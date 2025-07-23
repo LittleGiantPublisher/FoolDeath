@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2236262026f6841abea47dd518bcf2, type: 3}
+  m_Name: TarotCards
+  m_EditorClassIdentifier: 
+  cardPool:
+  - {fileID: 11400000, guid: f968fa58cd7da7a4b9804a762c14899f, type: 2}
+  - {fileID: 11400000, guid: 691bc2b55a1c2e84fb1385d9e98cfc95, type: 2}
+  - {fileID: 11400000, guid: 7dc84659834481d4a8ddb263fd1055d1, type: 2}
+  - {fileID: 11400000, guid: d56e211cd4b3f404d86bf4d8868d0a27, type: 2}
+  - {fileID: 11400000, guid: 20d47dc7ad9d79849b1f3e29fbf4c008, type: 2}
+  - {fileID: 11400000, guid: e255fb3bfa0349e468e9c5e182c54fc6, type: 2}
+  - {fileID: 11400000, guid: 27a6c46bdd12b5943837ed429a635c0b, type: 2}
+  - {fileID: 11400000, guid: 28f5104763ddf9843bb3fe6cc8b4e17e, type: 2}
+  - {fileID: 11400000, guid: 5029dfd879f19814b917df4fac647f02, type: 2}
+  - {fileID: 11400000, guid: cb56362227f553a4d950097a3f3fb578, type: 2}
+  - {fileID: 11400000, guid: 38328d64871cdc741aaf93950aee58bc, type: 2}
+  - {fileID: 11400000, guid: 4f6b97b3ca369764c863b96d13ed40bc, type: 2}
+  - {fileID: 11400000, guid: 63d45554909326c4cb4174aaed3b72ec, type: 2}
+  - {fileID: 11400000, guid: 53f76f4fe1dc96849bcb9501ac14265e, type: 2}
+  - {fileID: 11400000, guid: affef0529bf4f29448cc9d7b24d14b6a, type: 2}
+  - {fileID: 11400000, guid: 9c8f1f9d6f804df44918f63a63187c92, type: 2}
+  - {fileID: 11400000, guid: d67d45715187c854396c4acc8b378dca, type: 2}
+  - {fileID: 11400000, guid: 29ab00b8b235409428d694c73cc7e2b5, type: 2}
+  - {fileID: 11400000, guid: d5c395018eca7634dae78032f2b67630, type: 2}
+  - {fileID: 11400000, guid: c6436ac01117e5742a74a32b3df3f923, type: 2}
+  - {fileID: 11400000, guid: 6a09f639a1a342d469ab902fadb990f4, type: 2}
+  - {fileID: 11400000, guid: 96fa4309e91f52d47996087134ac9b45, type: 2}

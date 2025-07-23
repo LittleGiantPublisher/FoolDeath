@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91dca22246234624283734dd3c720bea, type: 3}
+  m_Name: Tarot 20
+  m_EditorClassIdentifier: 
+  cardArt: {fileID: 21300000, guid: dda2395900f45b84aade6cf044736f67, type: 3}
+  value: 20
+  foolArt: {fileID: 21300000, guid: f6b8458f225dcc8449e8b56a723fbe1a, type: 3}

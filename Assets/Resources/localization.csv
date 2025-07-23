@@ -1,0 +1,43 @@
+"key","en","br",
+
+"Default","Default","Default",
+
+"Menu_Start","Start","Começar",
+"Menu_Language","Language","Idioma",
+"Menu_Options","Options","Opções",
+"Menu_Quit","Quit","Sair",
+"Menu_Back","Back","Voltar",
+"Menu_Return","Return","Retornar",
+"Menu_Record","Record","Recorde",
+"Menu_CoinsTotal","Coins Total","Total de Moedas",
+"Menu_Rounds","Rounds","Rodadas",
+"Menu_Points","Points","Pontuação",
+"Menu_Continue","Continue","Continuar",
+
+"HUD_Points","Points:","Pontuação:",
+"HUD_Rounds","Rounds:","Rodadas:",
+"HUD_Coins","Coins:","Moedas:",
+"HUD_TotalCoins","Total Coins:","Total de Moedas:",
+
+"Store_RubyName","Ruby :","Rubi:",
+"Store_RubyDes","Removes target card and draws a new card.","Remove a carta alvo e compra uma nova.",
+"Store_EmeraldName","Emerald :","Esmeralda:",
+"Store_EmeraldDes","Inverts the signal of target card. ","Inverte o sinal do multiplicador da carta alvo.",
+"Store_SapName","Sapphire","Safira",
+"Store_SapDes","Target card becomes a 0.","Transforma o valor da carta em 0.",
+
+"Bgm_Label","Music Volume","Volume da Música",
+"Sfx_Label","SFX Volume","Volume dos Efeitos Sonoros",
+"Fullscreen_Label","Fullscreen","Tela Cheia",
+"Resultion_Label","Resolution","Resolução de Tela",
+"CameraShake_Label","Camera Shake","Vibração da Tela",
+"On_Label","On","Ligada",
+"Off_Label","Off","Desligada",
+
+"Victory","Victory","Vitória",
+"Defeat","Defeat","Derrota",
+
+"Msg1","Survive as many rounds as you can","Sobreviva ao máximo de rodadas",
+"Msg2","Keep the left gauge near 0<br>This will earn you more money and points","Mantenha a barra da esquerda perto de 0.  <br>  Para ganhar mais dinheiro e pontos",
+"Msg3","If the number is too low or high at round's end, you lose","Número muito baixo ou alto no fim da rodada <br> faz você perder",
+"Msg4","XIII is Death <br> Nulls Everything","XIII é a morte <br> Zera Tudo",
