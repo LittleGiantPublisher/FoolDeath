@@ -14,7 +14,7 @@ namespace F.Cards
     {
         private DeckVisual deckVisual;
         private Selectable selfSelectable;
-        private PlayerInput controls;
+        private FDPlayerInput controls;
         private EventSystem eventSystem;
 
         private Card draggedCard;
@@ -32,7 +32,7 @@ namespace F.Cards
         {
             selfSelectable  = GetComponent<Selectable>();
             deckVisual      = GetComponent<DeckVisual>();
-            controls        = new PlayerInput();
+            controls        = new FDPlayerInput();
             eventSystem     = EventSystem.current;
         }
 

@@ -9,7 +9,7 @@ namespace F.State
 {
     public abstract class GameState : State
     {
-        protected PlayerInput input => this.owner.input;
+        protected FDPlayerInput input => this.owner.input;
 //
         protected F.UI.Panel balancePanel => this.owner.balancePanel;
 

@@ -14,7 +14,7 @@ namespace F.State
 		}
 
 		private void Awake(){
-			input = new PlayerInput();
+			input = new FDPlayerInput();
 			input.Enable();
 		}
 
@@ -23,7 +23,7 @@ namespace F.State
 			input.Disable();
 		}
 
-		public PlayerInput input;
+		public FDPlayerInput input;
 
 		public F.UI.Panel logoPanel;
 

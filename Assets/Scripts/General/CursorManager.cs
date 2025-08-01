@@ -18,7 +18,7 @@ namespace F
         [SerializeField] public float gamepadCursorSpeed = 1000f;
         [SerializeField] public float cardCursorSpeed = 100f;
 
-        private PlayerInput controls;
+        private FDPlayerInput controls;
         // private VirtualMouseInput virtualMouse; // disabled virtual mouse for now
         private EventSystem eventSystem;
         public InputSystemUIInputModule uiModule;
@@ -41,7 +41,7 @@ namespace F
             DontDestroyOnLoad(gameObject);
 
             // initialize InputSystem actions
-            controls = new PlayerInput();
+            controls = new FDPlayerInput();
             controls.Enable();
 
             // get the UI input module from the active EventSystem
