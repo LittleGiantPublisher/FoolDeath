@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+#if UNITY_GAMECORE
+using Unity.GameCore;
+    public class XB_Platform : MonoBehaviour, IPlatform
+{
+ 
+    public static XB_Platform Create()
+    {
+        GameObject obj = new GameObject("PlatformManager_XB");
+        return obj.AddComponent<XB_Platform>();
+    }
+
+    public string GetUserGamertag()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string GetFileName()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnPlatformAwake()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnPlatformStart()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnPlatformUpdate()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RequestUserSignIn(int padIndex, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RequestUserSignOut(int padIndex, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool HasUserConnected()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SaveGameData(byte[] rawData, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LoadGameData(Action<bool, byte[]> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetPresence(string id, params string[] extraInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ClearPresence()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UnlockAchievement(int trophyID, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool CheckAchievement(string name)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int GetAchievementStats(string name)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAchievementStats(string name, int amount, int maxAmount, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UpdateActivity(string status, Action<bool> callback)
+    {
+        throw new NotImplementedException();
+    }
+
+    public float StreamingInstallProgress()
+    {
+        throw new NotImplementedException();
+    }
+}
+#endif

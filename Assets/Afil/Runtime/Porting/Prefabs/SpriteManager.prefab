@@ -1,0 +1,429 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3950890313003449219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2251521481988381397}
+  - component: {fileID: 5718386562662213123}
+  m_Layer: 0
+  m_Name: SpriteManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2251521481988381397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950890313003449219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.87949, y: 455.51132, z: 2.7328284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5718386562662213123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950890313003449219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200a6a26619409e4ca1fddf5fd1d616a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PS4:
+  - BUTTON_ID: 0
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -1573236382, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+    Alt_Sprite: {fileID: -1032926260, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+  - BUTTON_ID: 1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -1032926260, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+    Alt_Sprite: {fileID: -1573236382, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+  - BUTTON_ID: 2
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 1953821256, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 3
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -1735039398, guid: 740526be346f26443af101b5a5ae30d2, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: 4
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: ecea78d3c253927418f9a2a7c7e15a1c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: 4
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 9918e729a4248eb4183aa36646a7680a, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 4
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: d1735a2c237a24b4d9f13099fc73ca23, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 5
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: a1f7bb6d7826b054ca16a308a4378ffd, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 6
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 1b179c280998df6439ee92ec4a5c376c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 7
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 1b179c280998df6439ee92ec4a5c376c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 9
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 70a9e2a10fbef0a49b9ac858c3934222, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: 4
+    Sprite: {fileID: 21300000, guid: 6d5b88d04d1710a448f226b372aeb00f, type: 3}
+    Alt_Sprite: {fileID: 0}
+  PS5:
+  - BUTTON_ID: 0
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 9dcef2edc5ac9e4438f70f7f655bef6b, type: 3}
+    Alt_Sprite: {fileID: 21300000, guid: e2e5aea341a9e734eb94399b00b0374a, type: 3}
+  - BUTTON_ID: 1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: bd628f1364b97bb4caf4827432d542d7, type: 3}
+    Alt_Sprite: {fileID: 21300000, guid: 095166e09547bbb4c904adca0ff41e58, type: 3}
+  - BUTTON_ID: 2
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 67f22e864b6863048a07743a91fc0bc0, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 3
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: bfb3a50f4984bf242bb5d9605c7b5b45, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: 4
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: e1c2f00bedfbc44459effc185e39ea2d, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: 4
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 59371b4d769a4fb48a4a96c1dd6de38e, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 4
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 906d120d63e7cd94da7f8ff7159a591a, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 6
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 98d10f5e232b6514da6003bb59f64eb1, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 5
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: f321228da9b3dcb4a8f767e39742d77e, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 7
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 28ec74792f8652e45a247b370bfc7b5f, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 9
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 901472e93f101dd43bb4d8f06ef7923c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: 4
+    Sprite: {fileID: 21300000, guid: 9c315825022de424a83657497e82d791, type: 3}
+    Alt_Sprite: {fileID: 0}
+  XB1:
+  - BUTTON_ID: 0
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 897154463, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+    Alt_Sprite: {fileID: -452672054, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+  - BUTTON_ID: 1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -452672054, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+    Alt_Sprite: {fileID: 897154463, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+  - BUTTON_ID: 2
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -2052596710, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 3
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -1604797158, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 4
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 6fe91a245e5286b43bffbb442c870eaa, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 5
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: d701b741d6ecfd5479511516114216af, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 6
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 99a294b2a79a0da478975ede04b8be41, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 7
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: e9ce401a637b8c444aa5f8a2ba43d453, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 8
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 960aee54228b3ea458bb4346a81a3978, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 9
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 41c50769f08d6bb4cb41e517e33d9780, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: 4
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 1632deede7b3aea42a8e110c825b066c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: 4
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: d2fd2aa3462446d4fba0cba2d6fbc45d, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: 4
+    Sprite: {fileID: 21300000, guid: 2ab0beb86ea52fc4ab26df526c94276c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  SWITCH:
+  - BUTTON_ID: 0
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 7ccdbcfe02147ba44ad84e647b919c0a, type: 3}
+    Alt_Sprite: {fileID: 21300000, guid: 67e56707bd04e1341a3a4d2306dc67e3, type: 3}
+  - BUTTON_ID: 1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 67e56707bd04e1341a3a4d2306dc67e3, type: 3}
+    Alt_Sprite: {fileID: 21300000, guid: 7ccdbcfe02147ba44ad84e647b919c0a, type: 3}
+  - BUTTON_ID: 2
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 7a4618e6bcfbb0b488fc54278f3e9eff, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 3
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 9f180112963e44740bfd39d9543aedd0, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: 4
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 74beb41f35b075f44b86621c228f2b50, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: 4
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: e4076c250e486ec4683a3cf80d380ea9, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 4
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 4a78839221bebb94e991ff53e567b139, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 5
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: e808ef8e1fa398e4388b6c073b7dfb6c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 6
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 1a17f3cc889d37f48b1fbd7d0e58e30c, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 7
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: fddb4a760c6ac5344bf7b06e0c470416, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: 4
+    Sprite: {fileID: 21300000, guid: 56d819e116c150740acd1734a5cd9011, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 9
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 19b5dd0efb2ef5149b1e630bd6eeff63, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 8
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 938bee8641fa23b4996d974400514948, type: 3}
+    Alt_Sprite: {fileID: 0}
+  KEYBOARD:
+  - BUTTON_ID: 0
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 4895489, guid: fcd13216687e2c440bea6c047871f3c3, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -1039069054, guid: fcd13216687e2c440bea6c047871f3c3, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 2
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 1118829308, guid: fcd13216687e2c440bea6c047871f3c3, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 3
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: -964443217, guid: fcd13216687e2c440bea6c047871f3c3, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 5
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: c315bbfdc60b39d43a7e00051505ae4f, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 4
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 9c7b8458dcc7de642ace4aa95d9e95fc, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 6
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 1803364797, guid: fcd13216687e2c440bea6c047871f3c3, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 7
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 0}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 8
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 0}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: 9
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 21300000, guid: 16a6913e8afd2234bb8aee1e8f6c610f, type: 3}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: 4
+    R_STICK_ID: -1
+    DPAD_ID: -1
+    Sprite: {fileID: 0}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: 4
+    DPAD_ID: -1
+    Sprite: {fileID: 0}
+    Alt_Sprite: {fileID: 0}
+  - BUTTON_ID: -1
+    L_STICK_ID: -1
+    R_STICK_ID: -1
+    DPAD_ID: 4
+    Sprite: {fileID: 21300000, guid: f4ecf46b5d6c23a46b207b640d06e150, type: 3}
+    Alt_Sprite: {fileID: 0}

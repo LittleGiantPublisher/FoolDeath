@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Game
+  configVersion="1">
+  <Identity
+    Name="AfilGames.DisAssemble"
+    Publisher="CN=44B2AC89-AD9A-462E-BA8F-CD247DAB6981"
+    Version="1.0.0.11" />
+  <ShellVisuals
+    DefaultDisplayName="(Dis)Assemble"
+    PublisherDisplayName="Afil Games"
+    StoreLogo="StoreLogo.png"
+    Square150x150Logo="Square150x150Logo.png"
+    Square44x44Logo="Square44x44Logo.png"
+    Square480x480Logo="Square480x480Logo.png"
+    Description="game"
+    ForegroundText="light"
+    SplashScreenImage="SplashScreenImage.png" />
+  <Resources>
+    <Resource
+      Language="en-US" />
+  </Resources>
+  <ExecutableList />
+  <StoreId>9MSW00FSWNGT</StoreId>
+  <MSAAppId>00000000456BDC26</MSAAppId>
+  <TitleId>7c509066</TitleId>
+  <ExtendedAttributeList>
+    <ExtendedAttribute
+      Name="SandboxIds"
+      Value="JFSTHW.0,JFSTHW.1" />
+    <ExtendedAttribute
+      Name="Scid"
+      Value="00000000-0000-0000-0000-00007c509066" />
+  </ExtendedAttributeList>
+  <DevelopmentOnly>
+    <ContentIdOverride>57534d39-3030-3046-c053-574e47546900</ContentIdOverride>
+  </DevelopmentOnly>
+  <AdvancedUserModel>false</AdvancedUserModel>
+</Game>

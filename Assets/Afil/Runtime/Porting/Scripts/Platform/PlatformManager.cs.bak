@@ -1,0 +1,361 @@
+using System.IO;
+using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.Collections.Generic;
+using System.Collections;
+
+namespace PlatformSupport
+{
+    public enum DataResult
+    {
+        Success,
+        OK,
+        NOT_OK,
+        Busy,
+        UserCanceled,
+        FailedNoFreeSpace,
+        FailedCorrupted,
+        FailedTempered,
+        FailedGenericError,
+        DoesntExists,
+        GenericError,
+        NULL
+    }
+}
+
+namespace Porting
+{
+    public class PlatformManager : MonoBehaviour
+    { 
+    	public static bool notSpaceAvailable;
+        public static readonly Dictionary<string, int> GetAchievementID = new Dictionary<string, int>() {
+            { "CATastrophe", 0 },
+            { "Whisker_Wizard", 1 },
+            { "Feline_Phenom", 2 },
+            { "Purrfect_Puzzler", 3 },
+            { "Meowster_Solver", 4 },
+            { "Box_Hopper", 5 },
+            { "Leapin_kitty", 6 },
+            { "Pawsome_Acrobat", 7 },
+            { "Airborne_Whiskers", 8 },
+            { "Second_Chances", 9 },
+            { "Resilient_Kitty", 10 },
+            { "Persistente_Pouncer", 11 },
+            { "Never_Give_Up", 12 },
+            { "Master_Of_The_Retry", 13 },
+            { "Box_Stacker_Extraordinaire", 14 },
+            { "Towering_Feline_Architect", 15 },
+            { "Box_Castle_Creator", 16 },
+            { "Box_Mountain_Counqueror", 17 },
+        };
+
+		public static Action ForcePause;
+        public bool[] hasUnlockedAchievement;
+        public static PlatformManager instance { get; private set; }
+        public static IPlatform currentPlatform { get; private set; }
+
+        public static int enterButtonParam;
+        static public bool isRequesting = false;
+        static public bool isOnRechargeTime;
+
+#if UNITY_GAMECORE
+        public static Unity.GameCore.XUserLocalId localId;
+#endif
+#if MICROSOFT_GAME_CORE
+        public static XGamingRuntime.XUserLocalId localId;
+#endif
+
+        public class PlatformEvent : EventArgs
+        {
+            public bool success;
+
+            public PlatformEvent(bool success)
+            {
+                this.success = success;
+            }
+        }
+
+
+        static public Action OnUpdateProgress;
+        static public event EventHandler<PlatformEvent> OnGameSaveEnd;
+        static public event EventHandler<(PlatformEvent, byte[])> OnGameLoadEnd;
+        static public event EventHandler<PlatformEvent> OnUserSignInEnd;
+        static public event EventHandler<PlatformEvent> OnUserSignOutEnd;
+        static public event EventHandler<PlatformEvent> OnActivityStatusChange;
+
+        [HideInInspector]
+        public bool initializeFinished;
+        public static bool isLaunchingActivity;
+        public static bool resaivingActivity;
+        //SoundManager sound;
+        bool activityStatusChangeRequest;
+        bool hasRecievedValue;
+        bool saveFinished = true;
+        bool loadedData;
+
+        public const string firstGameScene = "TestFunctions";// Colocar o nome da cena a ser loadada ap�s a tela de logo da afil
+
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Init()
+        {
+            const string prefabPath = "PlatformManager";
+
+            if (instance)
+                return;
+
+            PlatformManager platformManagerPrefab = Resources.Load<PlatformManager>(prefabPath);
+
+            if (platformManagerPrefab == null)
+                throw new Exception($"[Platform Manager] Platform manager prefab not found at {prefabPath}");
+
+
+
+            instance = Instantiate(platformManagerPrefab);
+            instance.gameObject.SetActive(true);
+            DontDestroyOnLoad(instance.gameObject);
+            Debug.LogError($"[Platform Manager] = {instance}");
+            //SaveCompatibility.LocalPlayerPrefs.OnSaveCallback = instance.RequestGameSave;
+            instance.hasUnlockedAchievement = new bool[32];
+
+#if UNITY_SWITCH
+            currentPlatform = new Switch_Platform();
+#elif UNITY_PS4
+            currentPlatform = new PS_Platform();
+#elif UNITY_PS5
+            currentPlatform = new PS5_Platform();
+#elif UNITY_GAMECORE
+            currentPlatform = new XB_Platform();
+#elif MICROSOFT_GAME_CORE && !UNITY_EDITOR
+            currentPlatform = new MS_Platform();
+#else
+            currentPlatform = new Windows_Platform();
+#endif
+            Debug.LogError("[Current Platform] = " + currentPlatform);
+
+            //instance.userDataStore = instance.gameObject.AddComponent<Rewired.Data.UserDataStore_PlayerPrefs>();
+            //instance.userDataStore.Load();
+            instance.StartCoroutine(instance.InitPlatform());
+        }
+
+        IEnumerator InitPlatform()
+        {
+           
+            //yield return new WaitForSeconds(0.3f);
+            currentPlatform.OnPlatformAwake();
+            yield return new WaitForSeconds(1f);
+            currentPlatform.OnPlatformStart();
+            yield return new WaitForSeconds(1f);
+            
+            instance.RequestUserSignIn();
+#if UNITY_GAMECORE || MICROSOFT_GAME_CORE
+#if UNITY_GAMECORE
+            while (!XB_Platform.userInitialized)
+#else           
+            while (!MS_Platform.userInitialized)
+#endif
+            {
+
+
+                yield return new WaitForEndOfFrame();
+            }
+#endif
+            // Debug.LogError("REGISTRANDO EVENTO SAVE DESATIVANDO COISA IMPORTANTE");
+            OnGameSaveEnd += instance.SaveEnd;
+            //Debug.LogError("REGISTRANDO EVENTO LOAD DESATIVANDO COISA IMPORTANTE");
+            OnGameLoadEnd += instance.LoadEnd;
+            OnUserSignInEnd += instance.SignedIn;
+            OnActivityStatusChange += instance.ActivityChanged;
+        }
+
+        private void SignedIn(object sender, PlatformEvent result)
+        {
+            Debug.LogError($"[UserSignedIn] : {result.success}");
+        }
+
+        private void Update()
+        {
+#if !UNITY_EDITOR
+            currentPlatform.OnPlatformUpdate();
+#endif
+        }
+
+        void ActivityChanged(object sender, PlatformEvent result)
+        {
+            activityStatusChangeRequest = false;
+            Debug.LogError($"[ActivityChanged] : {result.success}");
+        }
+
+        void SaveEnd(object sender, PlatformEvent result)
+        {
+            Debug.LogError("[SaveEnd] : " + result.success);
+            saveFinished = true;
+        }
+
+        void LoadEnd(object sender, (PlatformEvent e, byte[] dataToLoad) result)
+        {
+#if !UNITY_GAMECORE && !MICROSOFT_GAME_CORE
+            switch (result.e.success)
+            {
+                case true:
+                    Debug.Log("[LOAD END]");
+                    if (result.dataToLoad != null && result.dataToLoad.LongLength > 0)
+                       SaveCompatibility.LocalPlayerPrefs.Deserialize(result.dataToLoad);
+                    else
+                        SaveCompatibility.LocalPlayerPrefs.SetDefault();
+                    break;
+                case false:
+                    SaveCompatibility.LocalPlayerPrefs.SetDefault();
+                    break;
+            }
+#endif
+            hasRecievedValue = true;
+        }
+
+        public void UnlockAchievement(string name)
+        {
+            if (!GetAchievementID.ContainsKey(name))
+                return;
+
+            int trophyID = GetAchievementID[name];
+            if (!hasUnlockedAchievement[trophyID])
+            {
+                currentPlatform.UnlockAchievement(trophyID, null);
+                hasUnlockedAchievement[trophyID] = true;
+            }
+        }
+
+        public bool CheckAchievement(string name) => currentPlatform.CheckAchievement(name);
+
+        public string GetUserGamertag() => currentPlatform.GetUserGamertag();
+
+        public void RequestUserSignIn()
+        {
+            Debug.LogError("[Platform Manager] Request user sign in");
+
+            if (loadedData)
+            {
+                UserSignInCallback(true);
+                return;
+            }
+#if UNITY_EDITOR
+            currentPlatform.RequestUserSignIn(0, UserSignInCallback);
+
+#else
+            currentPlatform.RequestUserSignIn(0, UserSignInCallback);
+#endif
+        }
+
+        public void RequestUserSignOut(int user)
+        {
+            Debug.Log("[Platform Manager] Request user sign out");
+            SaveCompatibility.LocalPlayerPrefs.DeleteAll();
+            loadedData = false;
+            currentPlatform.RequestUserSignOut(user, UserSignOutCallback);
+        }
+
+        void RequestGameSave()
+        {
+            Debug.Log("[Platform Manager] Saving game data");
+            byte[] data = SaveCompatibility.LocalPlayerPrefs.Serialize();
+            Debug.Log($"[Platform Manager]  Game data size: {data}");
+            //string saveData = Convert.ToBase64String(data);
+            //SaveCompatibility.LocalPlayerPrefs.SetString(GameData.SaveData.SAVEDATA_FILENAME + saveDataIndex.ToString(), saveData);
+            currentPlatform.SaveGameData(data, SaveDataCallback);
+        }
+
+        void RequestGameLoad()
+        {
+            Debug.Log("[Platform Manager] Loading game data ");
+            currentPlatform.LoadGameData(LoadDataCallback);
+        }
+
+        public bool HasUserConnected() => currentPlatform.HasUserConnected();
+
+        void UserSignInCallback(bool success)
+        {
+            Debug.LogError($"[UserSignInCallback] : {success}");
+            initializeFinished = true;
+            OnUserSignInEnd?.Invoke(this, new PlatformEvent(success));
+        }
+
+        void UserSignOutCallback(bool success)
+        {
+            OnUserSignOutEnd?.Invoke(this, new PlatformEvent(success));
+        }
+
+        void SaveDataCallback(bool success)
+        {
+            Debug.LogError("[SaveDataCallback]= " + success);
+            OnGameSaveEnd?.Invoke(this, new PlatformEvent(success));
+        }
+
+        void LoadDataCallback(bool success, byte[] dataToLoad)
+        {
+            Debug.LogError("\n [LoadDataCallback] : " + success);
+            Debug.LogError($"[LoadDataCallback] dataToLoad.Length: {dataToLoad.Length}");
+            loadedData = success;
+            OnGameLoadEnd?.Invoke(this, (new PlatformEvent(success), dataToLoad));
+        }
+
+        public void ReturnToMenu()
+        {
+            //reset variables and back to menu
+        }
+
+        public void UpdateActivity(string status)
+        {
+            //Debug.LogError("Entrou no UpdateActivity");
+            currentPlatform.UpdateActivity(status, UpdateActivityCallback);
+        }
+        public void UpdateActivityCallback(bool success)
+        {
+            OnActivityStatusChange?.Invoke(this, new PlatformEvent(success));
+        }
+
+        public IEnumerator WaitingSaveFinish()
+        {
+            RequestGameSave();
+            yield return new WaitForSeconds(3);
+
+            while (!saveFinished)
+            {
+                yield return new WaitForSeconds(1);
+            }
+
+            if (saveFinished)
+            {
+                StopCoroutine(WaitingSaveFinish());
+                saveFinished = false;
+            }
+        }
+
+        public IEnumerator WaitingLoadFinish()
+        {
+            RequestGameLoad();
+
+            while (!hasRecievedValue)
+            {
+           
+                yield return new WaitForSeconds(1);
+            }
+            hasRecievedValue = false;
+            yield break;
+        }
+
+        public IEnumerator WaitingActivity(string status)
+        {
+            if (!activityStatusChangeRequest)
+                UpdateActivity(status);
+
+            while (!activityStatusChangeRequest)
+            {
+                yield return new WaitForSeconds(1);
+            }
+            activityStatusChangeRequest = false;
+            yield break;
+        }
+    }
+
+}

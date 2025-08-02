@@ -1,0 +1,1082 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using System;
+
+
+// Save/Load process
+
+#if UNITY_PS5
+using Unity.SaveData.PS5.Core;
+using Unity.SaveData.PS5.Mount;
+using Unity.SaveData.PS5.Info;
+using Unity.SaveData.PS5.Dialog;
+using Unity.SaveData.PS5.Initialization;
+using Unity.SaveData.PS5.Search;
+using Unity.SaveData.PS5.Backup;
+using Unity.SaveData.PS5.Delete;
+using Unity.SaveData.PS5;
+
+#endif
+
+#region PS5SaveData Class
+namespace PlatformSupport
+{
+    enum Dialog
+    {
+        BrokenData, NoSpaceContinuable, NoSpace, GenericError
+    }
+#if UNITY_PS5
+    public class PS5SaveData
+    {
+        // PS4 title's TitleID. Also needs to be set in the "titleIdForTransferringPs4" section of the param.json
+        [SerializeField] private string[] m_PS4TitleID = new string[] { "CUSA44410", "CUSA44411", "CUSA44412", "CUSA44413" };
+        // PS4 passcode fingerprint from the PS4 Package Generator tool
+        [SerializeField] private string m_PS4Fingerprint = "51246d54137bbdb8ce7b31b9e7f708ad94f0cf065a56db2a342bcde1fe552e6a";
+
+
+
+        [SerializeField] private ulong maximumBlockSizeForTitle = Mounting.MountRequest.BLOCKS_MIN + 360;//Min: 48
+        [Header("Save details")]
+        [SerializeField] private string title = "Save Data";
+        [SerializeField] private string subtitle = "";
+        [SerializeField] private string detail = "";
+        private ulong requiredBlocks;
+        const string mountDirName = "PS5Save";
+        DirName dirName = new DirName();
+
+        List<SaveDataCallbackEvent> eventsDispatcher = new List<SaveDataCallbackEvent>();
+
+        [SerializeField] private bool waitingResponse;
+        ReturnCodes operationResult;
+        //SonySaveDataDialogTests dialog = new SonySaveDataDialogTests();
+
+        private bool m_Mounted = false;
+        private InitResult m_InitResult;
+
+        MonoBehaviour _dispatcher;
+
+
+        public bool isSaving { get; internal set; }
+        public bool isLoading { get; internal set; }
+
+
+        int userId;
+
+        // Start is called before the first frame update
+        public void Init(int userId, MonoBehaviour dispatcher)
+        {
+            // Used to initialize the save/load system
+            this.userId = userId;
+            _dispatcher = dispatcher;
+            InitResult initResult;
+            dirName.Data = mountDirName;
+            try
+            {
+                InitSettings settings = new InitSettings();
+                settings.Affinity = ThreadAffinity.Core5;
+                initResult = Main.Initialize(settings);
+
+                Main.OnAsyncEvent += Main_OnAsyncEvent;
+
+                if (initResult.Initialized == true)
+                {
+                    Debug.Log("[PS5 SAVEDATA] Init : Save system was initialized successfully");
+                }
+                else
+                {
+                    //Debug.LogError("[PS5 SAVEDATA] Init : not initialized ");
+                }
+            }
+            catch (SaveDataException e)
+            {
+                //Debug.LogError("Exeption: " + e);
+            }
+            //Porting.PlatformManager.instance.StartCoroutine(DispatchEvent);
+        }
+
+        private void Main_OnAsyncEvent(SaveDataCallbackEvent callbackEvent)
+        {
+            // Enquee to dispatch at the Main Thread
+            Debug.Log($"[Main_OnAsyncEvent] Add Event To Queue");
+            eventsDispatcher.Add(callbackEvent);
+        }
+
+        public void UpdateEventCallback()
+        {
+            if (eventsDispatcher.Count <= 0)
+                return;
+
+            var callback = eventsDispatcher[0];
+            eventsDispatcher.RemoveAt(0);
+            FunctionsCallback(callback);
+        }
+
+        private void FunctionsCallback(SaveDataCallbackEvent callbackEvent)
+        {
+            try
+            {
+                Debug.Log($"[FunctionsCallback] callbackEvent : {callbackEvent}");
+                Debug.Log($"[FunctionsCallback] callbackEvent.Response : {callbackEvent.Response}");
+                //Event callback of save system
+                if (callbackEvent.Response != null)
+                {
+                    if (callbackEvent.Response.ReturnCodeValue < 0)
+                    {
+                        // An error has occurred. This is a Sony error code value that you can look up in Sony's developer documentation
+                    }
+
+                    if (callbackEvent.Response.Exception != null)
+                    {
+                        // An exception occurred in the async code. Get the extended error message for more details.
+                        if (callbackEvent.Response.Exception is SaveDataException)
+                        {
+                            string errorMessage = ((SaveDataException)callbackEvent.Response.Exception).ExtendedMessage;
+                            Debug.Log($"[FunctionsCallback] callbackEvent.Response.Exception : {errorMessage}");
+                            // Handle the error
+                        }
+                    }
+                }
+                switch (callbackEvent.ApiCalled)
+                {
+                    case FunctionTypes.Mount:
+                        {
+                            Debug.Log($"[FunctionTypes.Mount]");
+                            var response = callbackEvent.Response as Mounting.MountResponse;
+
+                            if (response != null)
+                            {
+                                requiredBlocks = response.RequiredBlocks;
+                                operationResult = response.ReturnCode;
+                            }
+
+                            waitingResponse = false;
+                            Debug.Log($"[FunctionTypes.Mount] : waitingResponse = false;");
+                        }
+                        break;
+                    case FunctionTypes.Unmount:
+                    case FunctionTypes.Delete:
+                    case FunctionTypes.NotificationUnmountWithBackup:
+                    case FunctionTypes.FileOps:
+                    case FunctionTypes.Backup:
+                        {
+                            Debug.Log($"[FunctionTypes.Unmount]");
+                            if (callbackEvent.Response != null)
+                            {
+                                operationResult = callbackEvent.Response.ReturnCode;
+                            }
+
+                            waitingResponse = false;
+                            Debug.Log($"[FunctionTypes.Unmount:] : waitingResponse = false;");
+                        }
+                        break;
+                    case FunctionTypes.OpenDialog:
+                        {
+                            Debug.Log($"Open Dialog Response");
+                            Debug.Log($"Request FunctionType = {callbackEvent.Request.FunctionType}");
+
+                            var response = callbackEvent.Response as Dialogs.OpenDialogResponse;
+
+                            Dialogs.DialogResult result = response.Result;
+
+                            if (result == null)
+                            {
+                                Debug.Log("Error occured when opening dialog");
+                                waitingResponse = false;
+                                return;
+                            }
+
+                            if (result.CallResult == Dialogs.DialogCallResults.OK)
+                            {
+                                Debug.Log($"Call Result is OK");
+                                //m_sce_result = Sony.PS4.SaveData.ReturnCodes.SUCCESS;
+                            }
+                            else
+                            {
+                                Debug.Log($"Call Result is Cancel");
+                                //m_sce_result = Sony.PS4.SaveData.ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                            }
+
+                            operationResult = ReturnCodes.SUCCESS;
+                            waitingResponse = false;
+                        }
+                        break;
+                }
+            }
+            catch (SaveDataException e)
+            {
+                //Debug.LogError("FunctionsCallback SaveData Exception = " + e.ExtendedMessage);
+            }
+            catch (System.Exception e)
+            {
+                //Debug.LogError($"[Exception] {e}");
+            }
+        }
+
+
+        void MountSaveData(bool readOnly = false)
+        {
+            //Mount point from save/load process
+            try
+            {
+                Mounting.MountRequest request = new Mounting.MountRequest();
+                bool async = true;
+
+                request.UserId = userId;
+                request.Async = async;
+                request.DirName = dirName;
+                request.MountMode = !readOnly ? Mounting.MountModeFlags.Create2 | Mounting.MountModeFlags.ReadWrite : Mounting.MountModeFlags.ReadOnly;
+                request.Blocks = maximumBlockSizeForTitle; //Minimum blocks required = 48
+
+                Mounting.MountResponse response = new Mounting.MountResponse();
+                int requestId = Mounting.Mount(request, response);
+
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_NOT_MOUNTED;
+                //Debug.LogError(e.Message + " " + e.SceErrorCode);
+                Debug.Log("###Um Erro ocorreu na execução do Mount###");
+            }
+
+
+        }
+
+        public void Unmount(Mounting.MountPoint mp, bool canBackup = false)
+        {
+            try
+            {
+                if (canBackup)
+                {
+                    //Debug.LogError("[PS5 Save Data] iniciando backup");
+                    Backup();
+                }
+
+                //Unmount point after save or load request
+                Mounting.UnmountRequest request = new Mounting.UnmountRequest();
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+               
+                EmptyResponse response = new EmptyResponse();
+                //Debug.LogError("[PS5 Save Data] Unmount Save data");
+                int requestId = Mounting.Unmount(request, response);
+
+
+              
+
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //Debug.LogError($"Exception: {e.ExtendedMessage}");
+            }
+        }
+
+        #region Share Save Functions
+        public Mounting.MountPoint MountPS4( string PS4TitleID)
+        {
+            try
+            {
+                Mounting.MountPS4Request request = new Mounting.MountPS4Request();
+
+                TitleId titleId = new TitleId();
+                titleId.Data = PS4TitleID;
+
+                Fingerprint fingerprint = new Fingerprint();
+                fingerprint.Data = m_PS4Fingerprint;
+
+
+                request.UserId = userId;
+                request.Async = false;
+                request.DirName = dirName;
+                request.TitleId = titleId;
+                request.Fingerprint = fingerprint;
+
+
+                Mounting.MountResponse response = new Mounting.MountResponse();
+
+                int requestId = Mounting.MountPS4(request, response);
+
+                if (response.ReturnCodeValue < 0)
+                {
+                    Debug.LogError("Mount Sync : " + response.ConvertReturnCodeToString(request.FunctionType));
+                    Debug.LogError("\n");
+                    return null;
+                }
+                else
+                {
+                    Debug.LogError("Mount Sync : " + response.ConvertReturnCodeToString(request.FunctionType));
+                    Debug.LogError("\n");
+                    m_Mounted = true;
+                    return response.MountPoint;
+                }
+
+
+            
+            }
+            catch (SaveDataException e)
+            {
+                Debug.LogError("Exception : " + e.ExtendedMessage);
+                return null;
+            }
+}
+
+        public void UnmountPS4(Mounting.MountPoint mp)
+        {
+            try
+            {
+                Mounting.UnmountRequest request = new Mounting.UnmountRequest();
+
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+                request.Async = false;
+
+                EmptyResponse response = new EmptyResponse();
+
+                Debug.LogError("Unmounting = " + request.MountPointName.Data);
+
+                int requestId = Mounting.Unmount(request, response);
+
+                m_Mounted = false;
+                
+
+                Debug.LogError("Unmount Sync : Request Id = " + requestId);
+            }
+            catch (SaveDataException e)
+            {
+                Debug.LogError("Exception : " + e.ExtendedMessage);
+            }
+            Debug.LogError("\n");
+        }
+
+        //Load the PlayerPrefs data into a byte[], and overwrite the existing PlayerPrefs values with it - make sure to call PlayerPrefs.Save() afterwards to write this into PS5 savedata
+        private byte[] ReadPS4(Mounting.MountPoint mp, string file)
+        {
+            FileInfo info = new FileInfo(mp.PathName.Data + file);
+
+            byte[] playerPrefsPS4 = new byte[info.Length];
+
+            int totalRead = 0;
+
+           
+            using (FileStream fs = new FileStream(mp.PathName.Data + file, FileMode.Open, FileAccess.Read, FileShare.None, 1024 * 1024 * 10))//The maximum size of PS4 PlayerPrefs data is 10 MiB
+            {
+                while (totalRead < info.Length)
+                {
+                    int readSize = Math.Min((int)info.Length - totalRead, 1024 * 1024 * 2); // Read up to 2 MiB in a single write
+
+                    fs.Read(playerPrefsPS4, totalRead, readSize);
+
+                    totalRead += readSize;
+                }
+            }
+
+            //Overwrite the existing PS5 data with the PS4 data
+            return playerPrefsPS4;
+        }
+
+        public IEnumerator LoadPS4Request(ScriptableObject SO, string fileName, System.Action<DataResult, byte[], string, ScriptableObject> callback)
+        {
+            var finalResult = DataResult.FailedGenericError;
+
+            isLoading = true;
+
+            operationResult = ReturnCodes.SAVE_DATA_ERROR_BUSY;
+            waitingResponse = true;
+            MountPS4(m_PS4TitleID[0]);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            switch (operationResult)
+            {
+                case ReturnCodes.SUCCESS:
+                    break;
+
+                case ReturnCodes.SAVE_DATA_ERROR_NOT_FOUND:
+                    {
+                        //OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                        callback?.Invoke(DataResult.DoesntExists, new byte[0], fileName, SO);
+                        yield break;
+                    }
+                    break;
+                case ReturnCodes.SAVE_DATA_ERROR_EXISTS:
+                    {
+                        //Debug.LogError("SAVE DATA NOT EXIST");
+                        callback?.Invoke(DataResult.DoesntExists, new byte[0], fileName, SO);
+                        yield break;
+                    }
+                    break;
+
+                default:
+                    {
+                        waitingResponse = true;
+                        OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                        yield return _dispatcher.StartCoroutine(WaitResponse());
+                        callback?.Invoke(DataResult.NULL, null, fileName, SO);
+                        yield break;
+                    }
+                    break;
+            }
+
+
+            var mp = Mounting.ActiveMountPoints[0];
+
+            byte[] data = null;
+
+            waitingResponse = true;
+            if (m_Mounted)
+            {
+                ReadPS4(mp, fileName);
+                yield return _dispatcher.StartCoroutine(WaitResponse());
+
+
+                waitingResponse = true;
+                UnmountPS4(mp);
+                yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                if (operationResult != ReturnCodes.SUCCESS)
+                {
+                    waitingResponse = true;
+                    OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                    yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                    callback?.Invoke(DataResult.NULL, null, fileName, SO);
+                    yield break;
+                }
+            }
+            callback?.Invoke(finalResult, data, fileName, SO);
+
+        }
+
+        #endregion
+
+        void SetIcon(Mounting.MountPoint mp)
+        {
+            try
+            {
+                Mounting.SaveIconRequest request = new Mounting.SaveIconRequest();
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+                request.IconPath = "/app0/Media/StreamingAssets/SaveIcon.png";
+
+                EmptyResponse response = new EmptyResponse();
+
+                int requestId = Mounting.SaveIcon(request, response);
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //Debug.LogError($"Exception {e}, code {e.ExtendedMessage}");
+            }
+        }
+
+
+        public IEnumerator CommitRequest(byte[] data, string fileName, System.Action<DataResult> callback)
+        {
+
+            if (isSaving)
+            {
+                //Debug.LogError("[PS5 SAVE DATA] IS SAVING ESTÁ TRUE");
+                yield break;
+            }
+            var finalResult = DataResult.Success;
+
+            isSaving = true;
+
+            operationResult = ReturnCodes.SAVE_DATA_ERROR_BUSY;
+
+            waitingResponse = true;
+            MountSaveData();
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            switch (operationResult)
+            {
+                case ReturnCodes.SUCCESS:
+                    Porting.PlatformManager.notSpaceAvailable = false;
+                    break;
+
+                case ReturnCodes.DATA_ERROR_NO_SPACE_FS:
+                    {
+                        waitingResponse = true;
+                        operationResult = ReturnCodes.SAVE_DATA_ERROR_BUSY;
+                        if (!Porting.PlatformManager.notSpaceAvailable)
+                        {
+                            Porting.PlatformManager.notSpaceAvailable = true;
+                        }
+                        OpenDialog(Dialog.NoSpaceContinuable, dialogType: Dialogs.DialogType.Save);
+                        yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                        callback?.Invoke(DataResult.GenericError);
+
+                        yield break;
+                    }
+                default:
+                    {
+                        waitingResponse = true;
+                        OpenDialog(Dialog.GenericError, unchecked((int)operationResult), Dialogs.DialogType.Save);
+                        yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                        callback?.Invoke(DataResult.GenericError);
+                        yield break;
+                    }
+                    break;
+            }
+
+            var mp = Mounting.ActiveMountPoints[0];
+
+            waitingResponse = true;
+            WriteSave(data, fileName, mp);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            if (operationResult == ReturnCodes.SUCCESS)
+                Debug.Log("[WriteSave] operationResult == SUCCESS");
+            else
+            {
+                waitingResponse = true;
+                OpenDialog(Dialog.GenericError, unchecked((int)operationResult), Dialogs.DialogType.Save);
+                yield return _dispatcher.StartCoroutine(WaitResponse());
+                finalResult = DataResult.GenericError;
+            }
+
+            waitingResponse = true;
+            Unmount(mp);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            if (operationResult != ReturnCodes.SUCCESS)
+            {
+                waitingResponse = true;
+                OpenDialog(Dialog.GenericError, unchecked((int)operationResult), Dialogs.DialogType.Save);
+                yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                callback?.Invoke(DataResult.GenericError);
+                yield break;
+            }
+            //waitingResponse = true;
+            //yield return _dispatcher.StartCoroutine(WaitResponse());//only with backup beeing performed
+
+            //if (operationResult != ReturnCodes.SUCCESS) // only with backup beeing performed
+            //{
+            //    waitingResponse = true;
+            //    OpenDialog(Dialog.GenericError, unchecked((int)operationResult), Dialogs.DialogType.Save);
+            //    yield return _dispatcher.StartCoroutine(WaitResponse());
+            //}
+
+            callback?.Invoke(finalResult);
+
+        }
+
+        void Delete()
+        {
+            try
+            {
+
+                Deleting.DeleteRequest request = new Deleting.DeleteRequest();
+
+                request.UserId = userId;
+                request.DirName = dirName;
+
+                EmptyResponse response = new EmptyResponse();
+
+                int requestID = Deleting.Delete(request, response);
+                ////Debug.Log("[SaveDataTask] Requested Delete : " + requestID);
+            }
+            catch (SaveDataException e)
+            {
+                ////Debug.LogException(e);
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+            }
+        }
+
+        void WriteSave(byte[] data, string fileName, Mounting.MountPoint mp)
+        {
+            try
+            {
+                SetMountParams(mp);
+
+                SetIcon(mp);
+
+                WriteFilesRequestLarge request = new WriteFilesRequestLarge();
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+                request.data = data;
+                request.fileName = fileName;
+
+                WriteFilesResponse response = new WriteFilesResponse();
+                request.DoFileOperations(mp, response);
+                int requestId = FileOps.CustomFileOp(request, response);
+
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //Debug.LogError($"Exception {e}, code {e.ExtendedMessage}");
+            }
+        }
+
+        void SetMountParams(Mounting.MountPoint mp)
+        {
+            try
+            {
+                Mounting.SetMountParamsRequest request = new Mounting.SetMountParamsRequest();
+
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+                SaveDataParams sdParams = new SaveDataParams();
+
+                sdParams.Title = title;
+                sdParams.SubTitle = subtitle;
+                sdParams.Detail = detail;
+
+                request.Params = sdParams;
+
+                EmptyResponse response = new EmptyResponse();
+                int requestId = Mounting.SetMountParams(request, response);
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //Debug.LogError($"Exception {e}, code {e.ExtendedMessage}");
+            }
+        }
+
+        public IEnumerator LoadRequest(ScriptableObject SO, string fileName, System.Action<DataResult, byte[], string, ScriptableObject> callback)
+        {
+            var finalResult = DataResult.FailedGenericError;
+
+            isLoading = true;
+
+            operationResult = ReturnCodes.SAVE_DATA_ERROR_BUSY;
+            waitingResponse = true;
+            MountSaveData(readOnly: true);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            switch (operationResult)
+            {
+                case ReturnCodes.SUCCESS:
+                    break;
+               
+                case ReturnCodes.SAVE_DATA_ERROR_NOT_FOUND:
+                    {
+                        //OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                        callback?.Invoke(DataResult.DoesntExists, new byte[0], fileName, SO);
+                        yield break;
+                    }
+                    break;
+                case ReturnCodes.SAVE_DATA_ERROR_EXISTS:
+                    {
+                        //Debug.LogError("SAVE DATA NOT EXIST");
+                        callback?.Invoke(DataResult.DoesntExists, new byte[0], fileName, SO);
+                        yield break;
+                    }
+                    break;
+
+                default:
+                    {
+                        waitingResponse = true;
+                        OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                        yield return _dispatcher.StartCoroutine(WaitResponse());
+                        callback?.Invoke(DataResult.NULL, null, fileName, SO);
+                        yield break;
+                    }
+                    break;
+            }
+
+
+            var mp = Mounting.ActiveMountPoints[0];
+
+            byte[] data = null;
+
+            waitingResponse = true;
+            var readResponse = ReadData(mp, fileName);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+
+            if (readResponse != null)
+            {
+                switch (operationResult)
+                {
+                    case ReturnCodes.SUCCESS:
+                        {
+                            data = readResponse.largeData;
+                            finalResult = DataResult.Success;
+                        }
+                        break;
+
+                    default:
+                        {
+                            waitingResponse = true;
+                            OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                            finalResult = DataResult.FailedGenericError;
+                        }
+                        break;
+                }
+            }
+
+            waitingResponse = true;
+            Unmount(mp);
+            yield return _dispatcher.StartCoroutine(WaitResponse());
+
+            if (operationResult != ReturnCodes.SUCCESS)
+            {
+                waitingResponse = true;
+                OpenDialog(Dialog.GenericError, errorCode: unchecked((int)operationResult), Dialogs.DialogType.Load);
+                yield return _dispatcher.StartCoroutine(WaitResponse());
+
+                callback?.Invoke(DataResult.NULL, null, fileName, SO);
+                yield break;
+            }
+
+            callback?.Invoke(finalResult, data, fileName, SO);
+
+        }
+        
+        IEnumerator WaitResponse()
+        {
+            while (waitingResponse)
+            {
+                yield return null;
+            }
+        }
+       
+        void OpenDialog(Dialog dialog, int errorCode = 0, Dialogs.DialogType dialogType = Dialogs.DialogType.Invalid)
+        {
+            try
+            {
+                Dialogs.DialogMode dialogMode; Dialogs.SystemMessageType msg;
+
+                dialogMode = dialog == Dialog.GenericError ? Dialogs.DialogMode.ErrorCode : Dialogs.DialogMode.SystemMsg;
+                dialogType = dialogType == Dialogs.DialogType.Invalid ? (dialog == Dialog.BrokenData ? Dialogs.DialogType.Load : Dialogs.DialogType.Save) : dialogType;
+                msg = dialog == Dialog.BrokenData ? Dialogs.SystemMessageType.Corrupted : (dialog == Dialog.NoSpace ? Dialogs.SystemMessageType.NoSpace : Dialogs.SystemMessageType.NoSpaceContinuable);
+
+                if (dialog == Dialog.GenericError)
+                    ShowDialogError(dialogMode, dialogType, errorCode);
+                else
+                    ShowDialogError(dialogMode, msg, dialogType);
+
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //Debug.LogError("Exception : " + e.ExtendedMessage);
+            }
+        }
+
+        void ShowDialogError(Dialogs.DialogMode dialogMode, Dialogs.DialogType dialogType, int errorCode)
+        {
+
+            Dialogs.OpenDialogRequest request = new Dialogs.OpenDialogRequest();
+
+            InitDialog(ref request, dialogMode, dialogType);
+
+            Dialogs.ErrorCodeParam errorParam = new Dialogs.ErrorCodeParam();
+            errorParam.ErrorCode = errorCode;
+
+            request.ErrorCode = errorParam;
+
+            Dialogs.OpenDialogResponse response = new Dialogs.OpenDialogResponse();
+
+            int requestId = Dialogs.OpenDialog(request, response);
+        }
+
+        void ShowDialogError(Dialogs.DialogMode dialogMode, Dialogs.SystemMessageType messageType, Dialogs.DialogType dialogType)
+        {
+            Dialogs.OpenDialogRequest request = new Dialogs.OpenDialogRequest();
+            InitDialog(ref request, dialogMode, dialogType);
+
+            Dialogs.SystemMessageParam msg = new Dialogs.SystemMessageParam();
+            msg.SysMsgType = messageType;
+            if (messageType != Dialogs.SystemMessageType.Corrupted)
+                msg.Value = requiredBlocks;
+
+            DirName[] dirNames = new DirName[1];
+            dirNames[0] = new DirName { Data = mountDirName };
+
+            Dialogs.Items items = new Dialogs.Items();
+            items.DirNames = dirNames;
+
+            request.Items = items;
+
+            request.SystemMessage = msg;
+
+            Dialogs.OpenDialogResponse response = new Dialogs.OpenDialogResponse();
+
+            int requestId = Dialogs.OpenDialog(request, response);
+
+            // OnScreenLog.Add("OpenDialog Async : Request Id = " + requestId);
+
+        }
+        void InitDialog(ref Dialogs.OpenDialogRequest request, Dialogs.DialogMode dialogMode, Dialogs.DialogType dialogType)
+        {
+
+            request.UserId = userId;
+            request.Mode = dialogMode;
+            request.DispType = dialogType;
+
+            request.Animations = new Dialogs.AnimationParam(Dialogs.Animation.On, Dialogs.Animation.On);
+        }
+
+        void Backup()
+        {
+            try
+            {
+                Backups.BackupRequest request = new Backups.BackupRequest();
+
+                request.UserId = userId;
+                request.DirName = dirName;
+                EmptyResponse response = new EmptyResponse();
+
+                int requestId = Backups.Backup(request, response);
+
+                //Debug.LogError("[PS5 Save Data] Backup Async : Request Id = " + requestId);
+                //Debug.LogError("[PS5 Save Data] Backup Finalizado :" + response.ReturnCodeValue);
+
+                //OnScreenLog.Add("Backup Async : Request Id = " + requestId);
+            }
+            catch (SaveDataException e)
+            {
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+                //OnScreenLog.AddError("Exception : " + e.ExtendedMessage);
+                //Debug.LogError("[PS5 Save Data] Backup Exception: " + e.ExtendedMessage);
+            }
+        }
+
+
+        ReadFilesResponseLarge ReadData(Mounting.MountPoint mp, string fileName)
+        {
+            try
+            {
+                ReadFilesRequestLarge request = new ReadFilesRequestLarge();
+
+                request.UserId = userId;
+                request.MountPointName = mp.PathName;
+                request.fileName = fileName;
+
+                ReadFilesResponseLarge response = new ReadFilesResponseLarge();
+
+                request.DoFileOperations(mp, response);
+                int requestID = FileOps.CustomFileOp(request, response);
+
+                return response;
+            }
+            catch (SaveDataException e)
+            {
+                //////Debug.LogError("[SaveDataTask] ReadData Exception : " + e.ExtendedMessage);
+                waitingResponse = false;
+                operationResult = ReturnCodes.SAVE_DATA_ERROR_INTERNAL;
+            }
+            return null;
+        }
+
+
+      
+    }
+
+    #region Write Request/response files
+
+
+    //public class WriteFilesRequest : FileOps.FileOperationRequest
+    //{
+    //    public string fileName;
+    //    public byte[] data;
+
+    //    public override void DoFileOperations(Mounting.MountPoint mp, FileOps.FileOperationResponse response)
+    //    {
+    //        WriteFilesResponse fileResponse = response as WriteFilesResponse;
+
+    //        string filePath = string.Format("{0}/{1}", mp.PathName.Data, fileName);
+
+    //        File.WriteAllText(filePath, data);
+
+    //        FileInfo info = new FileInfo(filePath);
+
+    //        fileResponse.totalFileSizeWritten = info.Length;
+
+    //        string outpath2 = mp.PathName.Data + "/Data.dat";
+
+    //        fileResponse.lastWriteTime = info.LastWriteTime;
+    //        fileResponse.totalFileSizeWritten += info.Length;
+
+
+    //    }
+    //}
+
+    public class WriteFilesRequestLarge : FileOps.FileOperationRequest
+    {
+        public string fileName;
+        public byte[] data;
+
+        //SonySaveDataDialogTests dialog = new SonySaveDataDialogTests();
+        public override void DoFileOperations(Mounting.MountPoint mp, FileOps.FileOperationResponse response)
+        {
+            WriteFilesResponse fileResponse = response as WriteFilesResponse;
+            string outpath = string.Format("{0}/{1}", mp.PathName.Data, fileName);
+
+            int totalWritten = 0;
+            FileInfo info = new FileInfo(outpath);
+            int dataSize = data.Length;
+
+            //Dialogs.OpenDialogRequest request = new Dialogs.OpenDialogRequest();
+            //OpenDialog(mp, ref request);
+
+            //Dialogs.OpenDialogResponse dialogResponse = new Dialogs.OpenDialogResponse();
+            //int requestId = Dialogs.OpenDialog(request, dialogResponse);
+
+
+            using (FileStream fs = new FileStream(outpath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, 1024 * 1024 * 5))
+            {
+
+                while (totalWritten < dataSize)
+                {
+                    int writeSize = Math.Min(dataSize - totalWritten, 1000);
+                    fs.Write(data, totalWritten, writeSize);
+                    totalWritten += writeSize;
+
+                    /*       response.UpdateProgress((float)totalWritten / (float)dataSize);
+                           Dialogs.ProgressBarInc((uint)Math.Ceiling((float)totalWritten / (float)dataSize));*/
+                }
+            }
+            /*
+                        Dialogs.CloseParam close = new Dialogs.CloseParam();
+                        close.Anim = Dialogs.Animation.On;
+                        Dialogs.Close(close);*/
+
+            fileResponse.lastWriteTime = info.LastWriteTime;
+            fileResponse.totalFileSizeWritten += info.Length;
+        }
+
+        void OpenDialog(Mounting.MountPoint mp, ref Dialogs.OpenDialogRequest request)
+        {
+            Dialogs.ProgressBarParam progressBar = new Dialogs.ProgressBarParam();
+            progressBar.BarType = Dialogs.ProgressBarType.Percentage;
+            progressBar.SysMsgType = Dialogs.ProgressSystemMessageType.Progress;
+
+            request.UserId = mp.UserId;
+            request.Mode = Dialogs.DialogMode.ProgressBar;
+            request.DispType = Dialogs.DialogType.Save;
+
+            request.Animations = new Dialogs.AnimationParam(Dialogs.Animation.On, Dialogs.Animation.On);
+
+            request.ProgressBar = progressBar;
+
+            Dialogs.NewItem newItem = new Dialogs.NewItem();
+            newItem.Title = "Saving game";
+            request.NewItem = newItem;
+        }
+    }
+
+    public class WriteFilesResponse : FileOps.FileOperationResponse
+    {
+        public DateTime lastWriteTime;
+        public long totalFileSizeWritten;
+    }
+
+    public class EnumerateFilesRequest : FileOps.FileOperationRequest
+    {
+        public string fileName;
+        public override void DoFileOperations(Mounting.MountPoint mp, FileOps.FileOperationResponse response)
+        {
+            EnumerateFilesResponse fileResponse = response as EnumerateFilesResponse;
+            string outpath = string.Format("{0}/{1}", mp.PathName.Data, fileName);
+
+            fileResponse.files = Directory.GetFiles(outpath, "*.*", SearchOption.AllDirectories);
+        }
+    }
+
+    public class EnumerateFilesResponse : FileOps.FileOperationResponse
+    {
+        public string[] files;
+    }
+
+    public class ReadFilesRequest : FileOps.FileOperationRequest
+    {
+        public string fileName;
+        public override void DoFileOperations(Mounting.MountPoint mp, FileOps.FileOperationResponse response)
+        {
+            ReadFilesResponse fileResponse = response as ReadFilesResponse;
+
+            string outpath = string.Format("{0}/{1}", mp.PathName.Data, fileName);
+            fileResponse.data = File.ReadAllText(outpath);
+        }
+    }
+
+    public class ReadFilesRequestLarge : FileOps.FileOperationRequest
+    {
+        public string fileName;
+        public override void DoFileOperations(Mounting.MountPoint mp, FileOps.FileOperationResponse response)
+        {
+
+            ReadFilesResponseLarge fileResponse = response as ReadFilesResponseLarge;
+            string outpath = string.Format("{0}/{1}", mp.PathName.Data, fileName);
+            FileInfo info = new FileInfo(outpath);
+
+            fileResponse.largeData = new byte[1024 * 1024 * 2];
+
+            int totalRead = 0;
+            Dialogs.OpenDialogRequest request = new Dialogs.OpenDialogRequest();
+            OpenDialog(mp, ref request);
+
+            Dialogs.OpenDialogResponse dialogResponse = new Dialogs.OpenDialogResponse();
+            int requestId = Dialogs.OpenDialog(request, dialogResponse);
+
+
+            using (FileStream fs = new FileStream(outpath, FileMode.Open, FileAccess.Read, FileShare.None, 1024 * 1024 * 2))
+            {
+                while (totalRead < info.Length)
+                {
+                    int readSize = Math.Min((int)info.Length - totalRead, 1024 * 1024 * 2);
+
+                    fs.Read(fileResponse.largeData, totalRead, readSize);
+                    totalRead += readSize;
+
+                    response.UpdateProgress((float)totalRead / (float)info.Length);
+                }
+            }
+        }
+
+        void OpenDialog(Mounting.MountPoint mp, ref Dialogs.OpenDialogRequest request)
+        {
+            Dialogs.ProgressBarParam progressBar = new Dialogs.ProgressBarParam();
+            progressBar.BarType = Dialogs.ProgressBarType.Percentage;
+            progressBar.SysMsgType = Dialogs.ProgressSystemMessageType.Progress;
+
+            request.UserId = mp.UserId;
+            request.Mode = Dialogs.DialogMode.ProgressBar;
+            request.DispType = Dialogs.DialogType.Load;
+
+            request.Animations = new Dialogs.AnimationParam(Dialogs.Animation.On, Dialogs.Animation.On);
+
+            request.ProgressBar = progressBar;
+
+            Dialogs.NewItem newItem = new Dialogs.NewItem();
+            newItem.Title = "Saving game";
+            request.NewItem = newItem;
+        }
+    }
+
+
+    public class ReadFilesResponse : FileOps.FileOperationResponse
+    {
+        public string data;
+    }
+    public class ReadFilesResponseLarge : FileOps.FileOperationResponse
+    {
+        public byte[] largeData;
+    }
+
+    #endregion
+
+  
+
+#endif
+}
+#endregion

@@ -1,0 +1,79 @@
+fileFormatVersion: 2
+guid: 427bcd2d0aec523418e81fc8ed4377e7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3e8e5a87a551bfc45aa0ac07bcf83cf4, type: 3}
+  titleId: 7c509066
+  sCID: 00000000-0000-0000-0000-00007c509066
+  mSAAppId: 00000000456BDC26
+  identityName: AfilGames.DisAssemble
+  identityPublisher: CN=44B2AC89-AD9A-462E-BA8F-CD247DAB6981
+  identityVersion: 1.0.0.4
+  storeId: 9MSW00FSWNGT
+  languagePairResources:
+    keys:
+    - en_US
+    - en_CA
+    - en_AU
+    - en_GB
+    - en_NZ
+    - en_IE
+    - en_CZ
+    - en_GR
+    - en_HK
+    - en_HU
+    - en_IN
+    - en_IL
+    - en_SA
+    - en_SG
+    - en_SK
+    - en_ZA
+    - en_AE
+    - ar_AE
+    - ar_SA
+    - cs_CZ
+    - nl_BE
+    - nl_NL
+    - fr_FR
+    - fr_CA
+    - fr_BE
+    - fr_CH
+    - it_IT
+    - es_AR
+    - es_ES
+    - es_MX
+    - es_CL
+    - es_CO
+    - de_DE
+    - de_AT
+    - de_CH
+    - he_IL
+    - hu_HU
+    - pt_PT
+    - pt_BR
+    - ru_RU
+    - pl_PL
+    - zh_CN
+    - zh_HK
+    - zh_SG
+    - zh_TW
+    - da_DK
+    - fi_FI
+    - ja_JP
+    - nb_NO
+    - ko_KR
+    - sk_SK
+    - sv_SE
+    - tr_TR
+    values: 0100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  shellVisualsResourcePath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b,
+    type: 3}
+  builtResourcesPriPath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b,
+    type: 3}
+  contentIdOverride: 57534d39-3030-3046-c053-574e47546900
+  eKBIDOverride: 

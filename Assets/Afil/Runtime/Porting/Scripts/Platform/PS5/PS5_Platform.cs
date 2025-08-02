@@ -1,0 +1,435 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using PlatformSupport;
+#if UNITY_PS5
+using Unity.PSN.PS5.Aysnc;
+using Unity.PSN.PS5.Users;
+using Unity.PSN.PS5;
+using Unity.PSN.PS5.UDS;
+using UnityEngine.PS5;
+using Unity.PSN.PS5.GameIntent;
+#endif
+
+#if UNITY_PS5
+public class PS5_Platform : IPlatform
+{
+    //public int userId { get; private set; }
+    public const string fileName = "SaveData.dat"; //Keep .dat in filename
+
+    PS5Input.LoggedInUser mainUser;
+    Action UserSignedIn;
+    bool mainInitialized;
+    bool initializationFinished;
+    PS5SaveData saveData;
+    static public int enterButtonParam { get; private set; } = 1;
+    //struct ServiceEventBuffer
+    //{
+    //    public PS5Input.UserServiceEventType eventType;
+    //    public int userId;
+    //    public Action<bool> callback;
+    //}
+
+    //static private Queue<ServiceEventBuffer> eventQueue;
+    void IPlatform.OnPlatformAwake()
+    {
+#if !UNITY_EDITOR
+        Main.Initialize();
+        mainInitialized = true;
+        GameIntentSystem.OnGameIntentNotification += OnGameIntentNotification;
+#endif
+    }
+
+    void IPlatform.OnPlatformStart()
+    {
+#if !UNITY_EDITOR
+        //eventQueue = new Queue<ServiceEventBuffer>();
+
+
+        saveData = new PS5SaveData();
+        
+
+        UniversalDataSystem.StartSystemRequest request = new UniversalDataSystem.StartSystemRequest
+        {
+            PoolSize = 256 * 1024
+        };
+
+        var requestOp = new AsyncRequest<UniversalDataSystem.StartSystemRequest>(request).ContinueWith((antecedent) =>
+        {
+
+        });
+        UniversalDataSystem.Schedule(requestOp);
+
+        Porting.PlatformManager.enterButtonParam = enterButtonParam;
+#endif
+    }
+
+    //static void OnUserServiceEvent(PS5Input.UserServiceEventType eventtype, uint userid)
+    //{
+    //    eventQueue.Enqueue(new ServiceEventBuffer() { eventType = eventtype, userId = (int)userid });
+    //}
+
+    void IPlatform.RequestUserSignIn(int padIndex, Action<bool> callback)
+    {
+#if !UNITY_EDITOR
+        for (int userIndex = 0; userIndex < 4; userIndex++)
+        {
+            PS5Input.LoggedInUser user = PS5Input.GetUsersDetails(userIndex);
+    
+            if(user.status != 0 && user.primaryUser)
+            {
+                mainUser = user;
+                break;
+            }
+        }
+        //Debug.LogError($"[RequestUserSignIn] mainUser : {mainUser}");
+        //Debug.LogError($"[RequestUserSignIn] user_id : {mainUser.userId}");
+
+        UserSystem.AddUserRequest userRequest = new UserSystem.AddUserRequest() { UserId = mainUser.userId };
+        UserSignedIn += UserSignnedInCallback;
+        UserSystem.Schedule(new AsyncRequest<UserSystem.AddUserRequest>(userRequest).ContinueWith(result => {
+
+            if (result != null && result.Request != null)
+            {
+                Debug.Log($"[RequestUserSignIn] AddUserRequest: {result.Request.Result.apiResult}");
+                UserSignedIn?.Invoke();
+                callback?.Invoke(result.Request.Result.apiResult == APIResultTypes.Success);
+            }
+        }));
+#else
+        callback?.Invoke(true);
+        initializationFinished = true;
+#endif
+    }
+    void UserSignnedInCallback()
+    {
+        UserSignedIn -= UserSignnedInCallback;
+        saveData.Init(mainUser.userId, Porting.PlatformManager.instance);
+        initializationFinished = true;
+    }
+
+    void IPlatform.OnPlatformUpdate()
+    {
+#if !UNITY_EDITOR
+        if(!mainInitialized)
+            return; 
+
+        Main.Update();
+
+        if (!initializationFinished)
+            return;
+
+        saveData.UpdateEventCallback();
+
+
+        UpdatePauseGame();
+
+        //for (int i = 0; i < eventQueue.Count; i++)
+        //{
+        //    ProcessServiceEvent(eventQueue.Dequeue());
+        //}
+#endif
+    }
+    void UpdatePauseGame()
+    {
+        if ((Utility.isInBackgroundExecution || Utility.isSystemUiOverlaid))
+        {
+            Porting.PlatformManager.ForcePause?.Invoke();
+        }
+    }
+
+    //private void ProcessServiceEvent(ServiceEventBuffer serviceEvent)
+    //{
+    //    this.userId = serviceEvent.userId;
+
+    //    switch (serviceEvent.eventType)
+    //    {
+    //        case PS5Input.UserServiceEventType.Login:
+    //            serviceEvent.callback(true);
+    //            break;
+    //        case PS5Input.UserServiceEventType.Logout:
+    //            break;
+    //        default:
+    //            serviceEvent.callback(false);
+    //            break;
+    //    }
+    //}
+
+    bool IPlatform.CheckAchievement(string name)
+    {
+        return false;
+    }
+
+    void IPlatform.ClearPresence()
+    {
+
+    }
+
+    int IPlatform.GetAchievementStats(string name)
+    {
+        return 0;
+    }
+
+    string IPlatform.GetFileName()
+    {
+        return fileName;
+    }
+
+    string IPlatform.GetUserGamertag()
+    {
+        return "";
+    }
+
+    bool IPlatform.HasUserConnected()
+    {
+        return false;
+    }
+
+    void IPlatform.LoadGameData(Action<bool, byte[]> callback)
+    {
+#if !UNITY_EDITOR
+        Porting.PlatformManager.instance.StartCoroutine(saveData.LoadRequest(null, fileName, (result, rawData, fileName, so) => {
+            //saveData.isSaving = false;
+            Debug.Log($"[LoadRequest Callback] : {result}");
+            switch (result)
+            {
+                case DataResult.Success:
+                    SaveCompatibility.LocalPlayerPrefs.loadedBytes = rawData;
+                    callback?.Invoke(true, rawData);
+                    break;
+                case DataResult.FailedGenericError:
+                    SaveCompatibility.LocalPlayerPrefs.loadedBytes = null;
+                    break;
+                case DataResult.DoesntExists:
+                    SaveCompatibility.LocalPlayerPrefs.loadedBytes = rawData;
+                    callback?.Invoke(true, rawData);
+                    break;
+                case DataResult.NULL:
+                    SaveCompatibility.LocalPlayerPrefs.loadedBytes = null;
+                    callback?.Invoke(false, null);
+                    break;
+            }
+            saveData.isLoading = false;
+        }));
+#else
+        callback?.Invoke(false, null);
+#endif
+    }
+
+
+
+    void IPlatform.RequestUserSignOut(int padIndex, Action<bool> callback)
+    {
+
+    }
+
+    void IPlatform.SaveGameData(byte[] rawData, Action<bool> callback)
+    {
+#if !UNITY_EDITOR
+        if (saveData.isSaving)
+        {
+            
+            callback?.Invoke(false);
+            return;
+        }
+
+        Porting.PlatformManager.instance.StartCoroutine((saveData.CommitRequest(rawData, fileName, (result) => {
+            saveData.isSaving = false;
+            callback?.Invoke(true);
+        })));
+#else
+        callback?.Invoke(true);
+#endif
+    }
+
+    void IPlatform.SetAchievementStats(string name, int amount, int maxAmount, Action<bool> callback)
+    {
+
+    }
+
+    void IPlatform.SetPresence(string id, params string[] extraInfo)
+    {
+
+    }
+
+    float IPlatform.StreamingInstallProgress()
+    {
+        return 0;
+    }
+
+    void IPlatform.UnlockAchievement(int trophyID, Action<bool> callback)
+    {
+#if !UNITY_EDITOR
+        UniversalDataSystem.UnlockTrophyRequest unlockRequest = new UniversalDataSystem.UnlockTrophyRequest();
+        unlockRequest.TrophyId = trophyID;
+        unlockRequest.UserId = mainUser.userId;
+
+        var AsyncRequest = new AsyncRequest<UniversalDataSystem.UnlockTrophyRequest>(unlockRequest).ContinueWith((result) =>
+        {
+            Debug.Log($"Trophy unlock request finished!");
+
+            Debug.Log($"Unlock result message: {unlockRequest.Result.message}");
+
+            Debug.Log($"Error message: {result.Request.Result.ErrorMessage()}");
+
+        });
+        UniversalDataSystem.Schedule(AsyncRequest);
+#endif
+    }
+
+    IEnumerator TerminateAllActivities(string status)
+    {
+        //VERIFICAR DPSS
+        yield return null;
+
+        //UniversalDataSystem.UDSEvent activityTerminateEvent = new UniversalDataSystem.UDSEvent();
+        //activityTerminateEvent.Create(status);
+
+
+        //// Create a PostEventRequest with the UDSEvent data
+        //UniversalDataSystem.PostEventRequest postEvent = new UniversalDataSystem.PostEventRequest
+        //{
+        //    UserId = mainUser.userId,
+        //    EventData = activityTerminateEvent
+        //};
+
+        //// Create the AsyncRequest operation for scheduling
+        //var asyncOp = new AsyncRequest<UniversalDataSystem.PostEventRequest>(postEvent);
+
+        //UniversalDataSystem.Schedule(asyncOp);
+
+        //yield return new WaitUntil(() => asyncOp.IsSequenceCompleted);
+
+    }
+
+    IEnumerator MakeActivitiesAvailable(string status, string activityId)
+    {
+#if !UNITY_EDITOR
+        // Substituir pelos activities ID do UDS do game
+        string[] myActivitiesList = { "MainStory" };
+
+        UniversalDataSystem.UDSEvent changeAvailabilityEvent = new UniversalDataSystem.UDSEvent();
+        changeAvailabilityEvent.Create(status);
+
+        // To set an array as a property of the UDSEvent class, you need to use an EventPropertyArray
+        UniversalDataSystem.EventPropertyArray availableActivities = new UniversalDataSystem.EventPropertyArray(UniversalDataSystem.PropertyType.String);
+
+        availableActivities.CopyValues(myActivitiesList);
+
+        changeAvailabilityEvent.Properties.Set("availableActivities", availableActivities);
+        changeAvailabilityEvent.Properties.Set("mode", "full");
+#endif
+        yield return null;
+    }
+
+    IEnumerator ActivityEnd(string status, string activityID)
+    {
+#if !UNITY_EDITOR
+        UniversalDataSystem.UDSEvent activityEvent = new UniversalDataSystem.UDSEvent();
+
+        activityEvent.Create(status);
+
+        activityEvent.Properties.Set("activityId", activityID);
+
+        UniversalDataSystem.PostEventRequest postEvent = new UniversalDataSystem.PostEventRequest()
+        {
+            UserId = mainUser.userId,
+            EventData = activityEvent
+        };
+
+        var asyncOp = new AsyncRequest<UniversalDataSystem.PostEventRequest>(postEvent);
+        UniversalDataSystem.Schedule(asyncOp);
+
+        yield return new WaitUntil(() => asyncOp.IsSequenceCompleted);
+
+
+#endif
+        yield return null;
+    }
+
+
+    IEnumerator ActivityStart(string status, string activityID)
+    {
+
+        //Debug.LogError("[PS5 Plat]Inicailizando");
+#if !UNITY_EDITOR
+        UniversalDataSystem.UDSEvent activityEvent = new UniversalDataSystem.UDSEvent();
+
+        activityEvent.Create("activityStart");
+        activityEvent.Properties.Set("activityId", activityID);
+
+        UniversalDataSystem.PostEventRequest postEvent = new UniversalDataSystem.PostEventRequest()
+        {
+            UserId = mainUser.userId,
+            EventData = activityEvent
+        };
+
+        var asyncOp = new AsyncRequest<UniversalDataSystem.PostEventRequest>(postEvent);
+        UniversalDataSystem.Schedule(asyncOp);
+        yield return new WaitUntil(() => asyncOp.IsSequenceCompleted);
+        if (activityID == "MainStory" && Porting.PlatformManager.resaivingActivity)
+        {
+                Porting.PlatformManager.resaivingActivity = false;
+                Porting.PlatformManager.isLaunchingActivity = true;
+                
+                //Debug.Log($"Change the lauchingactivity status to {Porting.PlatformManager.isLaunchingActivity}");
+
+        }
+#else
+        yield return null;
+#endif
+    }
+
+    void IPlatform.UpdateActivity(string status, Action<bool> callback)
+    {
+#if !UNITY_EDITOR
+        var activityId = "MainStory";
+
+        //Debug.LogError("[UpdateActivity] activityId: "+activityId);
+        switch (status)
+        {
+            case "activityStart":
+                //Debug.LogError("[UpdateActivity] Entrou no Start");
+                Porting.PlatformManager.instance.StartCoroutine(ActivityStart(status, activityId));
+                break;
+            case "activityTerminate":
+                Porting.PlatformManager.instance.StartCoroutine(TerminateAllActivities(status));
+                break;
+            case "activityEnd":
+                Porting.PlatformManager.instance.StartCoroutine(ActivityEnd(status, activityId));
+                break;
+            case "activityAvailabilityChange":
+                Porting.PlatformManager.instance.StartCoroutine(MakeActivitiesAvailable(status, activityId));
+                break;
+        }
+#endif
+    }
+
+    void OnGameIntentNotification(GameIntentSystem.GameIntent gameIntent)
+    {
+        Debug.Log("[OnGameIntentNotification]: Event Trigger");
+#if !UNITY_EDITOR
+        if (gameIntent is GameIntentSystem.LaunchActivity)
+        {
+            Debug.Log("Receive a gameintent notification");
+            GameIntentSystem.LaunchActivity activity = gameIntent as GameIntentSystem.LaunchActivity;
+            string activityID = activity.ActivityId;
+            if (activityID == "MainStory")
+            {
+               Porting.PlatformManager.resaivingActivity = true;
+               //Debug.LogError($"Change the lauchingactivity status to {Porting.PlatformManager.isLaunchingActivity}");
+
+            }
+            else
+            {
+                Debug.Log("I don't have configuration for this activity type.");
+            }
+
+            //Debug.LogError("[OnGameIntentNotification]: Launch Flag: "+ Porting.PlatformManager.isLaunchingActivity);
+        }
+#endif
+    }
+}
+
+#endif

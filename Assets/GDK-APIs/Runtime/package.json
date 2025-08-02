@@ -1,0 +1,11 @@
+{
+  "name": "com.unity.microsoft.gdk",
+  "version": "1.0.0-pre.3",
+  "displayName": "Microsoft GDK API",
+  "description": "Provides support for the Microsoft Game Development Kit making it available to approved platforms. Requires the Microsoft platform APIs to be pre-installed.",
+  "unity": "2021.3",
+  "license" : "Unity Companion Package License v1.0",
+  "dependencies": {},
+  "samples": [],
+  "hideInEditor" : false
+}

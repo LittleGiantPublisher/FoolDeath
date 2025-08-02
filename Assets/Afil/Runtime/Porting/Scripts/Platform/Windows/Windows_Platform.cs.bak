@@ -1,0 +1,98 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Windows_Platform : IPlatform
+{
+    public bool CheckAchievement(string name)
+    {
+        return true;
+    }
+
+    public void ClearPresence()
+    {
+        
+    }
+
+    public int GetAchievementStats(string name)
+    {
+        return 0;
+    }
+
+    public string GetFileName()
+    {
+        return "";
+    }
+
+    public string GetUserGamertag()
+    {
+        return "";
+    }
+
+    public bool HasUserConnected()
+    {
+        return true;
+    }
+
+    public void LoadGameData(Action<bool, byte[]> callback)
+    {
+        callback?.Invoke(false, null);
+    }
+
+    public void OnPlatformAwake()
+    {
+        
+    }
+
+    public void OnPlatformStart()
+    {
+        
+    }
+
+    public void OnPlatformUpdate()
+    {
+        
+    }
+
+    public void RequestUserSignIn(int padIndex, Action<bool> callback)
+    {
+        callback?.Invoke(true);
+    }
+
+    public void RequestUserSignOut(int padIndex, Action<bool> callback)
+    {
+        callback?.Invoke(false);
+    }
+
+    public void SaveGameData(byte[] rawData, Action<bool> callback)
+    {
+        callback?.Invoke(false);
+    }
+
+    public void SetAchievementStats(string name, int amount, int maxAmount, Action<bool> callback)
+    {
+        
+    }
+
+    public void SetPresence(string id, params string[] extraInfo)
+    {
+        
+    }
+
+    public float StreamingInstallProgress()
+    {
+        return 0;
+    }
+
+    public void UnlockAchievement(int trophyID, Action<bool> callback)
+    {
+        Debug.Log($" UnlockAchievement : {trophyID}");
+        callback?.Invoke(false);
+    }
+
+    public void UpdateActivity(string status, Action<bool> callback)
+    {
+        
+    }
+}

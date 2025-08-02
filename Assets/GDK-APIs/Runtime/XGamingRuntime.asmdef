@@ -1,0 +1,20 @@
+{
+    "name": "XGamingRuntime",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [
+        "Editor",
+        "WindowsStandalone64",
+        "GameCoreXboxOne",
+        "XboxOne",
+        "GameCoreScarlett"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

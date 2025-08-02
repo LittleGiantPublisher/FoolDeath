@@ -1,0 +1,276 @@
+using System;
+using UnityEngine.InputSystem;
+using UnityEngine;
+
+[Serializable]
+public class InputController
+{
+    PlayerInput playerInput;
+    public InputPlayer inputPlayerActions;
+    float leftAxisDeadzone = 0.25f;
+    float rightAxisDeadzone = 0.25f;
+
+
+    //Left Axis
+
+    [field : SerializeField] internal Vector2 leftStickAxis;
+    [field : SerializeField] internal bool leftStickButton;
+    [field : SerializeField] internal bool leftAxis_UpPressed;
+    [field : SerializeField] internal bool leftAxis_LeftPressed;
+    [field : SerializeField] internal bool leftAxis_DownPressed;
+    [field: SerializeField]  internal bool leftAxis_RightPressed;
+
+    //Right Axis
+
+    [field : SerializeField] internal Vector2 rightStickAxis;
+    [field: SerializeField]  internal bool rightStickButton;
+    [field : SerializeField] internal bool rightAxis_UpPressed;
+    [field : SerializeField] internal bool rightAxis_LeftPressed;
+    [field : SerializeField] internal bool rightAxis_DownPressed;
+    [field : SerializeField] internal bool rightAxis_RightPressed;
+
+
+
+
+    [field: SerializeField] internal Vector2 dPad;
+    [field : SerializeField] internal bool dPad_UpPressed;
+    [field : SerializeField] internal bool dPad_LeftPressed;
+    [field : SerializeField] internal bool dPad_DownPressed;
+    [field : SerializeField] internal bool dPad_RightPressed;
+
+
+
+
+    [field: SerializeField] internal bool buttonSouth;
+    [field: SerializeField] internal bool buttonEast;
+    [field: SerializeField] internal bool buttonNorth;
+    [field: SerializeField] internal bool buttonWest;
+    
+    [field: SerializeField] internal bool confirmButton;
+    [field: SerializeField] internal bool cancelButton;
+
+
+
+    
+    [field: SerializeField] internal bool buttonLeftBumper;    
+    [field: SerializeField] internal bool buttonLeftTrigger;    
+    [field: SerializeField] internal bool buttonRightBumper;
+    [field: SerializeField] internal bool buttonRightTrigger;
+
+    [field: SerializeField] internal bool buttonStart;
+    [field: SerializeField] internal bool buttonSelect;
+
+    public InputController (PlayerInput player, ref InputPlayer inputActions)
+    {
+        playerInput = player;
+        inputPlayerActions = inputActions;
+        Init();
+    }
+
+    void Init()
+    {
+        inputPlayerActions = new InputPlayer();
+    
+        inputPlayerActions.Player.LeftStick.started += LeftAxis;
+        inputPlayerActions.Player.LeftStick.performed += LeftAxis;
+        inputPlayerActions.Player.LeftStick.canceled += LeftAxis;
+
+        inputPlayerActions.Player.LeftStickButton.started += LeftAxisButton;
+        inputPlayerActions.Player.LeftStickButton.performed += LeftAxisButton;
+        inputPlayerActions.Player.LeftStickButton.canceled += LeftAxisButton;
+
+
+
+
+        inputPlayerActions.Player.RightStick.started += RightAxis;
+        inputPlayerActions.Player.RightStick.performed += RightAxis;
+        inputPlayerActions.Player.RightStick.canceled += RightAxis;
+
+        inputPlayerActions.Player.RightStickButton.started += RightAxisButton;
+        inputPlayerActions.Player.RightStickButton.performed += RightAxisButton;
+        inputPlayerActions.Player.RightStickButton.canceled += RightAxisButton;
+
+
+
+
+
+        inputPlayerActions.Player.Dpad.started += Dpad;
+        inputPlayerActions.Player.Dpad.performed += Dpad;
+        inputPlayerActions.Player.Dpad.canceled += Dpad;
+
+
+
+        inputPlayerActions.Player.ButtonSouth.started += ButtonSouth;
+        inputPlayerActions.Player.ButtonSouth.performed += ButtonSouth;
+        inputPlayerActions.Player.ButtonSouth.canceled += ButtonSouth;
+
+
+        inputPlayerActions.Player.ButtonEast.started += ButtonEast;
+        inputPlayerActions.Player.ButtonEast.performed += ButtonEast;
+        inputPlayerActions.Player.ButtonEast.canceled += ButtonEast;
+
+
+        inputPlayerActions.Player.ButtonNorth.started += ButtonNorth;
+        inputPlayerActions.Player.ButtonNorth.performed += ButtonNorth;
+        inputPlayerActions.Player.ButtonNorth.canceled += ButtonNorth;
+
+
+        inputPlayerActions.Player.ButtonWest.started += ButtonWest;
+        inputPlayerActions.Player.ButtonWest.performed += ButtonWest;
+        inputPlayerActions.Player.ButtonWest.canceled += ButtonWest;
+
+        inputPlayerActions.Player.Confirm.started += Confirm;
+        inputPlayerActions.Player.Confirm.performed += Confirm;
+        inputPlayerActions.Player.Confirm.canceled += Confirm;
+
+
+        inputPlayerActions.Player.Cancel.started += Cancel;
+        inputPlayerActions.Player.Cancel.performed += Cancel;
+        inputPlayerActions.Player.Cancel.canceled += Cancel;
+
+
+        inputPlayerActions.Player.LeftBumper.started += ButtonLeftBumper;
+        inputPlayerActions.Player.LeftBumper.performed += ButtonLeftBumper;
+        inputPlayerActions.Player.LeftBumper.canceled += ButtonLeftBumper;
+
+
+        inputPlayerActions.Player.LeftTrigger.started += ButtonLeftTrigger;
+        inputPlayerActions.Player.LeftTrigger.performed += ButtonLeftTrigger;
+        inputPlayerActions.Player.LeftTrigger.canceled += ButtonLeftTrigger;
+
+
+        inputPlayerActions.Player.RightBumper.started += ButtonRightBumper;
+        inputPlayerActions.Player.RightBumper.performed += ButtonRightBumper;
+        inputPlayerActions.Player.RightBumper.canceled += ButtonRightBumper;
+
+
+        inputPlayerActions.Player.RightTrigger.started += ButtonRightTrigger;
+        inputPlayerActions.Player.RightTrigger.performed += ButtonRightTrigger;
+        inputPlayerActions.Player.RightTrigger.canceled += ButtonRightTrigger;
+
+
+        inputPlayerActions.Player.Start.started += ButtonStart;
+        inputPlayerActions.Player.Start.performed += ButtonStart;
+        inputPlayerActions.Player.Start.canceled += ButtonStart;
+
+
+        inputPlayerActions.Player.Select.started += ButtonSelect;
+        inputPlayerActions.Player.Select.performed += ButtonSelect;
+        inputPlayerActions.Player.Select.canceled += ButtonSelect;
+
+
+        inputPlayerActions.Enable();
+    }
+
+    public void UpdateInput()
+    {
+    }
+
+    void LeftAxis(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+        leftStickAxis = input;
+
+        leftAxis_UpPressed = input.y > leftAxisDeadzone;
+        leftAxis_DownPressed = input.y < -leftAxisDeadzone;
+        leftAxis_LeftPressed = input.x < -leftAxisDeadzone;
+        leftAxis_RightPressed = input.x > leftAxisDeadzone;
+    }
+    void LeftAxisButton(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        leftStickButton = button;
+    }
+
+
+
+    void RightAxis(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+        rightStickAxis = input;
+
+        rightAxis_UpPressed = input.y > rightAxisDeadzone;
+        rightAxis_DownPressed = input.y < -rightAxisDeadzone;
+        rightAxis_LeftPressed = input.x < -rightAxisDeadzone;
+        rightAxis_RightPressed = input.x > rightAxisDeadzone;
+    }
+    void RightAxisButton(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        rightStickButton = button;
+    }
+
+
+    void Dpad(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+        dPad = input;
+
+        dPad_UpPressed = input.y > 0;
+        dPad_DownPressed = input.y < 0;
+        dPad_LeftPressed = input.x < 0;
+        dPad_RightPressed = input.x > 0;
+    }
+
+
+    void ButtonSouth(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonSouth = button;
+    }
+    void ButtonEast(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonEast = button;
+    }
+    void ButtonNorth(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonNorth = button;
+    }
+    void ButtonWest(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonWest = button;
+    }
+    void ButtonLeftBumper(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonLeftBumper = button;
+    }
+    void ButtonRightBumper(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonRightBumper = button;
+    }
+    void ButtonLeftTrigger(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonLeftTrigger = button;
+    }
+    void ButtonRightTrigger(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonRightTrigger = button;
+    }
+    void ButtonStart(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonStart = button;
+    }
+    void ButtonSelect(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        buttonSelect = button;
+    }
+    void Confirm(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        confirmButton = button;
+    }
+    void Cancel(InputAction.CallbackContext context)
+    {
+        bool button = context.ReadValueAsButton();
+        cancelButton = button;
+    }
+}
