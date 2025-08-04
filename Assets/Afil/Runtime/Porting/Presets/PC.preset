@@ -58,16 +58,16 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: companyName
-    value: OldSchoolGame&GrayBoss
+    value: Little Giant
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: productName
-    value: Primal Survivors
+    value: Fool's Death
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: defaultCursor
     value: 
-    objectReference: {fileID: 2800000, guid: 1326cbc612fb83243a217ae98cc77f8b, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: cursorHotspot.x
     value: 0
@@ -205,6 +205,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_SpriteBatchVertexThreshold
+    value: 300
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_MTRendering
     value: 1
     objectReference: {fileID: 0}
@@ -214,6 +218,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: numberOfMipsStripped
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: numberOfMipsStrippedPerMipmapLimitGroup.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -255,10 +263,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: iosUseCustomAppBackgroundBehavior
     value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: iosAllowHTTPDownload
-    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: allowedAutorotateToPortrait
@@ -333,6 +337,14 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: androidAutoRotationBehavior
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: androidPredictiveBackSupport
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: defaultIsNativeResolution
     value: 1
     objectReference: {fileID: 0}
@@ -361,6 +373,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: audioSpatialExperience
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: deferSystemGesturesMode
     value: 0
     objectReference: {fileID: 0}
@@ -375,6 +391,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: usePlayerLog
     value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: dedicatedServerOptimizations
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bakeCollisionMeshes
@@ -513,12 +533,24 @@ Preset:
     value: 16777216
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: switchGpuScratchPoolGranularity
+    value: 2097152
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: switchAllowGpuScratchShrinking
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: switchNVNMaxPublicTextureIDCount
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: switchNVNMaxPublicSamplerIDCount
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: switchNVNGraphicsFirmwareMemory
+    value: 32
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: switchMaxWorkerMultiple
@@ -553,24 +585,16 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_SupportedAspectRatios.4:3
-    value: 1
+    propertyPath: loadStoreDebugModeEnabled
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_SupportedAspectRatios.5:4
-    value: 1
+    propertyPath: visionOSBundleVersion
+    value: 1.0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_SupportedAspectRatios.16:10
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SupportedAspectRatios.16:9
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SupportedAspectRatios.Others
-    value: 1
+    propertyPath: tvOSBundleVersion
+    value: 1.0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bundleVersion
@@ -617,11 +641,15 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: allowHDRDisplaySupport
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: useHDRDisplay
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: D3DHDRBitDepth
+    propertyPath: hdrBitDepth
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -662,11 +690,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: applicationIdentifier.Array.data[0].second
-    value: com.OldSchoolGame-GrayBoss.Primal-Survivors
+    value: com.Little-Giant.Fool-s-Death
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.size
-    value: 3
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.data[0].first
@@ -678,7 +706,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.data[1].first
-    value: iPhone
+    value: VisionOS
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.data[1].second
@@ -686,10 +714,18 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.data[2].first
-    value: tvOS
+    value: iPhone
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.data[2].second
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: buildNumber.Array.data[3].first
+    value: tvOS
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: buildNumber.Array.data[3].second
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -753,12 +789,20 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: strictShaderVariantMatching
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: VertexChannelCompressionMask
     value: 4054
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: iPhoneSdkVersion
     value: 988
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: iOSSimulatorArchitecture
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: iOSTargetOSVersionString
@@ -769,12 +813,24 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: tvOSSimulatorArchitecture
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: tvOSRequireExtendedGameController
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: tvOSTargetOSVersionString
     value: 12.0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: VisionOSSdkVersion
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: VisionOSTargetOSVersionString
+    value: 1.0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: uIPrerenderedIcon
@@ -929,6 +985,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: metalCompileShaderBinary
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: iOSRenderExtraFrameOnPause
     value: 0
     objectReference: {fileID: 0}
@@ -949,11 +1009,19 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: VisionOSManualSigningProvisioningProfileID
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: iOSManualSigningProvisioningProfileType
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: tvOSManualSigningProvisioningProfileType
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: VisionOSManualSigningProvisioningProfileType
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -1025,6 +1093,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: useCustomGradleSettingsTemplate
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: useCustomProguardFile
     value: 0
     objectReference: {fileID: 0}
@@ -1051,6 +1123,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: AndroidKeyaliasName
     value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AndroidEnableArmv9SecurityFeatures
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidBuildApkPerCpuArchitecture
@@ -1103,10 +1179,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: chromeosInputEmulation
     value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: AndroidMinifyWithR8
-    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidMinifyRelease
@@ -1377,7 +1449,15 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_BuildTargetGroupHDRCubemapEncodingQuality.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_BuildTargetGroupLightmapSettings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_BuildTargetGroupLoadStoreDebugModeSettings.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -1429,6 +1509,10 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: macOSTargetOSVersion
+    value: 10.13.0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: switchNMETAOverride
     value: 
     objectReference: {fileID: 0}
@@ -1470,6 +1554,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: switchNSODependencies
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: switchCompilerFlags
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -1973,6 +2061,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: switchDisableHTCSPlayerConnection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: switchUseNewStyleFilepaths
     value: 0
     objectReference: {fileID: 0}
@@ -2377,6 +2469,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: webGLShowDiagnostics
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: webGLDataCaching
     value: 1
     objectReference: {fileID: 0}
@@ -2423,6 +2519,30 @@ Preset:
   - target: {fileID: 0}
     propertyPath: webGLDecompressionFallback
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLInitialMemorySize
+    value: 32
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLMaximumMemorySize
+    value: 2048
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLMemoryGrowthMode
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLMemoryLinearGrowthStep
+    value: 16
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLMemoryGeometricGrowthStep
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: webGLMemoryGeometricGrowthCap
+    value: 96
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: webGLPowerPreference
@@ -2569,6 +2689,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: il2cppCodeGeneration.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: managedStrippingLevel.Array.size
     value: 13
     objectReference: {fileID: 0}
@@ -2693,10 +2817,6 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: enableRoslynAnalyzers
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: additionalIl2CppArgs
     value: 
     objectReference: {fileID: 0}
@@ -2706,10 +2826,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: gcIncremental
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: assemblyVersionValidation
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -2834,6 +2950,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: metroSplashScreenUseBackgroundColor
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: syncCapabilities
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -3005,6 +3125,26 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: hmiPlayerDataPath
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: hmiForceSRGBBlit
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: embeddedLinuxEnableGamepadInput
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: hmiLogStartupTiming
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: hmiCpuConfiguration.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: apiCompatibilityLevel
     value: 6
     objectReference: {fileID: 0}
@@ -3045,15 +3185,19 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: playerDataPath
+    propertyPath: hmiLoadingImage
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: forceSRGBBlit
-    value: 1
+    propertyPath: platformRequiresReadableAssets
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: virtualTexturingSupportEnabled
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: insecureHttpOption
     value: 0
     objectReference: {fileID: 0}
   m_ExcludedProperties: []

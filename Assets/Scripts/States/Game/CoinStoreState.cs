@@ -162,7 +162,7 @@ namespace F.State
 
 
             if(CombatStateStatus.GamePoints >= 6666){
-                SteamIntegration.UnlockAchievement("ACH_6666");
+                //SteamIntegration.UnlockAchievement("ACH_6666");
             }
 
 

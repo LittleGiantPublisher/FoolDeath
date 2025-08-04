@@ -88,11 +88,10 @@ public class ControllerManager : MonoBehaviour
         {
            
             EventSystem.current.currentInputModule.DeactivateModule();
-            inputSystemUI.ActivateModule();
-            
+            inputSystemUI.ActivateModule(); 
         }
-        Debug.LogError("TIRA ESSA PORRA DAQUI CARALHO");
-        Porting.PlatformManager.enterButtonParam = 0;
+        //Debug.LogError("TIRA ESSA PORRA DAQUI CARALHO");
+        //Porting.PlatformManager.enterButtonParam = 0;
         onReconec =  tryReconnectController;
 #if UNITY_SWITCH
         if (!disconected)

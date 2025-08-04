@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleScreenApresentation : MonoBehaviour
 {
@@ -16,13 +17,13 @@ public class TitleScreenApresentation : MonoBehaviour
 
     IEnumerator StartTitleApresentation()
     {
-        for(int i=0; i< TitleImages.Count; i++)
+        for (int i = 0; i < TitleImages.Count; i++)
         {
             if (!TitleImages[i].hasAnimation)
             {
                 canvas.alpha = 0;
                 TitleImages[i].titleObject.SetActive(true);
-                while(canvas.alpha < 1)
+                while (canvas.alpha < 1)
                 {
                     canvas.alpha += 0.02f;
                     yield return new WaitForEndOfFrame();
@@ -43,10 +44,30 @@ public class TitleScreenApresentation : MonoBehaviour
                 yield return new WaitForSeconds(TitleImages[i].timeForAnim);
             }
         }
-
         apresentationIsFinish = true;
+        StartCoroutine(Load());
+    }
+    
+    IEnumerator Load()
+    {
+        Debug.Log("Start loading");
+        yield return new WaitForSeconds(1f);
+        while (!Porting.PlatformManager.instance.initializeFinished)
+            yield return null;
+        yield return Porting.PlatformManager.instance.StartCoroutine(Porting.PlatformManager.instance.WaitingLoadFinish());
+        
+        while(!apresentationIsFinish)
+            yield return null;
+        Debug.Log("Finish wait");
+        Porting.PlatformManager.instance.UpdateActivity("activityStart");
+        //           while (!asyncLoad.isDone)
+        //          yield return null;
+        //     asyncLoad.allowSceneActivation = true;
+        SceneManager.LoadScene("LoadControlleManager");
     }
 }
+
+
 
 [System.Serializable]
 public class TitleObeject

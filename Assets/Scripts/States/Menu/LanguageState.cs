@@ -47,14 +47,14 @@ namespace F.State
             base.languageMenu.Show();
 			base.languageMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
 			base.languageMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled += this.OnEscapeCanceled;
+            input.UI.Cancel.canceled += this.OnEscapeCanceled;
 		}
 		public override void Exit()
 		{
 			base.languageMenu.Hide();
 			base.languageMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
 			base.languageMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled -= this.OnEscapeCanceled;
+            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
 		}
 	}
 }

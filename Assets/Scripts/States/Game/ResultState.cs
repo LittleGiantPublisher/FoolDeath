@@ -57,7 +57,7 @@ namespace F.State
 
             if (CombatStateStatus.GamePoints > 13000)
             {
-                SteamIntegration.UnlockAchievement("ACH_13K");
+                //SteamIntegration.UnlockAchievement("ACH_13K");
 
                 backgroundImage.sprite = victoryBackground;
                 victoryText.gameObject.SetActive(true);
@@ -97,7 +97,7 @@ namespace F.State
             base.resultsMenu.Show();
             base.resultsMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
             base.resultsMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled += this.OnEscapeCanceled;
+            input.UI.Cancel.canceled += this.OnEscapeCanceled;
         }
 
         public override void Exit()
@@ -105,7 +105,7 @@ namespace F.State
             base.resultsMenu.Hide();
             base.resultsMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
             base.resultsMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled -= this.OnEscapeCanceled;
+            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
         }
 
         private void SetActive(GameObject obj, bool isActive)

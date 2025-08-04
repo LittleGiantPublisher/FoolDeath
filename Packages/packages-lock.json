@@ -18,8 +18,8 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.common": "6.0.6",
+        "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.2.6",
         "com.unity.modules.animation": "1.0.0"
       },
@@ -30,11 +30,11 @@
       "depth": 2,
       "source": "registry",
       "dependencies": {
+        "com.unity.burst": "1.7.3",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.1.0",
-        "com.unity.modules.uielements": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.burst": "1.7.3"
+        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -52,9 +52,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.animation": "9.2.0",
         "com.unity.2d.common": "8.1.0",
-        "com.unity.2d.sprite": "1.0.0"
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.2d.animation": "9.2.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -69,8 +69,8 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.1.0",
         "com.unity.2d.common": "8.1.0",
+        "com.unity.mathematics": "1.1.0",
         "com.unity.modules.physics2d": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -123,6 +123,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.commondialog.ps4": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.commondialog.ps4-1.0.7.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -144,6 +150,12 @@
         "com.unity.2d.tilemap.extras": "3.1.3",
         "com.unity.2d.aseprite": "1.1.9"
       }
+    },
+    "com.unity.gamecore": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.gamecore-1.3.0 (2).tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.ide.rider": {
       "version": "3.0.36",
@@ -172,12 +184,52 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.inputsystem.gxdk": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.inputsystem.gxdk-1.0.2 (1).tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.inputsystem": "1.12.0"
+      }
+    },
+    "com.unity.inputsystem.ps4": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.inputsystem.ps4-0.2.0-pre.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.inputsystem": "1.6.1"
+      }
+    },
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
+    },
+    "com.unity.microsoft.gdk.tools": {
+      "version": "1.3.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.microsoft.gdk.tools.xbox": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.microsoft.gdk.tools.xbox-1.0.2 (1).tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.microsoft.gdk.tools": "1.1.0",
+        "com.unity.ugui": "1.0.0"
+      }
+    },
+    "com.unity.nptoolkit2.ps4": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.nptoolkit2.ps4-1.0.6.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.render-pipelines.core": {
       "version": "14.0.12",
@@ -189,6 +241,18 @@
         "com.unity.modules.terrain": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       }
+    },
+    "com.unity.render-pipelines.gamecore": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.render-pipelines.gamecore-1.4.0 (1).tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
+    "com.unity.render-pipelines.ps4": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.render-pipelines.ps4-1.9.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.render-pipelines.universal": {
       "version": "14.0.12",
@@ -209,6 +273,12 @@
       "dependencies": {
         "com.unity.render-pipelines.core": "14.0.10"
       }
+    },
+    "com.unity.savedata.ps4": {
+      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.savedata.ps4-1.0.6.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.searcher": {
       "version": "4.9.2",
@@ -267,9 +337,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"

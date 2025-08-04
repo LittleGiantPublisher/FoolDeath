@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using UnityEngine;
+using SaveCompatibility;
+using Porting;
 
 namespace F
 {
@@ -8,46 +10,20 @@ namespace F
     {
         public static void Load()
         {
-            string path = Application.persistentDataPath + "/gamedata.json";
-            if (File.Exists(path))
-            {
-                string json = File.ReadAllText(path);
-                try
-                {
-                    SaveSystem.data = JsonUtility.FromJson<SaveData>(json);
-                }
-                catch (Exception)
-                {
-                    string path2 = Application.persistentDataPath + "/gamedata_backup.json";
-                    if (File.Exists(path2))
-                    {
-                        string json2 = File.ReadAllText(path2);
-                        try
-                        {
-                            SaveSystem.data = JsonUtility.FromJson<SaveData>(json2);
-                        }
-                        catch (Exception)
-                        {
-                            SaveSystem.data = new SaveData();
-                        }
-                    }
-                    else
-                    {
-                        SaveSystem.data = new SaveData();
-                    }
-                }
-            }
-            else
-            {
-                SaveSystem.data = new SaveData();
-            }
+            SaveSystem.data = new SaveData();
+            SaveSystem.data.coins = LocalPlayerPrefs.GetInt("coins", 0);
+            SaveSystem.data.rounds = LocalPlayerPrefs.GetInt("rounds", 0);
+            SaveSystem.data.points = LocalPlayerPrefs.GetInt("points", 0);
+            Debug.Log($"DATA LOADED {SaveSystem.data.coins} {SaveSystem.data.rounds} {SaveSystem.data.points}");
         }
 
         public static void Save()
         {
-            string contents = JsonUtility.ToJson(SaveSystem.data);
-            File.WriteAllText(Application.persistentDataPath + "/gamedata.json", contents);
-            File.WriteAllText(Application.persistentDataPath + "/gamedata_backup.json", contents);
+            LocalPlayerPrefs.SetInt("coins", SaveSystem.data.coins);
+            LocalPlayerPrefs.SetInt("rounds", SaveSystem.data.rounds);
+            LocalPlayerPrefs.SetInt("points", SaveSystem.data.points);
+            LocalPlayerPrefs.Save();
+            Debug.Log($"DATA SAVED {SaveSystem.data.coins} {SaveSystem.data.rounds} {SaveSystem.data.points}");
         }
 
         public static SaveData data;

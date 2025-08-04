@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SaveCompatibility;
 
 namespace F
 {
@@ -24,8 +25,8 @@ namespace F
                 Destroy(gameObject);
             }
 
-            _musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
-            _sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+            _musicVolume = LocalPlayerPrefs.GetFloat("MusicVolume", 1f);
+            _sfxVolume = LocalPlayerPrefs.GetFloat("SFXVolume", 1f);
         }
 
 
@@ -111,7 +112,7 @@ namespace F
             {
                 _musicVolume = value;
                 musicSource.volume = _musicVolume;
-                PlayerPrefs.SetFloat("MusicVolume", _musicVolume);
+                LocalPlayerPrefs.SetFloat("MusicVolume", _musicVolume);
             }
         }
 
@@ -121,7 +122,7 @@ namespace F
             set
             {
                 _sfxVolume = value;
-                PlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
+                LocalPlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
             }
         }
 

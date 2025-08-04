@@ -58,7 +58,7 @@ namespace F.State
             base.optionsMenu.Show();
 			base.optionsMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
 			base.optionsMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled += this.OnEscapeCanceled;
+            input.UI.Cancel.canceled += this.OnEscapeCanceled;
 		}
 
 		public override void Exit()
@@ -66,7 +66,7 @@ namespace F.State
 			base.optionsMenu.Hide();
 			base.optionsMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
 			base.optionsMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled -= this.OnEscapeCanceled;
+            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
         }
 	}
 }

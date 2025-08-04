@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095259024350454005}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7041858913226265940
 MonoBehaviour:
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: -2694974785362014472}
   thisController:
+    anyButton: 0
     leftStickAxis: {x: 0, y: 0}
     leftStickButton: 0
     leftAxis_UpPressed: 0
@@ -110,7 +111,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: PS4
+  m_DefaultControlScheme: Xbox
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -146,16 +147,17 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: -2111291733359432989, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
-  m_CancelAction: {fileID: -6511080147213059423, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
+  m_PointAction: {fileID: -2698985983820000005, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_MoveAction: {fileID: -8880171065338800222, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_SubmitAction: {fileID: 3452858325286623655, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_CancelAction: {fileID: 5256710224006073395, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_LeftClickAction: {fileID: -6497194573911477426, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_MiddleClickAction: {fileID: 1050194467050140265, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_RightClickAction: {fileID: -4455109376231171963, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_ScrollWheelAction: {fileID: 2545519293280860738, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6

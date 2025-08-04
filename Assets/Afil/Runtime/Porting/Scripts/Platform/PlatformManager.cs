@@ -133,14 +133,14 @@ namespace Porting
             if(data == null)
             {
 #if UNITY_EDITOR
-                UnityEditor.EditorUtility.DisplayDialog("Faltando data", "AchievementData não foi encontrado, clique em 'Afil/Porting/Check Achievement Data'", "OK");
+                UnityEditor.EditorUtility.DisplayDialog("Faltando data", "AchievementData nï¿½o foi encontrado, clique em 'Afil/Porting/Check Achievement Data'", "OK");
 #endif
-                Debug.LogError("AchievementData não encontrado, clique em 'Afil/Porting/Check Achievement Data'");
+                Debug.LogError("AchievementData nï¿½o encontrado, clique em 'Afil/Porting/Check Achievement Data'");
                 return;
             }
             if (data.Achievements == null || data.Achievements.Length == 0)
             {
-                Debug.LogError("Achievements não carregados no data, por favor cheque o AchiementData'");
+                Debug.LogError("Achievements nï¿½o carregados no data, por favor cheque o AchiementData'");
                 return;
             }
             foreach (var achi in data.Achievements)
@@ -289,6 +289,7 @@ namespace Porting
         void RequestGameSave()
         {
            Debug.Log("[Platform Manager] Saving game data");
+          
             byte[] data = SaveCompatibility.LocalPlayerPrefs.Serialize();
             Debug.Log($"[Platform Manager]  Game data size: {data.Length}");
             //string saveData = Convert.ToBase64String(data);

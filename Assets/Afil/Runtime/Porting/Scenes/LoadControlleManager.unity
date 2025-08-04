@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -104,7 +103,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +116,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,20 +127,45 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
       propertyPath: m_MoveAction
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -8880171065338800222, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_PointAction
+      value: 
+      objectReference: {fileID: -2698985983820000005, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
     - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
       propertyPath: m_CancelAction
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5256710224006073395, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
     - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
       propertyPath: m_SubmitAction
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3452858325286623655, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_LeftClickAction
+      value: 
+      objectReference: {fileID: -6497194573911477426, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_RightClickAction
+      value: 
+      objectReference: {fileID: -4455109376231171963, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_MiddleClickAction
+      value: 
+      objectReference: {fileID: 1050194467050140265, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_ScrollWheelAction
+      value: 
+      objectReference: {fileID: 2545519293280860738, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -7964756900385318995, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_TrackedDeviceOrientationAction
+      value: 
+      objectReference: {fileID: 2545519293280860738, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
     - target: {fileID: 147267998039062601, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -239,12 +263,16 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
 --- !u!1001 &567263790
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2251521481988381397, guid: fd26086b791be034c9caf70d7a597d86, type: 3}
@@ -320,6 +348,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 095166e09547bbb4c904adca0ff41e58, type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd26086b791be034c9caf70d7a597d86, type: 3}
 --- !u!1 &600038245
 GameObject:
@@ -362,9 +393,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -398,13 +437,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600038245}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &600038250
 MonoBehaviour:
@@ -505,13 +544,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072343739}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &2072343742
 MonoBehaviour:
@@ -525,3 +564,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 600038248}
+  - {fileID: 2072343741}
+  - {fileID: 215948080}
+  - {fileID: 567263790}

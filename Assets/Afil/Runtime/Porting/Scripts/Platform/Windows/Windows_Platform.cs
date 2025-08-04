@@ -42,18 +42,21 @@ public class Windows_Platform : IPlatform
 
     public void LoadGameData(Action<bool, byte[]> callback)
     {
-
-
         if (File.Exists(filePath))
         {
-
-            
+            Debug.LogError("Loading game data... WINDOWS");
             BinaryFormatter formatter = new BinaryFormatter();
 
             FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate);
 
             byte[] bytes = (byte[])formatter.Deserialize(stream);
             stream.Close();
+
+            if (bytes == null || bytes.Length > 0 )
+            {
+                SaveCompatibility.LocalPlayerPrefs.loadedBytes = bytes;
+            }          
+
             callback?.Invoke(true, bytes);
         }
         else
@@ -96,14 +99,14 @@ public class Windows_Platform : IPlatform
 
     public void SaveGameData(byte[] rawData, Action<bool> callback)
     {
-        //Debug.LogError("Entrou");
+        
         BinaryFormatter formatter = new BinaryFormatter();
         
         FileStream stream = new FileStream(filePath, FileMode.Create);
 
         formatter.Serialize(stream, rawData);
         stream.Close();
-
+        
         callback?.Invoke(true);
     }
 

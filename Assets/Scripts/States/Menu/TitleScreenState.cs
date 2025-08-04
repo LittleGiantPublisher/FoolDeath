@@ -8,7 +8,7 @@ namespace F.State
 {
     public abstract class TitleScreenState : State
     {
-        protected FDPlayerInput input => this.owner.input;
+        protected InputPlayer input => this.owner.input;
 //
         protected F.UI.Panel logoPanel => this.owner.logoPanel;
 

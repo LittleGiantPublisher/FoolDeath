@@ -14,7 +14,7 @@ namespace F.Cards
     {
         private DeckVisual deckVisual;
         private Selectable selfSelectable;
-        private FDPlayerInput controls;
+        private InputPlayer controls;
         private EventSystem eventSystem;
 
         private Card draggedCard;
@@ -32,7 +32,7 @@ namespace F.Cards
         {
             selfSelectable  = GetComponent<Selectable>();
             deckVisual      = GetComponent<DeckVisual>();
-            controls        = new FDPlayerInput();
+            controls        = new InputPlayer();
             eventSystem     = EventSystem.current;
         }
 
@@ -41,8 +41,8 @@ namespace F.Cards
             controls.Enable();
             controls.UI.Click.started   += OnUIClickStarted;
             controls.UI.Click.canceled  += OnUIClickCanceled;
-            controls.UI.Submit.started  += OnUIClickStarted;
-            controls.UI.Submit.canceled += OnUIClickCanceled;
+            controls.UI.Confirm.started  += OnUIClickStarted;
+            controls.UI.Confirm.canceled += OnUIClickCanceled;
 
             uiClickHeld     = false;
             draggedCard     = null;
@@ -54,8 +54,8 @@ namespace F.Cards
         {
             controls.UI.Click.started   -= OnUIClickStarted;
             controls.UI.Click.canceled  -= OnUIClickCanceled;
-            controls.UI.Submit.started  -= OnUIClickStarted;
-            controls.UI.Submit.canceled -= OnUIClickCanceled;
+            controls.UI.Confirm.started  -= OnUIClickStarted;
+            controls.UI.Confirm.canceled -= OnUIClickCanceled;
             controls.Disable();
         }
 
@@ -81,7 +81,7 @@ namespace F.Cards
             // continuous stick-based drag
             if (uiClickHeld && draggedCard != null)
             {
-                Vector2 moveDelta = controls.Player.Move.ReadValue<Vector2>();
+                Vector2 moveDelta = controls.Player.LeftStick.ReadValue<Vector2>();
                 Vector2 lookDelta = Gamepad.current?.rightStick.ReadValue() ?? Vector2.zero;
                 Vector2 delta     = moveDelta + lookDelta;
 

@@ -26,7 +26,7 @@ namespace F.State
 
 		public override void Exit()
 		{
-			input.UI.Escape.canceled -= this.OnEscapeCanceled;
+			input.UI.Cancel.canceled -= this.OnEscapeCanceled;
 			base.messagePanel.Hide();
 			AudioManager.Instance.SetLowPassFilter(false);
 		}
@@ -46,7 +46,7 @@ namespace F.State
 		{
 			base.messagePanel.onClick.AddListener(new UnityAction<int>(this.OnClickContinue));
 			base.messagePanel.onCancel.AddListener(new UnityAction(this.OnCancel));
-			input.UI.Escape.canceled += this.OnEscapeCanceled;
+			input.UI.Cancel.canceled += this.OnEscapeCanceled;
 			yield return new WaitForSecondsRealtime(transitionTime);
 			yield break;
 		}

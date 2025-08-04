@@ -7,7 +7,7 @@ using System.Text;
 namespace SaveCompatibility
 {
     /// <summary>
-    /// Classe substituta do PlayerPrefs da Unity, salva os valores na memória e possui função de serializar e deserializar
+    /// Classe substituta do PlayerPrefs da Unity, salva os valores na memï¿½ria e possui funï¿½ï¿½o de serializar e deserializar
     /// </summary>
     public class LocalPlayerPrefs : MonoBehaviour
     {
@@ -201,6 +201,7 @@ namespace SaveCompatibility
 
         static public byte[] Serialize()
         {
+             Debug.LogError($"SERIALIZE SAVE {saveContainer}");
             return saveContainer.SerializeSaveData(); 
         }
 
@@ -218,6 +219,7 @@ namespace SaveCompatibility
             {
                 saveContainer.Deserialize(containerData as SaveData[]);
             }
+            Debug.LogError($"DESERIALIZE SAVE {saveContainer}");
         }
         static public void DeserializeManual()
         {

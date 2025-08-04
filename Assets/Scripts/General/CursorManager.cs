@@ -18,7 +18,7 @@ namespace F
         [SerializeField] public float gamepadCursorSpeed = 1000f;
         [SerializeField] public float cardCursorSpeed = 100f;
 
-        private FDPlayerInput controls;
+        private InputPlayer controls;
         // private VirtualMouseInput virtualMouse; // disabled virtual mouse for now
         private EventSystem eventSystem;
         public InputSystemUIInputModule uiModule;
@@ -41,7 +41,7 @@ namespace F
             DontDestroyOnLoad(gameObject);
 
             // initialize InputSystem actions
-            controls = new FDPlayerInput();
+            controls = new InputPlayer();
             controls.Enable();
 
             // get the UI input module from the active EventSystem
@@ -63,7 +63,7 @@ namespace F
             // subscribe to input events for cursor control
             //controls.Player.Look.performed += OnLookUsed;
             controls.UI.Point.performed += OnMousePoint;
-            controls.UI.Navigate.performed += OnNavigate;
+            controls.UI.Nav.performed += OnNavigate;
 
             SetCursorSprite(null);
 
@@ -79,7 +79,7 @@ namespace F
             // unsubscribe from input events
             //controls.Player.Look.performed -= OnLookUsed;
             controls.UI.Point.performed -= OnMousePoint;
-            controls.UI.Navigate.performed -= OnNavigate;
+            controls.UI.Nav.performed -= OnNavigate;
             controls.Disable();
         }
 

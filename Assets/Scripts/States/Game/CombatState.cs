@@ -166,7 +166,7 @@ namespace F.State
 
         private bool ChecksWinOrLose()
         {
-            if(CombatStateStatus.Karma == 0)SteamIntegration.UnlockAchievement("ACH_0");
+            //if(CombatStateStatus.Karma == 0)SteamIntegration.UnlockAchievement("ACH_0");
             return CombatStateStatus.Karma >= CombatStateStatus.MinKarma && CombatStateStatus.Karma <= CombatStateStatus.MaxKarma;
         }
 
@@ -342,7 +342,7 @@ namespace F.State
             base.pauseBG.Hide();
             //base.pauseMenuButton.onClick.RemoveListener(new UnityAction<int>(this.OnClickOptions));
             //base.pauseMenuButton.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled -= this.OnEscapeCanceled;
+            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
         }
 
         public void OnClickOptions(int i)
@@ -399,7 +399,7 @@ namespace F.State
             base.pauseBG.Hide();
             //base.pauseMenuButton.onClick.AddListener(new UnityAction<int>(this.OnClickOptions));
             //base.pauseMenuButton.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Escape.canceled += this.OnEscapeCanceled;
+            input.UI.Cancel.canceled += this.OnEscapeCanceled;
         }
     }
 }
