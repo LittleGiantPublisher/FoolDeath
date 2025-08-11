@@ -342,7 +342,7 @@ namespace F.State
             base.pauseBG.Hide();
             //base.pauseMenuButton.onClick.RemoveListener(new UnityAction<int>(this.OnClickOptions));
             //base.pauseMenuButton.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            input.Player.Start.canceled -= this.OnEscapeCanceled;
         }
 
         public void OnClickOptions(int i)
@@ -399,7 +399,7 @@ namespace F.State
             base.pauseBG.Hide();
             //base.pauseMenuButton.onClick.AddListener(new UnityAction<int>(this.OnClickOptions));
             //base.pauseMenuButton.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            input.Player.Start.canceled += this.OnEscapeCanceled;
         }
     }
 }

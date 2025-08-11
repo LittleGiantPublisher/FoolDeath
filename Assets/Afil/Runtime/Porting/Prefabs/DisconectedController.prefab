@@ -141,8 +141,7 @@ MonoBehaviour:
   m_text: controller not found
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -225,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8777616826908007977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -275,9 +274,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Reconect the controller\n to continue"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -406,7 +404,7 @@ RectTransform:
   m_GameObject: {fileID: 2159131844040498316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.93000007, y: 0.93000007, z: 0.93000007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3970731701427679830}
@@ -437,14 +435,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.30980393, g: 0.13333334, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7258bfa7f2442f042bd53d2cc492e665, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -522,8 +520,7 @@ MonoBehaviour:
   m_text: "Press <sprite=0> button or ENTER\n to continue"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -835,7 +832,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1224.6124, y: 546.6526}
+  m_SizeDelta: {x: 1225, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3970731701427679832
 CanvasRenderer:
@@ -858,7 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.56078434, g: 0.2392157, b: 0.5372549, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -934,7 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
+  m_Color: {r: 0.13274144, g: 0, b: 0.21698111, a: 0.7647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -966,7 +963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4210246933168635428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1057,8 +1054,7 @@ MonoBehaviour:
   m_text: controller not found
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1191,9 +1187,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Press <sprite=5> button\n to continue"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1364,8 +1359,7 @@ MonoBehaviour:
   m_text: "Press <sprite=0> button\n to continue"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1448,7 +1442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2675668146685786142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1498,9 +1492,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: controller not found
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1670,8 +1663,7 @@ MonoBehaviour:
   m_text: "Reconect the controller\n to continue"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1805,8 +1797,7 @@ MonoBehaviour:
   m_text: controller not found
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f,
-    type: 2}
+  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

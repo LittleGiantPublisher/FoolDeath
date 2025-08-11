@@ -2080,19 +2080,19 @@
                     "name": "Confirm",
                     "type": "Button",
                     "id": "37df238b-4a6e-4f04-876c-53624e02c258",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Nav",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "f44cfcbd-0174-49af-b3a9-00a49cb7770c",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -2144,6 +2144,24 @@
                     "type": "PassThrough",
                     "id": "d7ce361a-4180-4a30-bbb4-c2b7c9332ea9",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TrackedDevicePosition",
+                    "type": "PassThrough",
+                    "id": "e6760259-d877-462a-8134-628fb5aff478",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TrackedDeviceOrientation",
+                    "type": "PassThrough",
+                    "id": "c3bf7455-aa45-46a6-ab69-39da8dcfd8dc",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -3049,6 +3067,28 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f544a98e-6dab-4339-8eb4-bd05e7d2ca02",
+                    "path": "<XRController>/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "TrackedDevicePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98e2f3df-b460-40ec-9c85-5af1a9fc32f9",
+                    "path": "<TrackedDevice>/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

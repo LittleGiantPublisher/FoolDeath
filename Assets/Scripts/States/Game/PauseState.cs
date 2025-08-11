@@ -53,17 +53,19 @@ namespace F.State
             yield return new WaitForSeconds(transitionTime);
             base.pauseBG.Show();
             base.pauseMenu.Show();
-			base.pauseMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
-			base.pauseMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
+            base.pauseMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
+            base.pauseMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
             input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            input.Player.Start.canceled += this.OnEscapeCanceled;
 		}
 
-		public override void Exit()
-		{
-			base.pauseMenu.Hide();
-			base.pauseMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
-			base.pauseMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
+        public override void Exit()
+        {
+            base.pauseMenu.Hide();
+            base.pauseMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
+            base.pauseMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
             input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            input.Player.Start.canceled -= this.OnEscapeCanceled;
         }
 	}
 }

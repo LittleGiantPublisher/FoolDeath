@@ -124,7 +124,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.commondialog.ps4": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.commondialog.ps4-1.0.7.tgz",
+      "version": "file:ConsolePackages/PS4/com.unity.commondialog.ps4-1.0.7.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
@@ -152,7 +152,7 @@
       }
     },
     "com.unity.gamecore": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.gamecore-1.3.0 (2).tgz",
+      "version": "file:ConsolePackages/com.unity.gamecore-1.3.0 (2).tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
@@ -184,16 +184,8 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.inputsystem.gxdk": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.inputsystem.gxdk-1.0.2 (1).tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {
-        "com.unity.inputsystem": "1.12.0"
-      }
-    },
     "com.unity.inputsystem.ps4": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.inputsystem.ps4-0.2.0-pre.tgz",
+      "version": "file:ConsolePackages/PS4/com.unity.inputsystem.ps4-0.2.0-pre.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -217,7 +209,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.microsoft.gdk.tools.xbox": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.microsoft.gdk.tools.xbox-1.0.2 (1).tgz",
+      "version": "file:ConsolePackages/com.unity.microsoft.gdk.tools.xbox-1.0.2 (1).tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -226,7 +218,7 @@
       }
     },
     "com.unity.nptoolkit2.ps4": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.nptoolkit2.ps4-1.0.6.tgz",
+      "version": "file:ConsolePackages/PS4/com.unity.nptoolkit2.ps4-1.0.6.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
@@ -242,14 +234,8 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       }
     },
-    "com.unity.render-pipelines.gamecore": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/com.unity.render-pipelines.gamecore-1.4.0 (1).tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {}
-    },
     "com.unity.render-pipelines.ps4": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.render-pipelines.ps4-1.9.0.tgz",
+      "version": "file:ConsolePackages/PS4/com.unity.render-pipelines.ps4-1.9.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
@@ -275,7 +261,7 @@
       }
     },
     "com.unity.savedata.ps4": {
-      "version": "file:C:/Users/moise/Downloads/ConsolePackages/ConsolePackages/PS4/com.unity.savedata.ps4-1.0.6.tgz",
+      "version": "file:ConsolePackages/PS4/com.unity.savedata.ps4-1.0.6.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}

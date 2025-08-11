@@ -155,8 +155,8 @@ MonoBehaviour:
   m_MiddleClickAction: {fileID: 1050194467050140265, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
   m_RightClickAction: {fileID: -4455109376231171963, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
   m_ScrollWheelAction: {fileID: 2545519293280860738, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: -6901362677323569477, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 2987169367488398858, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
