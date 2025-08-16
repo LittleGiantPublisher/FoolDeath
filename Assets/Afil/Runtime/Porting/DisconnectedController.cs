@@ -87,11 +87,13 @@ public class DisconnectedController : MonoBehaviour
     void ShowDisconnectedApplet()
     {
         canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
         //GameObject.Find("GameManager")?.GetComponent<LevelManager>()?.Pause();
 
     }
     void HideDisconnectedApplet()
     {
         canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
     }
 }

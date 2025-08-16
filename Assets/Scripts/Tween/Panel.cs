@@ -44,11 +44,25 @@ namespace F.UI
         private void OnEnable()
         {
             InputSystem.onActionChange += OnInputAction;
+            ControllerManager.OnInputChanged += OnInputChangedOrPressed;
+            ControllerManager.OnAnyKeyPressed += OnInputChangedOrPressed;
         }
 
         private void OnDisable()
         {
             InputSystem.onActionChange -= OnInputAction;
+            ControllerManager.OnInputChanged -= OnInputChangedOrPressed;
+            ControllerManager.OnAnyKeyPressed -= OnInputChangedOrPressed;
+        }
+
+        private void OnInputChangedOrPressed()
+        {         
+            if (this.canvasGroup.blocksRaycasts && EventSystem.current.currentSelectedGameObject == null)
+            {
+                bool virtualCursor = CursorManager.Instance != null && CursorManager.Instance.IsUICursorActive;
+                if (virtualCursor) return;
+                SelectDefault();
+            }        
         }
 
         private void OnInputAction(object action, InputActionChange change)
@@ -58,7 +72,7 @@ namespace F.UI
                 var inputAction = action as InputAction;
                 if (inputAction != null && IsNavigationAction(inputAction) && (EventSystem.current.currentSelectedGameObject == null))
                 {
-                    SelectDefault(); 
+                    SelectDefault();
                 }
             }
         }
@@ -79,7 +93,7 @@ namespace F.UI
                 componentsInChildren[i].Show();
             }
 
-            if (!CursorManager.Instance.IsAnyCursorActive)
+            if (CursorManager.Instance != null && !CursorManager.Instance.IsAnyCursorActive)
             {
                 SelectDefault();
             }

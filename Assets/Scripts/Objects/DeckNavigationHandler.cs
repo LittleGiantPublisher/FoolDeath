@@ -357,7 +357,7 @@ namespace F.Cards
 
         public void OnMove(AxisEventData eventData)
         {
-            if (uiClickHeld || CursorManager.Instance.IsUICursorActive) 
+            if (uiClickHeld || (CursorManager.Instance != null && CursorManager.Instance.IsUICursorActive)) 
                 return;
             
             if (eventSystem.currentSelectedGameObject == null)
@@ -403,15 +403,39 @@ namespace F.Cards
                 return;
             }
 
-            if (dir == NavigationMode.Left && currentIndex > 0)
+            if (dir == NavigationMode.Left)
             {
-                ChangeSelection(currentIndex - 1);
-                return;
+                if (currentIndex > 0)
+                {
+                    ChangeSelection(currentIndex - 1);
+                    return;
+                }
+                else
+                {
+                    // Em vez de perder a seleção, mantenha na carta 0
+                    ChangeSelection(0);
+                    return;
+                    // Se quiser navegar para um vizinho explícito, descomente:
+                    // StartCoroutine(FallbackToExplicit(dir));
+                    // return;
+                }
             }
-            if (dir == NavigationMode.Right && currentIndex < count - 1)
+            if (dir == NavigationMode.Right)
             {
-                ChangeSelection(currentIndex + 1);
-                return;
+                if (currentIndex < count - 1)
+                {
+                    ChangeSelection(currentIndex + 1);
+                    return;
+                }
+                else
+                {
+                    // Em vez de perder a seleção, mantenha na última carta
+                    ChangeSelection(count - 1);
+                    return;
+                    // Ou navegue para vizinho explícito se desejar:
+                    // StartCoroutine(FallbackToExplicit(dir));
+                    // return;
+                }
             }
             StartCoroutine(FallbackToExplicit(dir));
         }

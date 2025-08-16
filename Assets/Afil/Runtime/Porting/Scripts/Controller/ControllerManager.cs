@@ -14,7 +14,7 @@ public class ControllerManager : MonoBehaviour
 {
 
     [SerializeField] public PlayerInput playerInput;
-    [SerializeField] InputPlayer inputPlayerActions;
+    [SerializeField] public InputPlayer inputPlayerActions;
     [SerializeField] InputController thisController;
     public bool OnTestController;
     public INPUT_TYPE currentPCInput;
@@ -34,8 +34,12 @@ public class ControllerManager : MonoBehaviour
 
     public static Action OnControllerDisconnnect;
     public static Action OnControllerConnnect;
+    public static Action OnInputChanged;
+    public static Action OnAnyKeyPressed;
 
-     [SerializeField] GameObject ControllerDisconnectionPrefab;
+    [SerializeField] private bool anyKeyEventCalled = false;
+
+    [SerializeField] GameObject ControllerDisconnectionPrefab;
      GameObject ControllerDisconnection;
      GameObject disconectionScreen;
    //   CanvasGroup disconnectedScreenCanvas;
@@ -84,15 +88,15 @@ public class ControllerManager : MonoBehaviour
 
     private void Update()
     {
-        if(EventSystem.current.currentInputModule != inputSystemUI && EventSystem.current.currentInputModule.IsActive()) 
+        if (EventSystem.current.currentInputModule != inputSystemUI && EventSystem.current.currentInputModule.IsActive())
         {
-           
+            Debug.Log("Mudando input event");
             EventSystem.current.currentInputModule.DeactivateModule();
-            inputSystemUI.ActivateModule(); 
+            inputSystemUI.ActivateModule();
         }
         //Debug.LogError("TIRA ESSA PORRA DAQUI CARALHO");
         //Porting.PlatformManager.enterButtonParam = 0;
-        onReconec =  tryReconnectController;
+        onReconec = tryReconnectController;
 #if UNITY_SWITCH
         if (!disconected)
         {
@@ -100,7 +104,6 @@ public class ControllerManager : MonoBehaviour
             {
                 disconected = true;
                 ShowControllerSupport();
-
             }
     	}
 #endif
@@ -117,14 +120,25 @@ public class ControllerManager : MonoBehaviour
             desactiveInLoading = true;
 
             EventSystem.current.sendNavigationEvents = false;
-            
+            Debug.Log("Desativando input do controller");
             thisController.ActiveInput(false, InputController.ACTION_MAP.UI);
         }
         else if (!StateMachine.current.OnTheState(StateMachine.PAGE.LOADING) && desactiveInLoading)
         {
             desactiveInLoading = false;
             EventSystem.current.sendNavigationEvents = true;
+            Debug.Log("Ativando input do controller");
             thisController.ActiveInput(true, InputController.ACTION_MAP.UI);
+        }
+        
+        if (!anyKeyEventCalled && thisController != null && thisController.anyButton)
+        {
+            anyKeyEventCalled = true;
+            OnAnyKeyPressed?.Invoke();
+        }
+        else if (!thisController.anyButton)
+        {
+            anyKeyEventCalled = false;
         }
     }
 
@@ -571,6 +585,7 @@ public class ControllerManager : MonoBehaviour
                        || ((device.circleButton.isPressed || device.buttonEast.isPressed || device.bButton.isPressed) && Porting.PlatformManager.enterButtonParam == 0)) && !device.synthetic)
                     {
                         currentPCInput = INPUT_TYPE.GAMEPAD;
+                        OnInputChanged?.Invoke();
                         userDevice = device;
                         if(!firstInput)
                         {
@@ -661,10 +676,11 @@ public class ControllerManager : MonoBehaviour
 
                 if (device.anyKey.isPressed)
                 {
-                    if(currentPCInput != INPUT_TYPE.KEYBOARD)
+                    if (currentPCInput != INPUT_TYPE.KEYBOARD)
                     {
                         currentPCInput = INPUT_TYPE.KEYBOARD;
                         UpdateGlyphs?.Invoke();
+                        OnInputChanged?.Invoke();
                     }
                 }
                 ////Debug.LogError("Keyboard");
@@ -679,6 +695,7 @@ public class ControllerManager : MonoBehaviour
                     {
                         currentPCInput = INPUT_TYPE.KEYBOARD;
                         UpdateGlyphs?.Invoke();
+                        OnInputChanged?.Invoke();
                     }
                 }
             }
@@ -694,6 +711,7 @@ public class ControllerManager : MonoBehaviour
                         {
                             currentPCInput = INPUT_TYPE.GAMEPAD;
                             UpdateGlyphs?.Invoke();
+                            OnInputChanged?.Invoke();
                         }
                     }
                 }
@@ -705,6 +723,16 @@ public class ControllerManager : MonoBehaviour
             }
         }
     }
+
+    public void SetPCInputType(INPUT_TYPE inputType)
+    {
+#if UNITY_GAMECORE || MICROSOFT_GAME_CORE || UNITY_EDITOR
+        currentPCInput = inputType;
+        UpdateGlyphs?.Invoke();
+        OnInputChanged?.Invoke();
+#endif
+    }
+
     public void ReconnectController(InputAction.CallbackContext ctx)
     {
         StartCoroutine(ConnectController());

@@ -7,7 +7,7 @@ public class InputController
 {
    
 
- public enum ACTION_MAP
+    public enum ACTION_MAP
     {
         UI,
         PLAYER,
@@ -321,7 +321,7 @@ public class InputController
 
     void AnyKeyDown(InputAction.CallbackContext context)
     {
-        
+
     }
 
     void RightAxis(InputAction.CallbackContext context)
