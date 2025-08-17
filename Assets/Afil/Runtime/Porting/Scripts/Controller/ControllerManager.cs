@@ -15,7 +15,7 @@ public class ControllerManager : MonoBehaviour
 
     [SerializeField] public PlayerInput playerInput;
     [SerializeField] public InputPlayer inputPlayerActions;
-    [SerializeField] InputController thisController;
+    [SerializeField] public InputController thisController;
     public bool OnTestController;
     public INPUT_TYPE currentPCInput;
     public static Action UpdateGlyphs;

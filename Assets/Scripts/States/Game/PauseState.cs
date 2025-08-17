@@ -5,6 +5,7 @@ using F.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Porting;
 
 namespace F.State
 {
@@ -55,7 +56,14 @@ namespace F.State
             base.pauseMenu.Show();
             base.pauseMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
             base.pauseMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled += this.OnEscapeCanceled;
+            }
             input.Player.Start.canceled += this.OnEscapeCanceled;
 		}
 
@@ -64,7 +72,14 @@ namespace F.State
             base.pauseMenu.Hide();
             base.pauseMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
             base.pauseMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled -= this.OnEscapeCanceled;
+            }
             input.Player.Start.canceled -= this.OnEscapeCanceled;
         }
 	}

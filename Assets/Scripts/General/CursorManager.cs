@@ -42,7 +42,7 @@ namespace F
             DontDestroyOnLoad(gameObject);
 
             // initialize InputSystem actions
-            controls = ControllerManager.current.inputPlayerActions;
+            controls = ControllerManager.current.thisController.inputPlayerActions;
             //controls.Enable();
 
             // get the UI input module from the active EventSystem
@@ -149,6 +149,9 @@ namespace F
 
         public void ShowMouseCursor()
         {
+#if !UNITY_GAMECORE && !MICROSOFT_GAME_CORE && !UNITY_EDITOR
+            return;
+#endif
             if (isOSCursorActive || ControllerManager.current.currentPCInput == ControllerManager.INPUT_TYPE.GAMEPAD) return;
 
             // clear any current selection when switching to OS cursor

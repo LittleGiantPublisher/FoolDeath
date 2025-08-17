@@ -14,13 +14,12 @@ namespace F.State
 		}
 
 		private void Awake(){
-			input = new InputPlayer();
-			input.Enable();
+			input = ControllerManager.current.thisController.inputPlayerActions;
 		}
 
 		private void OnDisable()
 		{
-			input.Disable();
+			
 		}
 
 		public InputPlayer input;

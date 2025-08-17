@@ -140,7 +140,7 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""name"": ""ButtonSouth"",
                     ""type"": ""Button"",
                     ""id"": ""408f7643-afa3-4cc7-9418-a5f92cf9121c"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -248,7 +248,7 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""name"": ""RightClick"",
                     ""type"": ""Button"",
                     ""id"": ""c4db8e9a-08b0-459e-a2be-721765e48051"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -257,7 +257,7 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""name"": ""LeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""529a039f-70d3-4b73-88c1-eb63370e2ffc"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -2184,7 +2184,7 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""732dd4e3-7a6c-4922-a590-55e4d386836f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

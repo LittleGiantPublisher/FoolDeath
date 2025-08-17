@@ -84,7 +84,7 @@
       <Organization>USK</Organization>
       <Age>0</Age>
     </Rating>
-    <LegalInformationFilePath>Assets\legal_info_010095d025034000_e869_hac.zip</LegalInformationFilePath>
+    <LegalInformationFilePath>Assets\legal_info_010095d025034000_fec7_hac.zip</LegalInformationFilePath>
     <VideoCapture>Enable</VideoCapture>
     <RuntimeAddOnContentInstall>Deny</RuntimeAddOnContentInstall>
     <CrashReport>Allow</CrashReport>

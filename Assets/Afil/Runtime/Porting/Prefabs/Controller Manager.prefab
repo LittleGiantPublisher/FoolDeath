@@ -84,6 +84,7 @@ MonoBehaviour:
   inputSystemUI: {fileID: -7964756900385318995}
   onReconec: 0
   hasGamepadConected: 0
+  anyKeyEventCalled: 0
   ControllerDisconnectionPrefab: {fileID: 3970731700245794693, guid: 5c573c9550975d04bae3f7653d29fbd5, type: 3}
 --- !u!114 &-2694974785362014472
 MonoBehaviour:
@@ -111,8 +112,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Xbox
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: Switch
+  m_DefaultActionMap: 3de3c4e2-c8cc-4e0d-898f-928b313b0047
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &-4644555142402552550

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using TMPro;
+using Porting;
 
 namespace F.State
 {
@@ -97,7 +98,14 @@ namespace F.State
             base.resultsMenu.Show();
             base.resultsMenu.onClick.AddListener(new UnityAction<int>(this.OnClick));
             base.resultsMenu.onCancel.AddListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled += this.OnEscapeCanceled;
+            }
         }
 
         public override void Exit()
@@ -105,7 +113,14 @@ namespace F.State
             base.resultsMenu.Hide();
             base.resultsMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
             base.resultsMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
-            input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled -= this.OnEscapeCanceled;
+            }
         }
 
         private void SetActive(GameObject obj, bool isActive)

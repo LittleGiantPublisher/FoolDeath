@@ -99,7 +99,7 @@ namespace Porting
             Debug.Log("Set UserHandle Success");
 
             if (!nn.account.Account.TryOpenPreselectedUser(ref userHandle))
-                nn.Nn.Abort("Can´t Open Preselected User");
+                nn.Nn.Abort("Canï¿½t Open Preselected User");
 
             nn.Result result = nn.account.Account.GetUserId(ref userId, userHandle);
             result.abortUnlessSuccess();
@@ -165,7 +165,7 @@ namespace Porting
                 result = nn.fs.File.Delete(filePath + PlatformManager.currentPlatform.GetFileName());
                 result.abortUnlessSuccess();
             }
-            Debug.Log("Result Dont´t Exists");
+            Debug.Log("Result Dontï¿½t Exists");
             result = nn.fs.File.Create(filePath + PlatformManager.currentPlatform.GetFileName(), size); Debug.Log("Create File Sucess");
             result.abortUnlessSuccess();
 #endif

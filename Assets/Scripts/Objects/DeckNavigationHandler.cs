@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using F;  // for CursorManager
+using F;
+using Porting;  // for CursorManager
 
 namespace F.Cards
 {
@@ -32,17 +33,24 @@ namespace F.Cards
         {
             selfSelectable  = GetComponent<Selectable>();
             deckVisual      = GetComponent<DeckVisual>();
-            controls        = new InputPlayer();
+            controls        = ControllerManager.current.thisController.inputPlayerActions;
             eventSystem     = EventSystem.current;
         }
 
         private void OnEnable()
         {
-            controls.Enable();
-            controls.UI.Click.started   += OnUIClickStarted;
-            controls.UI.Click.canceled  += OnUIClickCanceled;
-            controls.UI.Confirm.started  += OnUIClickStarted;
-            controls.UI.Confirm.canceled += OnUIClickCanceled;
+            //controls.UI.Click.started   += OnUIClickStarted;
+            //controls.UI.Click.canceled  += OnUIClickCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                controls.UI.Confirm.started  += OnUIClickStarted;
+                controls.UI.Confirm.canceled += OnUIClickCanceled;
+            }
+            else
+            {
+                controls.UI.Cancel.started  += OnUIClickStarted;
+                controls.UI.Cancel.canceled += OnUIClickCanceled;
+            }
 
             uiClickHeld     = false;
             draggedCard     = null;
@@ -52,11 +60,18 @@ namespace F.Cards
 
         private void OnDisable()
         {
-            controls.UI.Click.started   -= OnUIClickStarted;
-            controls.UI.Click.canceled  -= OnUIClickCanceled;
-            controls.UI.Confirm.started  -= OnUIClickStarted;
-            controls.UI.Confirm.canceled -= OnUIClickCanceled;
-            controls.Disable();
+            //controls.UI.Click.started   -= OnUIClickStarted;
+            //controls.UI.Click.canceled  -= OnUIClickCanceled;
+            if (PlatformManager.enterButtonParam == 1)
+            {
+                controls.UI.Confirm.started  -= OnUIClickStarted;
+                controls.UI.Confirm.canceled -= OnUIClickCanceled;
+            }
+            else
+            {
+                controls.UI.Cancel.started  -= OnUIClickStarted;
+                controls.UI.Cancel.canceled -= OnUIClickCanceled;
+            }
         }
 
         private void Update()

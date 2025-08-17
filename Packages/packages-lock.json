@@ -192,6 +192,14 @@
         "com.unity.inputsystem": "1.6.1"
       }
     },
+    "com.unity.inputsystem.switch": {
+      "version": "file:C:/Nintendo/Unity2022.3.62_LTS-NXAddon19.3.0/UnityForNintendoSwitch/Packages/com.unity.inputsystem.switch@0.1.7-pre",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.inputsystem": "1.1.0-pre.5"
+      }
+    },
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,

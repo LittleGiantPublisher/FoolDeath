@@ -3,6 +3,7 @@ using CameraShake;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SaveCompatibility;
 using F;
 
 namespace F.UI
@@ -19,10 +20,10 @@ namespace F.UI
 		{
 			this.SetBGM(this.AM.MusicVolume);
 			this.SetSFX(this.AM.SFXVolume);
-			this._resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", 0);
-			bool fullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+			this._resolutionIndex = LocalPlayerPrefs.GetInt("ResolutionIndex", 0);
+			bool fullscreen = LocalPlayerPrefs.GetInt("Fullscreen", 1) == 1;
 			this.SetFullscreen(fullscreen);
-			this.SetCameraShake(PlayerPrefs.GetInt("CameraShake", 1) == 1);
+			this.SetCameraShake(LocalPlayerPrefs.GetInt("CameraShake", 1) == 1);
 		}
 
 		public void OnClickBGMVolume()
@@ -59,7 +60,7 @@ namespace F.UI
 			{
 				this._resolutionIndex = 0;
 			}
-			PlayerPrefs.SetInt("ResolutionIndex", this._resolutionIndex);
+			LocalPlayerPrefs.SetInt("ResolutionIndex", this._resolutionIndex);
 			this.SetResolution(this._resolutionIndex);
 		}
 
@@ -104,7 +105,7 @@ namespace F.UI
 				this.resolutionButton.interactable = true;
 				this.SetResolution(this._resolutionIndex);
 			}
-			PlayerPrefs.SetInt("Fullscreen", isFS ? 1 : 0);
+			LocalPlayerPrefs.SetInt("Fullscreen", isFS ? 1 : 0);
 		}
 
 		private void SetResolution(int resolutionIndex)
@@ -143,7 +144,7 @@ namespace F.UI
 			}
 			SetTextPairs( cameraShakeLabel, cameraShakeTMP);
 			CameraShaker.ShakeOn = isOn;
-			PlayerPrefs.SetInt("CameraShake", isOn ? 1 : 0);
+			LocalPlayerPrefs.SetInt("CameraShake", isOn ? 1 : 0);
 		}
 
         private void SetTextPairs( string text, TMP_Text tmpText){

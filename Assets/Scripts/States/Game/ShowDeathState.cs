@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using F.UI;
+using Porting;
 
 namespace F.State
 {
@@ -26,7 +27,14 @@ namespace F.State
 
 		public override void Exit()
 		{
-			input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+			if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled -= this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled -= this.OnEscapeCanceled;
+            }
 			base.messagePanel.Hide();
 			AudioManager.Instance.SetLowPassFilter(false);
 		}
@@ -46,7 +54,14 @@ namespace F.State
 		{
 			base.messagePanel.onClick.AddListener(new UnityAction<int>(this.OnClickContinue));
 			base.messagePanel.onCancel.AddListener(new UnityAction(this.OnCancel));
-			input.UI.Cancel.canceled += this.OnEscapeCanceled;
+			if (PlatformManager.enterButtonParam == 1)
+            {
+                input.UI.Cancel.canceled += this.OnEscapeCanceled;
+            }
+            else
+            {
+                input.UI.Confirm.canceled += this.OnEscapeCanceled;
+            }
 			yield return new WaitForSecondsRealtime(transitionTime);
 			yield break;
 		}
