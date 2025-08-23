@@ -25,6 +25,8 @@ namespace F.Cards
         private GameObject prevSelectedCardGO;
         private GameObject lastSelectedGO;
 
+        [SerializeField] private DeckNavigationHandler neighborDeck;
+
         private const float flashDuration = 0.3f;
 
         [HideInInspector] public bool IsUsingStickDrag => draggingStarted;
@@ -43,13 +45,13 @@ namespace F.Cards
             //controls.UI.Click.canceled  += OnUIClickCanceled;
             if (PlatformManager.enterButtonParam == 1)
             {
-                controls.UI.Confirm.started  += OnUIClickStarted;
-                controls.UI.Confirm.canceled += OnUIClickCanceled;
+                controls.UI.Confirm.started += OnConfirmPressed;
+                controls.UI.Cancel.started += OnCancelPressed;
             }
             else
             {
-                controls.UI.Cancel.started  += OnUIClickStarted;
-                controls.UI.Cancel.canceled += OnUIClickCanceled;
+                controls.UI.Confirm.started += OnCancelPressed;
+                controls.UI.Cancel.started += OnConfirmPressed;
             }
 
             uiClickHeld     = false;
@@ -64,13 +66,13 @@ namespace F.Cards
             //controls.UI.Click.canceled  -= OnUIClickCanceled;
             if (PlatformManager.enterButtonParam == 1)
             {
-                controls.UI.Confirm.started  -= OnUIClickStarted;
-                controls.UI.Confirm.canceled -= OnUIClickCanceled;
+                controls.UI.Confirm.started -= OnConfirmPressed;
+                controls.UI.Cancel.started -= OnCancelPressed;
             }
             else
             {
-                controls.UI.Cancel.started  -= OnUIClickStarted;
-                controls.UI.Cancel.canceled -= OnUIClickCanceled;
+                controls.UI.Confirm.started -= OnCancelPressed;
+                controls.UI.Cancel.started -= OnConfirmPressed;
             }
         }
 
@@ -97,8 +99,8 @@ namespace F.Cards
             if (uiClickHeld && draggedCard != null)
             {
                 Vector2 moveDelta = controls.Player.LeftStick.ReadValue<Vector2>();
-                Vector2 lookDelta = Gamepad.current?.rightStick.ReadValue() ?? Vector2.zero;
-                Vector2 delta     = moveDelta + lookDelta;
+                Vector2 lookDelta = Vector2.zero;
+                Vector2 delta = moveDelta + lookDelta;
 
                 if (delta.sqrMagnitude > 0f)
                 {
@@ -107,7 +109,7 @@ namespace F.Cards
                         // send BeginDrag once
                         var beginEvent = new PointerEventData(eventSystem);
                         ExecuteEvents.Execute<IBeginDragHandler>(
-                            draggedCard.gameObject, 
+                            draggedCard.gameObject,
                             beginEvent,
                             (handler, data) => handler.OnBeginDrag(beginEvent)
                         );
@@ -116,7 +118,7 @@ namespace F.Cards
                         // send PointerExit to the previously hovered object
                         var exitEvent = new PointerEventData(eventSystem);
                         ExecuteEvents.Execute<IPointerExitHandler>(
-                            lastSelectedGO, 
+                            lastSelectedGO,
                             exitEvent,
                             (handler, data) => handler.OnPointerExit(exitEvent)
                         );
@@ -125,7 +127,7 @@ namespace F.Cards
 
                     // move the card by converting Vector2 delta to Vector3
                     draggedCard.transform.position += (Vector3)delta
-                        * CursorManager.Instance.cardCursorSpeed 
+                        * CursorManager.Instance.cardCursorSpeed
                         * Time.unscaledDeltaTime;
 
                     ClampCardToScreen(draggedCard);
@@ -149,11 +151,13 @@ namespace F.Cards
 
                     //if (results.Count > 0)
                     //{
-                        // set the UI element under the cursor as the selected object
+                    // set the UI element under the cursor as the selected object
                     //    eventSystem.SetSelectedGameObject(results[0].gameObject);
                     //}
                 }
             }
+       
+            
         }
 
         private void ClampCardToScreen(Card card)
@@ -165,6 +169,27 @@ namespace F.Cards
             vp.y = Mathf.Clamp01(vp.y);
             Vector3 clamped = cam.ViewportToWorldPoint(vp);
             card.transform.position = new Vector3(clamped.x, clamped.y, worldPos.z);
+        }
+
+        private void OnConfirmPressed(InputAction.CallbackContext ctx)
+        {
+            if (uiClickHeld)
+            {
+                OnUIClickCanceled(ctx);
+            }
+            else
+            {
+                OnUIClickStarted(ctx);
+            }
+        }
+
+        private void OnCancelPressed(InputAction.CallbackContext ctx)
+        {
+            if (uiClickHeld)
+            {
+                draggedCard.cardVisual.cancelBoardDrop = true;
+                OnUIClickCanceled(ctx);
+            }
         }
 
         private void OnUIClickStarted(InputAction.CallbackContext ctx)
@@ -181,15 +206,17 @@ namespace F.Cards
             draggingStarted = false;
             eventSystem.sendNavigationEvents = false;
 
+            card.ignorePointer = false;
+
             // send pointer-down to card
             var downEvent = new PointerEventData(eventSystem) { button = PointerEventData.InputButton.Left };
             ExecuteEvents.Execute<IPointerDownHandler>(card.gameObject, downEvent,
                 (h, d) => h.OnPointerDown(downEvent));
-            
+
             // send BeginDrag once
             var beginEvent = new PointerEventData(eventSystem);
             ExecuteEvents.Execute<IBeginDragHandler>(
-                draggedCard.gameObject, 
+                draggedCard.gameObject,
                 beginEvent,
                 (h, d) => h.OnBeginDrag(beginEvent)
             );
@@ -202,12 +229,11 @@ namespace F.Cards
 
         private void OnUIClickCanceled(InputAction.CallbackContext ctx)
         {
-
-
             if (ctx.control.device is Pointer || !uiClickHeld || draggedCard == null) return;
 
             uiClickHeld = false;
-            
+            draggedCard.ignorePointer = false;
+
             var endEvent = new PointerEventData(eventSystem);
             ExecuteEvents.Execute<IEndDragHandler>(
                 draggedCard.gameObject,
@@ -225,11 +251,16 @@ namespace F.Cards
             }
             else
             {
-                draggedCard.cardVisual.SetOutline(false);
-                draggedCard.selected = false;
-                draggedCard.SelectEvent.Invoke(draggedCard, false);
-                prevSelectedCardGO = null;
+                //draggedCard.cardVisual.SetOutline(false);
+                //draggedCard.selected = false;
+                //draggedCard.SelectEvent.Invoke(draggedCard, false);
+                //prevSelectedCardGO = null;
             }
+
+            if (ControllerManager.current.currentPCInput == ControllerManager.INPUT_TYPE.GAMEPAD)
+            {
+                draggedCard.ignorePointer = false;
+            }            
 
             // re-enter previous hovered
             var enterEvent = new PointerEventData(eventSystem);
@@ -354,7 +385,6 @@ namespace F.Cards
                 ChangeSelection(0); 
             }
         }
-
                     
         public void RemoveCard(Card card){
             card.cardVisual.SetOutline(false);
@@ -372,26 +402,26 @@ namespace F.Cards
 
         public void OnMove(AxisEventData eventData)
         {
-            if (uiClickHeld || (CursorManager.Instance != null && CursorManager.Instance.IsUICursorActive)) 
+            if (uiClickHeld || (CursorManager.Instance != null && CursorManager.Instance.IsUICursorActive))
                 return;
-            
+
             if (eventSystem.currentSelectedGameObject == null)
             {
                 eventSystem.SetSelectedGameObject(selfSelectable.gameObject);
                 return;
             }
 
-            var dir = eventData.moveDir; 
-            
+            var dir = eventData.moveDir;
+
             NavigationMode navMode = dir switch
             {
-                MoveDirection.Left  => NavigationMode.Left,
+                MoveDirection.Left => NavigationMode.Left,
                 MoveDirection.Right => NavigationMode.Right,
-                MoveDirection.Up    => NavigationMode.Up,
-                MoveDirection.Down  => NavigationMode.Down,
-                _                   => NavigationMode.Left
+                MoveDirection.Up => NavigationMode.Up,
+                MoveDirection.Down => NavigationMode.Down,
+                _ => NavigationMode.Left
             };
-    
+
             HandleNav(navMode);
             eventData.Use();
         }    
@@ -418,53 +448,27 @@ namespace F.Cards
                 return;
             }
 
-            if (dir == NavigationMode.Left)
+            if (dir == NavigationMode.Left && currentIndex > 0)
             {
-                if (currentIndex > 0)
-                {
-                    ChangeSelection(currentIndex - 1);
-                    return;
-                }
-                else
-                {
-                    // Em vez de perder a seleção, mantenha na carta 0
-                    ChangeSelection(0);
-                    return;
-                    // Se quiser navegar para um vizinho explícito, descomente:
-                    // StartCoroutine(FallbackToExplicit(dir));
-                    // return;
-                }
+                ChangeSelection(currentIndex - 1);
+                return;
             }
-            if (dir == NavigationMode.Right)
+            if (dir == NavigationMode.Right && currentIndex < count - 1)
             {
-                if (currentIndex < count - 1)
-                {
-                    ChangeSelection(currentIndex + 1);
-                    return;
-                }
-                else
-                {
-                    // Em vez de perder a seleção, mantenha na última carta
-                    ChangeSelection(count - 1);
-                    return;
-                    // Ou navegue para vizinho explícito se desejar:
-                    // StartCoroutine(FallbackToExplicit(dir));
-                    // return;
-                }
+                ChangeSelection(currentIndex + 1);
+                return;
             }
             StartCoroutine(FallbackToExplicit(dir));
         }
-
+        
         private void ChangeSelection(int newIndex)
         {
-            
-
             var cards = GetSortedCards();
             if (cards.Count == 0) return;
             newIndex = Mathf.Clamp(newIndex, 0, cards.Count - 1);
 
             var card = cards[newIndex];
-            var go   = card.gameObject;
+            var go = card.gameObject;
 
             if (prevSelectedCardGO != null && prevSelectedCardGO != go)
             {
@@ -484,7 +488,8 @@ namespace F.Cards
 
             card.cardVisual.SetOutline(true);
 
-            
+
+            card.ignorePointer = false;
 
             var enterEvent = new PointerEventData(eventSystem);
             ExecuteEvents.Execute<IPointerEnterHandler>(go, enterEvent,
@@ -493,11 +498,12 @@ namespace F.Cards
             prevSelectedCardGO = go;
 
             if (card.cardVisual is TarotCardVisual tarotVis)
-            { 
+            {
                 // start the flash coroutine on the visual
                 tarotVis.StartCoroutine(tarotVis.DamageFlash(flashDuration));
             }
-            else if(card.cardVisual is CoinCardVisual coinVis){
+            else if (card.cardVisual is CoinCardVisual coinVis)
+            {
                 // start the flash coroutine on the visual
                 coinVis.StartCoroutine(coinVis.DamageFlash(flashDuration));
             }
@@ -543,12 +549,17 @@ namespace F.Cards
                 var nextDeckNav = next.GetComponent<DeckNavigationHandler>();
                 if (nextDeckNav != null && nextDeckNav.deckVisual.cards.Count == 0)
                 {
-                    eventSystem.SetSelectedGameObject(null);
+                    //eventSystem.SetSelectedGameObject(null);
+                    ChangeSelection(currentIndex);
                     yield break;
                 }
 
                 // Otherwise, select the next object as usual
                 eventSystem.SetSelectedGameObject(next.gameObject, axisEvent);
+            }
+            else
+            {
+                yield break;
             }
 
             // Finally, fire a pointer-exit on the previous selection to remove its outline

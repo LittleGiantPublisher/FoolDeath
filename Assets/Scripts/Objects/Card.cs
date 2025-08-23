@@ -28,7 +28,8 @@ namespace F.Cards{
         public float selectionOffset = 50;
         private float pointerDownTime;
         private float pointerUpTime;
-
+        private bool ignorePointerPlatform = false;
+        public bool ignorePointer = false;
         
         [Header("Visual")]
         [SerializeField] private GameObject cardVisualPrefab;
@@ -64,6 +65,11 @@ namespace F.Cards{
             imageComponent.raycastTarget = true;
 
             AttachVisuals(); //initializes
+
+#if !UNITY_STANDALONE && !UNITY_EDITOR && !MICROSOFT_GAME_CORE
+            ignorePointerPlatform = true;
+            ignorePointer = true;
+#endif
         }
 
         private void AttachVisuals(){
@@ -93,6 +99,10 @@ namespace F.Cards{
         void Update()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            if (ControllerManager.current.currentPCInput != ControllerManager.INPUT_TYPE.KEYBOARD)
+            {
+                return;
+            }
 
             if (isDragging)
             {
@@ -108,11 +118,18 @@ namespace F.Cards{
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            if(cardVisual.isStatic)return;
+            if (ignorePointer) return;
+            ignorePointer = ignorePointerPlatform;
+            
+            if (cardVisual.isStatic) return;
 
             BeginDragEvent.Invoke(this);
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            offset = mousePosition - (Vector2)transform.position;
+            if (ControllerManager.current.currentPCInput == ControllerManager.INPUT_TYPE.KEYBOARD)
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                offset = (Vector2)transform.position - mousePosition;
+            }
+            
             isDragging = true;
             canvas.GetComponent<GraphicRaycaster>().enabled = false;
             imageComponent.raycastTarget = false;
@@ -126,7 +143,10 @@ namespace F.Cards{
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            if(cardVisual.isStatic)return;
+            if (ignorePointer) return;
+            ignorePointer = ignorePointerPlatform;
+            
+            if (cardVisual.isStatic) return;
 
             EndDragEvent.Invoke(this);
             isDragging = false;
@@ -144,12 +164,18 @@ namespace F.Cards{
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
+            if (ignorePointer) return;
+            ignorePointer = ignorePointerPlatform;
+
             PointerEnterEvent.Invoke(this);
             isHovering = true;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            if (ignorePointer) return;
+            ignorePointer = ignorePointerPlatform;
+
             PointerExitEvent.Invoke(this);
             isHovering = false;
         }
@@ -174,7 +200,7 @@ namespace F.Cards{
                 if (selected)
                     transform.localPosition += (cardVisual.transform.up * 50);
                 else
-                    transform.localPosition = Vector3.zero;    
+                    transform.localPosition = Vector3.zero;
             }
         }
 

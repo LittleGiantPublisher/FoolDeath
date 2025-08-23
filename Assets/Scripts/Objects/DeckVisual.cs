@@ -226,8 +226,7 @@ namespace F.Cards{
 
         void Update()
         {
-
-            if (Input.GetMouseButtonDown(1))
+            if (ControllerManager.current.currentPCInput == ControllerManager.INPUT_TYPE.KEYBOARD && Input.GetMouseButtonDown(1))
             {
                 foreach (Card card in cards)
                 {

@@ -129,45 +129,52 @@ namespace F.Cards
             int filledCount = unavailableDecks.Count;
             if(filledCount == 5) return;
             
+            
             if (nearestDeck != null && currentCard != null)
             {
+                if (currentCard.cancelBoardDrop)
+                {
+                    currentCard.cancelBoardDrop = false;
+                    return;
+                }
+
                 if (currentCard is TarotCardVisual tarotCard)
-                {
-                    tarotCard.parentCard.deck.SwapCardHand(tarotCard.parentCard, nearestDeck);
-                    tarotCard.SetInDeckState(true);
-                    tarotOccupiedDecks.Add(nearestDeck); 
-                    unavailableDecks.Add(nearestDeck); 
-                    PerformDeckAction(nearestDeck, tarotCard.parentCard as TarotCard);
-                    CheckDeckFillMilestones();
-                }
-                else if (currentCard is CoinCardVisual coinCard && tarotOccupiedDecks.Contains(nearestDeck) && !coinAddedDecks.Contains(nearestDeck))
-                {
-                    Card tarotCardInDeck = nearestDeck.GetComponentInChildren<Card>();
-                    
-                    if (tarotCardInDeck != null && tarotCardInDeck.cardVisual is TarotCardVisual tarotVisual)
                     {
-                        
-
-                        tarotVisual.cardSuit.sprite = coinCard.parentCard.spec.cardArt;
-                        tarotVisual.cardSuit.color = new Color(1, 1, 1, 1);
-
-                        //TODO spaghetti
-                        if (coinCard.parentCard.spec is CoinScriptable coinSpec && coinSpec.id == 2)
-                        {
-                            tarotVisual.cardImage.sprite = ((TarotScriptable)tarotCardInDeck.spec).foolArt;
-                        }
-   
-                        
-                        StartCoroutine(tarotVisual.DamageFlash());
-
-                        coinCard.SetInDeckState(true);
-                        coinAddedDecks.Add(nearestDeck);
-
-                        PerformCoinAction(nearestDeck, coinCard.parentCard as CoinCard);
-                        
-                        coinCard.parentCard.deck.RemoveCard(coinCard.parentCard);
+                        tarotCard.parentCard.deck.SwapCardHand(tarotCard.parentCard, nearestDeck);
+                        tarotCard.SetInDeckState(true);
+                        tarotOccupiedDecks.Add(nearestDeck);
+                        unavailableDecks.Add(nearestDeck);
+                        PerformDeckAction(nearestDeck, tarotCard.parentCard as TarotCard);
+                        CheckDeckFillMilestones();
                     }
-                }
+                    else if (currentCard is CoinCardVisual coinCard && tarotOccupiedDecks.Contains(nearestDeck) && !coinAddedDecks.Contains(nearestDeck))
+                    {
+                        Card tarotCardInDeck = nearestDeck.GetComponentInChildren<Card>();
+
+                        if (tarotCardInDeck != null && tarotCardInDeck.cardVisual is TarotCardVisual tarotVisual)
+                        {
+
+
+                            tarotVisual.cardSuit.sprite = coinCard.parentCard.spec.cardArt;
+                            tarotVisual.cardSuit.color = new Color(1, 1, 1, 1);
+
+                            //TODO spaghetti
+                            if (coinCard.parentCard.spec is CoinScriptable coinSpec && coinSpec.id == 2)
+                            {
+                                tarotVisual.cardImage.sprite = ((TarotScriptable)tarotCardInDeck.spec).foolArt;
+                            }
+
+
+                            StartCoroutine(tarotVisual.DamageFlash());
+
+                            coinCard.SetInDeckState(true);
+                            coinAddedDecks.Add(nearestDeck);
+
+                            PerformCoinAction(nearestDeck, coinCard.parentCard as CoinCard);
+
+                            coinCard.parentCard.deck.RemoveCard(coinCard.parentCard);
+                        }
+                    }
 
                 SetDeckAlpha(nearestDeck, 0f);
                 nearestDeck = null;

@@ -22,6 +22,7 @@ namespace F.Cards
         private int savedIndex;
         Vector3 movementDelta;
         private Canvas canvas;
+        public bool cancelBoardDrop = false;
 
         [Header("References")]
         public Transform visualShadow;
@@ -143,6 +144,11 @@ namespace F.Cards
             SmoothFollow();
             FollowRotation();
             CardTilt();
+
+            if (CursorManager.Instance.IsUICursorActive && selectionOutline.activeSelf)
+            {
+                SetOutline(false);
+            }
         }
 
         private void HandPositioning()
@@ -179,7 +185,7 @@ namespace F.Cards
             float sine = Mathf.Sin(Time.unscaledTime + savedIndex) * (parentCard.isHovering ? .2f : 1);
             float cosine = Mathf.Cos(Time.unscaledTime + savedIndex) * (parentCard.isHovering ? .2f : 1);
 
-            Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 offset = transform.position;// - Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             offset.x = Mathf.Clamp(offset.x, -maxManualTilt, maxManualTilt);
             offset.y = Mathf.Clamp(offset.y, -maxManualTilt, maxManualTilt);

@@ -664,8 +664,8 @@ public class ControllerManager : MonoBehaviour
 
     public void UpdatePCGlyphs()
     {
-#if !UNITY_STANDALONE
-        return;
+#if !UNITY_STANDALONE && !UNITY_EDITOR && !MICROSOFT_GAME_CORE
+    return;
 #endif
         for (int I = 0; I < InputSystem.devices.Count; I++)
         {
@@ -689,7 +689,7 @@ public class ControllerManager : MonoBehaviour
             {
                 var device = InputSystem.devices[I] as Mouse;
 
-                if (device.leftButton.isPressed|| device.rightButton.isPressed|| device.middleButton.isPressed)
+                if (device.leftButton.isPressed || device.rightButton.isPressed || device.middleButton.isPressed)
                 {
                     if (currentPCInput != INPUT_TYPE.KEYBOARD)
                     {
@@ -702,8 +702,8 @@ public class ControllerManager : MonoBehaviour
             else if (InputSystem.devices[I] is Gamepad)
             {
                 var device = InputSystem.devices[I] as Gamepad;
-                
-                for(int b = 0; b < device.allControls.Count; b++)
+
+                for (int b = 0; b < device.allControls.Count; b++)
                 {
                     if (device.allControls[b].IsPressed())
                     {
@@ -715,8 +715,8 @@ public class ControllerManager : MonoBehaviour
                         }
                     }
                 }
-              
-                
+
+
 
 
 

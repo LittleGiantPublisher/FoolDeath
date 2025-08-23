@@ -32,6 +32,8 @@ namespace F
 
         private void Awake()
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             // enforce singleton pattern
             if (Instance != null)
             {
@@ -157,11 +159,12 @@ namespace F
             // clear any current selection when switching to OS cursor
             uiBlocker.blocksRaycasts = false;
             eventSystem.SetSelectedGameObject(null);
-            
+
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;     
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             isOSCursorActive = true;
-            isUICursorActive = false;
+            isUICursorActive = true;
         }
 
         public void HideCursors()
