@@ -8,13 +8,13 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 3e8e5a87a551bfc45aa0ac07bcf83cf4, type: 3}
-  titleId: 67607924
-  sCID: 00000000-0000-0000-0000-000067607924
-  mSAAppId: 00000000456C2623
-  identityName: AfilGames.DisAssembleXboxOne
-  identityPublisher: CN=44B2AC89-AD9A-462E-BA8F-CD247DAB6981
+  titleId: 74f15aaf
+  sCID: 00000000-0000-0000-0000-000074f15aaf
+  mSAAppId: 00000000496E4732
+  identityName: BadMinionsGameStudio.47921B96E95A9
+  identityPublisher: CN=263847BB-1FA2-4476-8BEB-DC622E84304A
   identityVersion: 1.0.0.0
-  storeId: 9P4NPX597M8S
+  storeId: 9N808DQZT954
   languagePairResources:
     keys:
     - en_US
@@ -71,9 +71,7 @@ ScriptedImporter:
     - sv_SE
     - tr_TR
     values: 0100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  shellVisualsResourcePath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b,
-    type: 3}
-  builtResourcesPriPath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b,
-    type: 3}
-  contentIdOverride: 4e345039-5850-3035-c039-374d38533000
+  shellVisualsResourcePath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b, type: 3}
+  builtResourcesPriPath: {fileID: 102900000, guid: 0d04011620a0c14429ed010946fc5e3b, type: 3}
+  contentIdOverride: 30384e39-4438-3051-c05a-543935340c00
   eKBIDOverride: 

@@ -230,7 +230,7 @@ namespace Porting
             hasRecievedValue = true;
         }
 
-        public void UnlockAchievement(string name)
+        public void UnlockAchievement(string name, int progress = 1)
         {
             if (!GetAchievementID.ContainsKey(name))
                 return;
@@ -238,19 +238,21 @@ namespace Porting
             int trophyID = GetAchievementID[name];
             if (!hasUnlockedAchievement[trophyID])
             {
-                currentPlatform.UnlockAchievement(trophyID, null);
-               // Debug.LogError($"Unlocked {trophyID} : {name}");
+                currentPlatform.UnlockAchievement(trophyID, progress, null);
+                // Debug.LogError($"Unlocked {trophyID} : {name}");
                 hasUnlockedAchievement[trophyID] = true;
                 SaveCompatibility.LocalPlayerPrefs.SetBool("UnlockList", hasUnlockedAchievement);
             }
-        }public void UnlockAchievement(int trophyID)
+
+        }
+        public void UnlockAchievement(int trophyID, int progress = 1)
         {
             if (!GetAchievementID.ContainsValue(trophyID))
                 return;
 
             if (!hasUnlockedAchievementOnPlat[trophyID])
             {
-                currentPlatform.UnlockAchievement(trophyID, null);
+                currentPlatform.UnlockAchievement(trophyID, progress, null);
                 ////Debug.LogError($"Unlocked {trophyID} : {name}");
                 hasUnlockedAchievement[trophyID] = true;
                 SaveCompatibility.LocalPlayerPrefs.SetBool("UnlockList", hasUnlockedAchievement);

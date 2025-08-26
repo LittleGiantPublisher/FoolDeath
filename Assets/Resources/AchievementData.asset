@@ -14,56 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Achievements:
   - id: 0
-    name: Pieces, Disassemble
+    name: SealedFate
   - id: 1
-    name: First move
+    name: FirstArcana
   - id: 2
-    name: Try again
+    name: TheWheelTurns
   - id: 3
-    name: Going back
+    name: TwoOfPentacles
   - id: 4
-    name: Deja vu
+    name: ThreeOfPentacles
   - id: 5
-    name: Rewind
+    name: FourOfPentacles
   - id: 6
-    name: Assembling pieces
+    name: FiveOfPentacles
   - id: 7
-    name: (Dis)Assembling pieces
+    name: Sunlight
   - id: 8
-    name: United we move
+    name: TheTowerHasFallen
   - id: 9
-    name: Breaking pieces
+    name: PerfectBalance
   - id: 10
-    name: Getting lost
+    name: Temperance
   - id: 11
-    name: Walking backwards
+    name: The Magician
   - id: 12
-    name: Moving boxes
+    name: TheWorld
   - id: 13
-    name: Button check
+    name: WhispersOfDeath
   - id: 14
-    name: Pushing boxes
+    name: Ascetic
   - id: 15
-    name: Mashing buttons
+    name: HeartOfEmerald
   - id: 16
-    name: Going to the finish line
+    name: SapphireTears
   - id: 17
-    name: To the new world
+    name: Ruby Blood
   - id: 18
-    name: Here we go again
+    name: ArcaneTrinity
   - id: 19
-    name: Moonwalking
+    name: FirstEnchantmentEmerald
   - id: 20
-    name: Halfway through
+    name: FirstEnchantmentSapphire
   - id: 21
-    name: Pull the lever
-  - id: 22
-    name: Press restart
-  - id: 23
-    name: Do it again
-  - id: 24
-    name: Push push
-  - id: 25
-    name: Color walls
-  - id: 26
-    name: We can teleport
+    name: FirstEnchantmentRuby

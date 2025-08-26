@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Game
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Game xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   configVersion="1">
   <Identity
-    Name="AfilGames.DisAssembleWindows"
-    Publisher="CN=44B2AC89-AD9A-462E-BA8F-CD247DAB6981"
-    Version="1.0.11.0" />
+    Name="BadMinionsGameStudio.2500960584656"
+    Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
+    Version="1.0.0.0" />
   <ShellVisuals
     DefaultDisplayName="(Dis)Assemble (Windows)"
-    PublisherDisplayName="Afil Games"
+    PublisherDisplayName="Little Giant"
     StoreLogo="StoreLogo.png"
     Square150x150Logo="Square150x150Logo.png"
     Square44x44Logo="Square44x44Logo.png"
@@ -20,19 +20,19 @@
       Language="en-US" />
   </Resources>
   <ExecutableList />
-  <StoreId>9PFJZBFJ5SF0</StoreId>
-  <MSAAppId>00000000415F8026</MSAAppId>
-  <TitleId>79962B79</TitleId>
+  <StoreId>9P72WL5KZ368</StoreId>
+  <MSAAppId>00000000456FA900</MSAAppId>
+  <TitleId>75844e0a</TitleId>
   <ExtendedAttributeList>
     <ExtendedAttribute
       Name="SandboxIds"
       Value="JFSTHW.0,JFSTHW.1" />
     <ExtendedAttribute
       Name="Scid"
-      Value="00000000-0000-0000-0000-000079962b79" />
+      Value="00000000-0000-0000-0000-000075844e0a" />
   </ExtendedAttributeList>
   <DevelopmentOnly>
-    <ContentIdOverride>57534d39-3030-3046-c053-574e47546900</ContentIdOverride>
+    <ContentIdOverride>32375039-4c57-3035-c04b-5a3336381000</ContentIdOverride>
   </DevelopmentOnly>
   <AdvancedUserModel>false</AdvancedUserModel>
 </Game>

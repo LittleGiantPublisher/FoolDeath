@@ -58,11 +58,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: companyName
-    value: Afil Games
+    value: Little Giant
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: productName
-    value: (Dis)Assemble
+    value: XIII A Final Game of Tarot With Death
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: defaultCursor

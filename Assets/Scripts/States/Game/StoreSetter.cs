@@ -12,47 +12,59 @@ namespace F.UI
 {
 	public class StoreSetter : MonoBehaviour
 	{
-		
-		public void OnClickEmerald()
-		{
-            if(CombatStateStatus.Money >= 1){
+
+        public void OnClickEmerald()
+        {
+            if (CombatStateStatus.Money >= 1)
+            {
                 CombatStateStatus.Money -= 1;
             }
-            else{
+            else
+            {
                 return;
             }
             DeckVisual coinHandDeck = coinPanel.GetComponentInChildren<DeckVisual>();
-                    
-			coinHandDeck.AddCard(coinEmerald); 
+
+            coinHandDeck.AddCard(coinEmerald);
             coinBuy.Play(null); 
+            
+            AchievementCalls.EmeraldBought();
 		}
 
-		public void OnClickSafira()
-		{
-            if(CombatStateStatus.Money >= 2){
+        public void OnClickSafira()
+        {
+            if (CombatStateStatus.Money >= 2)
+            {
                 CombatStateStatus.Money -= 2;
             }
-            else{
+            else
+            {
                 return;
             }
             DeckVisual coinHandDeck = coinPanel.GetComponentInChildren<DeckVisual>();
-                    
-			coinHandDeck.AddCard(coinSafira);  
+
+            coinHandDeck.AddCard(coinSafira);
             coinBuy.Play(null);
+
+            AchievementCalls.SaphireBought();
 		}
 
-		public void OnClickRuby()
-		{
-            if(CombatStateStatus.Money >= 4){
+        public void OnClickRuby()
+        {
+            if (CombatStateStatus.Money >= 4)
+            {
                 CombatStateStatus.Money -= 4;
             }
-            else{
+            else
+            {
                 return;
             }
             DeckVisual coinHandDeck = coinPanel.GetComponentInChildren<DeckVisual>();
-                    
-			coinHandDeck.AddCard(coinRuby);  
+
+            coinHandDeck.AddCard(coinRuby);
             coinBuy.Play(null);
+
+            AchievementCalls.RubyBought();
 		}
 
 

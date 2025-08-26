@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Game
   configVersion="1">
   <Identity
-    Name="AfilGames.DisAssemble"
-    Publisher="CN=44B2AC89-AD9A-462E-BA8F-CD247DAB6981"
-    Version="1.0.0.11" />
+    Name="BadMinionsGameStudio.XIIIAFinalGameofTarotWithDeat"
+    Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
+    Version="1.0.0.0" />
   <ShellVisuals
     DefaultDisplayName="(Dis)Assemble"
     PublisherDisplayName="Afil Games"
@@ -20,19 +20,19 @@
       Language="en-US" />
   </Resources>
   <ExecutableList />
-  <StoreId>9MSW00FSWNGT</StoreId>
-  <MSAAppId>00000000456BDC26</MSAAppId>
-  <TitleId>7c509066</TitleId>
+  <StoreId>9NP0N8DM0L6B</StoreId>
+  <MSAAppId>000000004D641112</MSAAppId>
+  <TitleId>625ae781</TitleId>
   <ExtendedAttributeList>
     <ExtendedAttribute
       Name="SandboxIds"
       Value="JFSTHW.0,JFSTHW.1" />
     <ExtendedAttribute
       Name="Scid"
-      Value="00000000-0000-0000-0000-00007c509066" />
+      Value="00000000-0000-0000-0000-0000625ae781" />
   </ExtendedAttributeList>
   <DevelopmentOnly>
-    <ContentIdOverride>57534d39-3030-3046-c053-574e47546900</ContentIdOverride>
+    <ContentIdOverride>30504e39-384e-3044-c04d-304c36421200</ContentIdOverride>
   </DevelopmentOnly>
   <AdvancedUserModel>false</AdvancedUserModel>
 </Game>

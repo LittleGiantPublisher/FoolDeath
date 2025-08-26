@@ -246,7 +246,7 @@ namespace Porting
         void IPlatform.OnPlatformAwake() { }
         void IPlatform.SetPresence(string id, params string[] extraInfo) { }
         void IPlatform.ClearPresence() { }
-        void IPlatform.UnlockAchievement(int Id, Action<bool> callback) { }
+        void IPlatform.UnlockAchievement(int Id, int progress, Action<bool> callback) { }
         bool IPlatform.CheckAchievement(string name) { return true; }
         int IPlatform.GetAchievementStats(string name) { return 0; }
         void IPlatform.SetAchievementStats(string name, int amount, int maxAmount, Action<bool> callback) { }

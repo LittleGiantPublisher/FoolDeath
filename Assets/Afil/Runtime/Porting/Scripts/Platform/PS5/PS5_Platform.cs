@@ -258,8 +258,9 @@ public class PS5_Platform : IPlatform
         return 0;
     }
 
-    void IPlatform.UnlockAchievement(int trophyID, Action<bool> callback)
+    void IPlatform.UnlockAchievement(int trophyID, int progress, Action<bool> callback)
     {
+        if (progress < 1) return;
 #if !UNITY_EDITOR
         UniversalDataSystem.UnlockTrophyRequest unlockRequest = new UniversalDataSystem.UnlockTrophyRequest();
         unlockRequest.TrophyId = trophyID;

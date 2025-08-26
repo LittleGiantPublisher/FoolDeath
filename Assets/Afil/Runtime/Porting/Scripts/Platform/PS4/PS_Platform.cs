@@ -266,8 +266,10 @@ namespace Porting
 #endif // UNITY_EDITOR
 		}
 
-		void IPlatform.UnlockAchievement(int trophyID, Action<bool> callback)
+		void IPlatform.UnlockAchievement(int trophyID, int progress, Action<bool> callback)
 		{
+			if (progress < 1) return;
+			
 #if !UNITY_EDITOR
 
 

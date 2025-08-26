@@ -96,7 +96,7 @@ namespace F.Cards
             }
 
             // continuous stick-based drag
-            if (uiClickHeld && draggedCard != null)
+            if (uiClickHeld && draggedCard != null && !draggedCard.cardVisual.isStatic)
             {
                 Vector2 moveDelta = controls.Player.LeftStick.ReadValue<Vector2>();
                 Vector2 lookDelta = Vector2.zero;
@@ -156,8 +156,11 @@ namespace F.Cards
                     //}
                 }
             }
-       
-            
+
+            if (draggedCard != null && draggedCard.cardVisual.isStatic)
+            {
+                ChangeSelection(currentIndex);
+            }
         }
 
         private void ClampCardToScreen(Card card)

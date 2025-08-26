@@ -125,7 +125,7 @@ public class Windows_Platform : IPlatform
         return 0;
     }
 
-    public void UnlockAchievement(int trophyID, Action<bool> callback)
+    public void UnlockAchievement(int trophyID, int progress, Action<bool> callback)
     {
         Debug.Log($" UnlockAchievement : {trophyID}");
         callback?.Invoke(false);

@@ -57,6 +57,7 @@ namespace F
                 {
                     _karma = value;
                     KarmaChangedEvent?.Invoke(typeof(CombatStateStatus), _karma);
+                    AchievementCalls.KarmaChanged(_karma);
                 }
             }
         }
@@ -94,6 +95,7 @@ namespace F
             {
                 if (_money != value)
                 {
+                    if (value > _money)  AchievementCalls.CoinCollected(value);
                     _money = value;
                     MoneyChangedEvent?.Invoke(typeof(CombatStateStatus), _money);
                 }
@@ -121,6 +123,7 @@ namespace F
                 {
                     _gamePoints = value;
                     GamePointsChangedEvent?.Invoke(typeof(CombatStateStatus), _gamePoints);
+                    AchievementCalls.PointChanged(_gamePoints);
                 }
             }
         }
@@ -134,10 +137,7 @@ namespace F
         public static void IncrementRound()
         {
             Round++;
-            if(Round == 22){
-                //SteamIntegration.UnlockAchievement("ACH_22");
-            }
-            
+            AchievementCalls.RoundNext(Round, Karma);          
         }
 
         public static void AdvancePhase()
