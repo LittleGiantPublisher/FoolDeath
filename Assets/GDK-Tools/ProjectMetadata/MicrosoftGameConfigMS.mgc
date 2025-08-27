@@ -1,13 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Game xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="utf-8"?>
+<Game
   configVersion="1">
   <Identity
     Name="BadMinionsGameStudio.2500960584656"
     Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
     Version="1.0.0.0" />
   <ShellVisuals
-    DefaultDisplayName="(Dis)Assemble (Windows)"
-    PublisherDisplayName="Little Giant"
+    DefaultDisplayName="XIII A Final Game of Tarot With Death (windows)"
+    PublisherDisplayName="Bad Minions Game Studio"
     StoreLogo="StoreLogo.png"
     Square150x150Logo="Square150x150Logo.png"
     Square44x44Logo="Square44x44Logo.png"
@@ -22,11 +22,11 @@
   <ExecutableList />
   <StoreId>9P72WL5KZ368</StoreId>
   <MSAAppId>00000000456FA900</MSAAppId>
-  <TitleId>75844e0a</TitleId>
+  <TitleId>75844E0A</TitleId>
   <ExtendedAttributeList>
     <ExtendedAttribute
       Name="SandboxIds"
-      Value="JFSTHW.0,JFSTHW.1" />
+      Value="JDBZTP.0,JDBZTP.1" />
     <ExtendedAttribute
       Name="Scid"
       Value="00000000-0000-0000-0000-000075844e0a" />

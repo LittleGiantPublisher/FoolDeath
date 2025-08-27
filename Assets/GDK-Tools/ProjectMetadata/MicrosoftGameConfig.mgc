@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Game
   configVersion="1">
   <Identity
@@ -6,8 +6,8 @@
     Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
     Version="1.0.0.0" />
   <ShellVisuals
-    DefaultDisplayName="(Dis)Assemble (Xbox One)"
-    PublisherDisplayName="Little Giant"
+    DefaultDisplayName="XIII A Final Game of Tarot With Death (Xbox One)"
+    PublisherDisplayName="Bad Minions Game Studio"
     StoreLogo="StoreLogo.png"
     Square150x150Logo="Square150x150Logo.png"
     Square44x44Logo="Square44x44Logo.png"
@@ -22,17 +22,17 @@
   <ExecutableList />
   <StoreId>9N808DQZT954</StoreId>
   <MSAAppId>00000000496E4732</MSAAppId>
-  <TitleId>74f15aaf</TitleId>
+  <TitleId>74F15AAF</TitleId>
   <ExtendedAttributeList>
     <ExtendedAttribute
       Name="SandboxIds"
-      Value="JFSTHW.0,JFSTHW.1" />
+      Value="JDBZTP.0,JDBZTP.1" />
     <ExtendedAttribute
       Name="Scid"
       Value="00000000-0000-0000-0000-000074f15aaf" />
   </ExtendedAttributeList>
   <DevelopmentOnly>
-    <ContentIdOverride>32375039-4c57-3035-c04b-5a3336381000</ContentIdOverride>
+    <ContentIdOverride>30384e39-4438-3051-c05a-543935340c00</ContentIdOverride>
   </DevelopmentOnly>
   <AdvancedUserModel>false</AdvancedUserModel>
 </Game>

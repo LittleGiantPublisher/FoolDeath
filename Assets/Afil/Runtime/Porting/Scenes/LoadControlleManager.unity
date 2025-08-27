@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_TrackedDeviceOrientationAction
       value: 
       objectReference: {fileID: 2987169367488398858, guid: 0ce328b5ce6a13242a7d6c0be2b18781, type: 3}
+    - target: {fileID: -2694974785362014472, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Xbox
+      objectReference: {fileID: 0}
     - target: {fileID: 147267998039062601, guid: 8267cc47c7b3f1e44a1071e877d24edf, type: 3}
       propertyPath: m_RootOrder
       value: 2

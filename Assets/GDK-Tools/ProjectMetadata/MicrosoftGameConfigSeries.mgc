@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Game
   configVersion="1">
   <Identity
@@ -6,7 +6,7 @@
     Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
     Version="1.0.0.0" />
   <ShellVisuals
-    DefaultDisplayName="(Dis)Assemble"
+    DefaultDisplayName="XIII A Final Game of Tarot With Death"
     PublisherDisplayName="Afil Games"
     StoreLogo="StoreLogo.png"
     Square150x150Logo="Square150x150Logo.png"
@@ -22,11 +22,11 @@
   <ExecutableList />
   <StoreId>9NP0N8DM0L6B</StoreId>
   <MSAAppId>000000004D641112</MSAAppId>
-  <TitleId>625ae781</TitleId>
+  <TitleId>625AE781</TitleId>
   <ExtendedAttributeList>
     <ExtendedAttribute
       Name="SandboxIds"
-      Value="JFSTHW.0,JFSTHW.1" />
+      Value="JDBZTP.0,JDBZTP.1" />
     <ExtendedAttribute
       Name="Scid"
       Value="00000000-0000-0000-0000-0000625ae781" />

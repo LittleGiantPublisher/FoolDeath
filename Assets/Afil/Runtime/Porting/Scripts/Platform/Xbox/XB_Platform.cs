@@ -896,7 +896,7 @@ public class XB_Platform : IPlatform
         //FM_.UpdateCurrentInfoState(FlowManager.currentStep.Achievement, FlowManager.currentState.InBetween, 1, "XB_Platform UnlockAchievement: " + achievementID + " - Got XUserGetID");
        // userXUID = xuid;
         Debug.LogError("[UNLOCK ACTIEVEMENTS] >> " + achievementID + " :: " + userXUID + " :: " + m_CurrentUserData.m_context);
-        SDK.XBL.XblAchievementsUpdateAchievementAsync(m_CurrentUserData.m_context, userXUID, achievementID.ToString(), progress * 100, (result) => 
+        SDK.XBL.XblAchievementsUpdateAchievementAsync(m_CurrentUserData.m_context, userXUID, achievementID.ToString(), (uint)progress * 100, (result) => 
         {
 
             Debug.LogError("[UNLOCK ACTIEVEMENTS] 3");
