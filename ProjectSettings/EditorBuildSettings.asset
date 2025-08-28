@@ -21,4 +21,5 @@ EditorBuildSettings:
     path: Assets/Settings/Scenes/URP2DSceneTemplate.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
+    Unity.Microsoft.GDK.Editor.Settings: {fileID: 11400000, guid: 40a394d7910a3dc4dbe0520aec1750ce, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: e88f50996994a3e4daecfd7f14d3febd, type: 2}

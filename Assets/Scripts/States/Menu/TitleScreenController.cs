@@ -26,6 +26,8 @@ namespace F.State
 
 		public F.UI.Panel logoPanel;
 
+		public F.UI.Panel characterPanel;
+
 		public F.UI.Menu mainMenu;
 
 		public F.UI.Menu languageMenu;

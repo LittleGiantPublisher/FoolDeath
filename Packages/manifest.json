@@ -12,6 +12,7 @@
     "com.unity.inputsystem.switch": "file:C:/Nintendo/Unity2022.3.62_LTS-NXAddon19.3.0/UnityForNintendoSwitch/Packages/com.unity.inputsystem.switch@0.1.7-pre",
     "com.unity.microsoft.gdk.tools.xbox": "file:ConsolePackages/com.unity.microsoft.gdk.tools.xbox-1.0.2 (1).tgz",
     "com.unity.nptoolkit2.ps4": "file:ConsolePackages/PS4/com.unity.nptoolkit2.ps4-1.0.6.tgz",
+    "com.unity.render-pipelines.gamecore": "file:ConsolePackages/com.unity.render-pipelines.gamecore-1.4.0.tgz",
     "com.unity.render-pipelines.ps4": "file:ConsolePackages/PS4/com.unity.render-pipelines.ps4-1.9.0.tgz",
     "com.unity.render-pipelines.universal": "14.0.12",
     "com.unity.savedata.ps4": "file:ConsolePackages/PS4/com.unity.savedata.ps4-1.0.6.tgz",

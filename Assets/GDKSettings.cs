@@ -13,18 +13,18 @@ using System;
 public static class GdkPlatformSettings
 {
 #if UNITY_GAMECORE_XBOXONE
-    public static string gameConfigTitleId = "67607924";
-    public static string gameConfigScid = "00000000-0000-0000-0000-000067607924";
+    public static string gameConfigTitleId = "74F15AAF";
+    public static string gameConfigScid = "00000000-0000-0000-0000-000074f15aaf";
     [Obsolete("gameConfigSandbox will be removed in future releases. Please do not use.", false)]
     public static string gameConfigSandbox = "";
 #elif UNITY_GAMECORE_XBOXSERIES
-    public static string gameConfigTitleId = "7c509066";
-    public static string gameConfigScid = "00000000-0000-0000-0000-00007c509066";
+    public static string gameConfigTitleId = "625AE781";
+    public static string gameConfigScid = "00000000-0000-0000-0000-0000625ae781";
     [Obsolete("gameConfigSandbox will be removed in future releases. Please do not use.", false)]
     public static string gameConfigSandbox = "";
 #else
-    public static string gameConfigTitleId = "79962B79";
-    public static string gameConfigScid = "00000000-0000-0000-0000-000079962b79";
+    public static string gameConfigTitleId = "75844E0A";
+    public static string gameConfigScid = "00000000-0000-0000-0000-000075844e0a";
     [Obsolete("gameConfigSandbox will be removed in future releases. Please do not use.", false)]
     public static string gameConfigSandbox = "";
 #endif

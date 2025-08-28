@@ -213,10 +213,10 @@ namespace F.Cards
                 int karmaChange = tarotSpec.value;
                 if(card.isZero)karmaChange = 0;
 
-
                 if (karmaChange == 13)
                 {
                     ApplySpecialEffectForValue13();
+                    AchievementCalls.DeathCardUsed();
                 }
                 
                     switch (deckIndex)
@@ -290,8 +290,9 @@ namespace F.Cards
                             if (tarotCardInDeck != null && tarotCardInDeck.spec is TarotScriptable tarotSpec)
                             {
                                 int originalValue = tarotSpec.value;
-                                if(tarotCardInDeck is TarotCard cardTarotZero){
-                                    if(cardTarotZero.isZero)originalValue = 0;
+                                if (tarotCardInDeck is TarotCard cardTarotZero)
+                                {
+                                    if (cardTarotZero.isZero) originalValue = 0;
                                 }
                                 int multiplier = GetMultiplierByDeckIndex(deckIndex);
 
@@ -300,6 +301,7 @@ namespace F.Cards
                                 multiplier = -multiplier;
 
                                 CombatStateStatus.Karma += originalValue * multiplier;
+                                AchievementCalls.EmeraldUsed();
                             }
                             break;
                         case 1:
@@ -308,13 +310,15 @@ namespace F.Cards
                             if (tarotCardInDeck != null && tarotCardInDeck.spec is TarotScriptable tarotSpecCase2)
                             {
                                 int originalValue = tarotSpecCase2.value;
-                                if(tarotCardInDeck is TarotCard cardTarotZero){
-                                    if(cardTarotZero.isZero)originalValue = 0;
+                                if (tarotCardInDeck is TarotCard cardTarotZero)
+                                {
+                                    if (cardTarotZero.isZero) originalValue = 0;
                                 }
 
                                 int multiplier = GetMultiplierByDeckIndex(deckIndex);
 
                                 CombatStateStatus.Karma -= originalValue * multiplier;
+                                AchievementCalls.RubyUsed();
                             }
                             RemoveCardsFromDeck(deck);
                             OnRubyCoin?.Invoke();
@@ -327,13 +331,16 @@ namespace F.Cards
                                 int originalValue = tarotSpecCase3.value;
 
 
-                                if(tarotCardInDeck is TarotCard cardTarotZero){
-                                    if(cardTarotZero.isZero)originalValue = 0;
+                                if (tarotCardInDeck is TarotCard cardTarotZero)
+                                {
+                                    if (cardTarotZero.isZero) originalValue = 0;
                                 }
 
                                 int multiplier = GetMultiplierByDeckIndex(deckIndex);
 
                                 CombatStateStatus.Karma -= originalValue * multiplier;
+                                
+                                AchievementCalls.SaphireUsed();
                             }
                             break;
                     }

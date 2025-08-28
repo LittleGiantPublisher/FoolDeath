@@ -13,7 +13,9 @@ namespace F
         private static int _money = 0;
         private static int _gamePoints = 0; 
         private static int _totalCoins = 0; 
-        
+
+        public static bool[] _coinsBought = new bool[3] { false, false, false };
+
         public static event EventHandler<CombatPhase> PhaseChangedEvent;
         public static event EventHandler<int> RoundChangedEvent;
         public static event EventHandler<int> KarmaChangedEvent;
@@ -21,7 +23,7 @@ namespace F
         public static event EventHandler<int> MaxKarmaChangedEvent;
         public static event EventHandler<int> MoneyChangedEvent;
         public static event EventHandler<int> GamePointsChangedEvent; 
-
+        
         public static CombatPhase CurrentPhase
         {
             get => _currentPhase;
@@ -95,7 +97,7 @@ namespace F
             {
                 if (_money != value)
                 {
-                    if (value > _money)  AchievementCalls.CoinCollected(value);
+                    if (value > _money)  AchievementCalls.CoinCollected(value, value - _money);
                     _money = value;
                     MoneyChangedEvent?.Invoke(typeof(CombatStateStatus), _money);
                 }

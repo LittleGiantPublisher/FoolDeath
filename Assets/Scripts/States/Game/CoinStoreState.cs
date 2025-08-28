@@ -55,8 +55,8 @@ namespace F.State
 			this.owner.ChangeState<CombatState>();
 		}
 
-		public override void Enter()
-		{
+        public override void Enter()
+        {
             base.pauseBG.Hide();
 
             if (!isInitialized)
@@ -64,25 +64,29 @@ namespace F.State
                 Initialize();
             }
             base.mainBackground.Hide();
-			cameraMoveUp.Play(null);
-			//cameraMoveDown.Play(null);
-			base.StartCoroutine(this.WaitToShow());
+            cameraMoveUp.Play(null);
+            //cameraMoveDown.Play(null);
+            base.StartCoroutine(this.WaitToShow());
 
             CombatStateStatus.PhaseStarted = false;
 
             MoneyChecker();
             GamePointsChecker();
-            
+
             CombatStateStatus.IncrementRound();
 
-            if(CombatStateStatus.MaxKarma > 20){
+            if (CombatStateStatus.MaxKarma > 20)
+            {
                 CombatStateStatus.MinKarma = CombatStateStatus.MinKarma + 5;
                 CombatStateStatus.MaxKarma = CombatStateStatus.MaxKarma - 5;
             }
-            else{
+            else
+            {
                 CombatStateStatus.MinKarma = CombatStateStatus.MinKarma + 1;
                 CombatStateStatus.MaxKarma = CombatStateStatus.MaxKarma - 1;
             }
+
+            CombatStateStatus._coinsBought = new bool[3] { false, false, false };
 
 		}
 
@@ -94,7 +98,7 @@ namespace F.State
             base.storeMenu.onClick.RemoveListener(new UnityAction<int>(this.OnClick));
 			base.storeMenu.onCancel.RemoveListener(new UnityAction(this.OnCancel));
 
-            
+            AchievementCalls.CloseStore(CombatStateStatus._coinsBought);
 		}
 
         private void MoneyChecker()

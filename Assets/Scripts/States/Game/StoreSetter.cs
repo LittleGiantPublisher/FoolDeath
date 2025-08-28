@@ -26,9 +26,11 @@ namespace F.UI
             DeckVisual coinHandDeck = coinPanel.GetComponentInChildren<DeckVisual>();
 
             coinHandDeck.AddCard(coinEmerald);
-            coinBuy.Play(null); 
-            
+            coinBuy.Play(null);
+
             AchievementCalls.EmeraldBought();
+            
+            CombatStateStatus._coinsBought[0] = true;
 		}
 
         public void OnClickSafira()
@@ -47,6 +49,8 @@ namespace F.UI
             coinBuy.Play(null);
 
             AchievementCalls.SaphireBought();
+
+            CombatStateStatus._coinsBought[2] = true;
 		}
 
         public void OnClickRuby()
@@ -65,6 +69,7 @@ namespace F.UI
             coinBuy.Play(null);
 
             AchievementCalls.RubyBought();
+            CombatStateStatus._coinsBought[1] = true;
 		}
 
 

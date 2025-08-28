@@ -230,8 +230,11 @@ namespace Porting
             hasRecievedValue = true;
         }
 
-        public void UnlockAchievement(string name, int progress = 1)
+        public void UnlockAchievement(string name, float progress = 1.0f)
         {
+            progress = Mathf.Clamp(progress, 0f, 1f);
+            if (progress <= 0) return;
+
             if (!GetAchievementID.ContainsKey(name))
                 return;
 
@@ -245,8 +248,11 @@ namespace Porting
             }
 
         }
-        public void UnlockAchievement(int trophyID, int progress = 1)
+        public void UnlockAchievement(int trophyID, float progress = 1.0f)
         {
+            progress = Mathf.Clamp(progress, 0f, 1f);
+            if (progress <= 0) return;
+
             if (!GetAchievementID.ContainsValue(trophyID))
                 return;
 

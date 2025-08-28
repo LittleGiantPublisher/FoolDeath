@@ -36,7 +36,7 @@ public interface IPlatform
 
 
 	//Platform Achievements
-	void UnlockAchievement(int trophyID, int progress, Action<bool /*success*/> callback);
+	void UnlockAchievement(int trophyID, float progress, Action<bool /*success*/> callback);
 	bool CheckAchievement(string name);
 	int GetAchievementStats(string name);
 	void SetAchievementStats(string name, int amount, int maxAmount, Action<bool /*success*/> callback);

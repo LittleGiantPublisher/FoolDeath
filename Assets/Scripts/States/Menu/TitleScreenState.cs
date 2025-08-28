@@ -12,6 +12,8 @@ namespace F.State
 //
         protected F.UI.Panel logoPanel => this.owner.logoPanel;
 
+        protected F.UI.Panel characterPanel => this.owner.characterPanel;
+
         protected F.UI.Menu mainMenu => this.owner.mainMenu;
 
         protected F.UI.Menu languageMenu => this.owner.languageMenu;

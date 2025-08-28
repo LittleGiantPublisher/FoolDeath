@@ -880,7 +880,7 @@ public class XB_Platform : IPlatform
 
   //  FlowManager FM_ = FlowManager.Instance;
 
-    public void UnlockAchievement(int achievementID, int progress, Action<bool> callback)
+    public void UnlockAchievement(int achievementID, float progress, Action<bool> callback)
     {
         // FM_.UpdateCurrentInfoState(FlowManager.currentStep.Achievement, FlowManager.currentState.Start, 1, "XB_Platform UnlockAchievement: " + achievementID);
         

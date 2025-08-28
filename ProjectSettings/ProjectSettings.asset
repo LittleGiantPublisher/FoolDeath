@@ -291,7 +291,7 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: a5cb13c6ffad3e740bb4d62c56063eb0, type: 3}
+      m_Icon: {fileID: 2800000, guid: 78eb0aee78cee9849abaed0f84053d1e, type: 3}
       m_Width: 1024
       m_Height: 1024
       m_Kind: 0
@@ -626,15 +626,15 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: DOTWEEN
     EmbeddedLinux: DOTWEEN
-    GameCoreScarlett: DOTWEEN
-    GameCoreXboxOne: DOTWEEN
+    GameCoreScarlett: DOTWEEN;MICROSOFT_GDK_SUPPORT
+    GameCoreXboxOne: DOTWEEN;MICROSOFT_GDK_SUPPORT
     LinuxHeadlessSimulation: DOTWEEN
     Nintendo Switch: DOTWEEN
     PS4: DOTWEEN
     PS5: DOTWEEN
     QNX: DOTWEEN
     Stadia: DOTWEEN
-    Standalone: DOTWEEN
+    Standalone: DOTWEEN;MICROSOFT_GDK_SUPPORT
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN

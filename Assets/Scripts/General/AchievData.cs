@@ -24,11 +24,11 @@ namespace F
         {
             SaveSystem.achievData.deathCardUsed++;
 
-            PlatformManager.instance.UnlockAchievement("WhispersOfDeath", SaveSystem.achievData.deathCardUsed / 3);
-            PlatformManager.instance.UnlockAchievement("EchoOfDeath", SaveSystem.achievData.deathCardUsed / 5);
-            PlatformManager.instance.UnlockAchievement("RelentlessDeath", SaveSystem.achievData.deathCardUsed / 7);
-            PlatformManager.instance.UnlockAchievement("Reaper", SaveSystem.achievData.deathCardUsed / 10);
-            PlatformManager.instance.UnlockAchievement("LordOfEndings", SaveSystem.achievData.deathCardUsed / 13);
+            PlatformManager.instance.UnlockAchievement("WhispersOfDeath", SaveSystem.achievData.deathCardUsed / 3f);
+            PlatformManager.instance.UnlockAchievement("EchoOfDeath", SaveSystem.achievData.deathCardUsed / 5f);
+            PlatformManager.instance.UnlockAchievement("RelentlessDeath", SaveSystem.achievData.deathCardUsed / 7f);
+            PlatformManager.instance.UnlockAchievement("Reaper", SaveSystem.achievData.deathCardUsed / 10f);
+            PlatformManager.instance.UnlockAchievement("LordOfEndings", SaveSystem.achievData.deathCardUsed / 13f);
             /*
                 BASE Whispers of Death - 3
 
@@ -39,25 +39,25 @@ namespace F
             */
         }
 
-        public static void CoinCollected(int coinAmnt)
+        public static void CoinCollected(int coinAmnt, int coinsCollected)
         {
-            PlatformManager.instance.UnlockAchievement("ThreeOfPentacles", coinAmnt / 3);
-            PlatformManager.instance.UnlockAchievement("FourOfPentacles", coinAmnt / 4);
-            PlatformManager.instance.UnlockAchievement("FiveOfPentacles", coinAmnt / 5);
+            PlatformManager.instance.UnlockAchievement("ThreeOfPentacles", coinAmnt / 3f);
+            PlatformManager.instance.UnlockAchievement("FourOfPentacles", coinAmnt / 4f);
+            PlatformManager.instance.UnlockAchievement("FiveOfPentacles", coinAmnt / 5f);
             /*
                 BASE Three of Pentacles - 3
                 BASE Four of Pentacles - 4
                 BASE Five of Pentacles - 5
-
             */
+            if (coinsCollected == 2) PlatformManager.instance.UnlockAchievement("TwoOfPentacles", 1f);
         }
 
         public static void KarmaChanged(int karmaValue)
         {
             Debug.Log($"Achievement KarmaChanged: {karmaValue}");
 
-            if (karmaValue >= 100) PlatformManager.instance.UnlockAchievement("Sunlight", 1);
-            if (karmaValue <= -100) PlatformManager.instance.UnlockAchievement("TheTowerHasFallen", 1);
+            if (karmaValue >= 100) PlatformManager.instance.UnlockAchievement("Sunlight", 1f);
+            if (karmaValue <= -100) PlatformManager.instance.UnlockAchievement("TheTowerHasFallen", 1f);
 
             /*
                 BASE Sunlight - 100+
@@ -69,9 +69,9 @@ namespace F
         public static void PointChanged(int pointsTotal)
         {
             Debug.Log($"Achievement PointChanged: {pointsTotal}");
-            PlatformManager.instance.UnlockAchievement("Temperance", pointsTotal / 1000);
-            PlatformManager.instance.UnlockAchievement("TheMagician", pointsTotal / 2000);
-            PlatformManager.instance.UnlockAchievement("TheWorld", pointsTotal / 3000);
+            PlatformManager.instance.UnlockAchievement("Temperance", pointsTotal / 1000f);
+            PlatformManager.instance.UnlockAchievement("TheMagician", pointsTotal / 2000f);
+            PlatformManager.instance.UnlockAchievement("TheWorld", pointsTotal / 3000f);
             /*
                 BASE Temperance - 1000
                 BASE The Magician - 2000
@@ -83,12 +83,12 @@ namespace F
         {
             Debug.Log($"Achievement RoundNext: {roundInd} {meterValue}");
 
-            PlatformManager.instance.UnlockAchievement("FirstArcane", roundInd / 2);
-            PlatformManager.instance.UnlockAchievement("TheWheelTurns", roundInd / 3);
-            PlatformManager.instance.UnlockAchievement("FourthKey", roundInd / 4);
-            PlatformManager.instance.UnlockAchievement("FifthArcana", roundInd / 5);
-            PlatformManager.instance.UnlockAchievement("SixthSeal", roundInd / 6);
-            PlatformManager.instance.UnlockAchievement("SeventhGate", roundInd / 7);
+            PlatformManager.instance.UnlockAchievement("FirstArcane", roundInd / 2f);
+            PlatformManager.instance.UnlockAchievement("TheWheelTurns", roundInd / 3f);
+            PlatformManager.instance.UnlockAchievement("FourthKey", roundInd / 4f);
+            PlatformManager.instance.UnlockAchievement("FifthArcana", roundInd / 5f);
+            PlatformManager.instance.UnlockAchievement("SixthSeal", roundInd / 6f);
+            PlatformManager.instance.UnlockAchievement("SeventhGate", roundInd / 7f);
 
             if (meterValue == 0) PlatformManager.instance.UnlockAchievement("PerfectBalance", 1);
             /*
@@ -110,7 +110,7 @@ namespace F
             SaveSystem.achievData.emeraldBought++;
             Debug.Log($"Achievement EmeraldBought: {SaveSystem.achievData.emeraldBought}");
 
-            if (SaveSystem.achievData.emeraldBought >= 1) PlatformManager.instance.UnlockAchievement("HeartOfEmerald", 1);
+            if (SaveSystem.achievData.emeraldBought >= 1) PlatformManager.instance.UnlockAchievement("HeartOfEmerald", 1f);
             /*
                 BASE Heart of Emerald - 1
             */
@@ -121,7 +121,7 @@ namespace F
             SaveSystem.achievData.saphireBought++;
             Debug.Log($"Achievement SaphireBought: {SaveSystem.achievData.saphireBought}");
 
-            if (SaveSystem.achievData.saphireBought >= 1) PlatformManager.instance.UnlockAchievement("SapphireTears", 1);
+            if (SaveSystem.achievData.saphireBought >= 1) PlatformManager.instance.UnlockAchievement("SapphireTears", 1f);
             /*
                 BASE Sapphire Tears - 1
             */
@@ -132,10 +132,22 @@ namespace F
             SaveSystem.achievData.rubyBought++;
             Debug.Log($"Achievement RubyBought: {SaveSystem.achievData.rubyBought}");
 
-            if (SaveSystem.achievData.rubyBought >= 1) PlatformManager.instance.UnlockAchievement("RubyBlood", 1);
+            if (SaveSystem.achievData.rubyBought >= 1) PlatformManager.instance.UnlockAchievement("RubyBlood", 1f);
             /*
                 BASE Ruby Blood - 1
             */
+        }
+
+        public static void CloseStore(bool[] coinsBought)
+        {
+            int boughtCount = 0;
+            for (int i = 0; i < coinsBought.Length; i++)
+            {
+                if (coinsBought[i]) boughtCount++;
+            }
+
+            if (boughtCount <= 0) PlatformManager.instance.UnlockAchievement("Ascetic", 1f);
+            PlatformManager.instance.UnlockAchievement("ArcaneTrinity", boughtCount / 3f);
         }
 
         public static void EmeraldUsed()
@@ -143,11 +155,11 @@ namespace F
             SaveSystem.achievData.emeraldUsed++;
             Debug.Log($"Achievement EmeraldUsed: {SaveSystem.achievData.emeraldUsed}");
 
-            PlatformManager.instance.UnlockAchievement("FirstEnchantmentEmerald", SaveSystem.achievData.emeraldUsed / 1);
-            PlatformManager.instance.UnlockAchievement("TrinityOfEmeralds", SaveSystem.achievData.emeraldUsed / 3);
-            PlatformManager.instance.UnlockAchievement("GreenPentacle", SaveSystem.achievData.emeraldUsed / 5);
-            PlatformManager.instance.UnlockAchievement("EightFacetsEmerald", SaveSystem.achievData.emeraldUsed / 8);
-            PlatformManager.instance.UnlockAchievement("SupremeJewelEmerald", SaveSystem.achievData.emeraldUsed / 10);
+            PlatformManager.instance.UnlockAchievement("FirstEnchantmentEmerald", (float) SaveSystem.achievData.emeraldUsed / 1f);
+            PlatformManager.instance.UnlockAchievement("TrinityOfEmeralds", (float) SaveSystem.achievData.emeraldUsed / 3f);
+            PlatformManager.instance.UnlockAchievement("GreenPentacle", (float) SaveSystem.achievData.emeraldUsed / 5f);
+            PlatformManager.instance.UnlockAchievement("EightFacetsEmerald", (float) SaveSystem.achievData.emeraldUsed / 8f);
+            PlatformManager.instance.UnlockAchievement("SupremeJewelEmerald", (float) SaveSystem.achievData.emeraldUsed / 10f);
             /*
                 BASE First Enchantment – Emerald - 1
                 DLC1 Trinity of Emeralds - 3
@@ -162,11 +174,11 @@ namespace F
             SaveSystem.achievData.saphireUsed++;
             Debug.Log($"Achievement SaphireUsed: {SaveSystem.achievData.saphireUsed}");
 
-            PlatformManager.instance.UnlockAchievement("FirstEnchantmentSapphire", SaveSystem.achievData.saphireUsed / 1);
-            PlatformManager.instance.UnlockAchievement("TrinityOfSapphires", SaveSystem.achievData.saphireUsed / 3);
-            PlatformManager.instance.UnlockAchievement("BluePentacle", SaveSystem.achievData.saphireUsed / 5);
-            PlatformManager.instance.UnlockAchievement("EightFacetsSapphire", SaveSystem.achievData.saphireUsed / 8);
-            PlatformManager.instance.UnlockAchievement("SupremeJewelSapphire", SaveSystem.achievData.saphireUsed / 10);
+            PlatformManager.instance.UnlockAchievement("FirstEnchantmentSapphire", SaveSystem.achievData.saphireUsed / 1f);
+            PlatformManager.instance.UnlockAchievement("TrinityOfSapphires", SaveSystem.achievData.saphireUsed / 3f);
+            PlatformManager.instance.UnlockAchievement("BluePentacle", SaveSystem.achievData.saphireUsed / 5f);
+            PlatformManager.instance.UnlockAchievement("EightFacetsSapphire", SaveSystem.achievData.saphireUsed / 8f);
+            PlatformManager.instance.UnlockAchievement("SupremeJewelSapphire", SaveSystem.achievData.saphireUsed / 10f);
             /*
                 BASE First Enchantment – Sapphire - 1
                 DLC1 Trinity of Sapphires - 3
@@ -181,11 +193,11 @@ namespace F
             SaveSystem.achievData.rubyUsed++;
             Debug.Log($"Achievement RubyUsed: {SaveSystem.achievData.rubyUsed}");
 
-            PlatformManager.instance.UnlockAchievement("FirstEnchantmentRuby", SaveSystem.achievData.rubyUsed / 1);
-            PlatformManager.instance.UnlockAchievement("TrinityOfRubies", SaveSystem.achievData.rubyUsed / 3);
-            PlatformManager.instance.UnlockAchievement("RedPentacle", SaveSystem.achievData.rubyUsed / 5);
-            PlatformManager.instance.UnlockAchievement("EightFacetsRuby", SaveSystem.achievData.rubyUsed / 8);
-            PlatformManager.instance.UnlockAchievement("SupremeJewelRuby", SaveSystem.achievData.rubyUsed / 10);
+            PlatformManager.instance.UnlockAchievement("FirstEnchantmentRuby", SaveSystem.achievData.rubyUsed / 1f);
+            PlatformManager.instance.UnlockAchievement("TrinityOfRubies", SaveSystem.achievData.rubyUsed / 3f);
+            PlatformManager.instance.UnlockAchievement("RedPentacle", SaveSystem.achievData.rubyUsed / 5f);
+            PlatformManager.instance.UnlockAchievement("EightFacetsRuby", SaveSystem.achievData.rubyUsed / 8f);
+            PlatformManager.instance.UnlockAchievement("SupremeJewelRuby", SaveSystem.achievData.rubyUsed / 10f);
             /*
                 BASE First Enchantment – Ruby - 1
                 DLC1 Trinity of Rubies - 3

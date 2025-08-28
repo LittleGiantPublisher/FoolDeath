@@ -36,10 +36,11 @@ namespace F.State
             OnCancel(); 
         }
 
-		public override void Enter()
-		{
+        public override void Enter()
+        {
             base.StartCoroutine(this.WaitToShowMenuCR());
-			base.logoPanel.Hide();
+            base.logoPanel.Hide();
+            base.characterPanel.Hide();
         }
 
         private IEnumerator WaitToShowMenuCR()

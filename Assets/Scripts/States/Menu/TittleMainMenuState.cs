@@ -44,6 +44,7 @@ namespace F.State
         private IEnumerator WaitToShowMenuCR()
         {
             yield return new WaitForSeconds(transitionTime);
+            base.characterPanel.Show();
             base.logoPanel.Show();
             base.mainMenu.Show();
             base.recordsPanel.Show();
