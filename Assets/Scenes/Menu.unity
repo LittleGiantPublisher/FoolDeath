@@ -4375,7 +4375,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245498383}
-  - component: {fileID: 1245498390}
   - component: {fileID: 1245498385}
   - component: {fileID: 1245498386}
   - component: {fileID: 1245498384}
@@ -4507,23 +4506,6 @@ MonoBehaviour:
   delay: 0
   permission: 1
   minimumAlpha: 0
---- !u!114 &1245498390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245498382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddc6f1f688ef69449eee6b0d353ab44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitudeY: 2
-  frequencyY: 2
-  amplitudeX: 2
-  frequencyX: 1.5
-  phaseOffsetX: 1
 --- !u!1 &1266909772
 GameObject:
   m_ObjectHideFlags: 0
@@ -7878,7 +7860,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1954689661}
-  - component: {fileID: 1954689667}
   - component: {fileID: 1954689666}
   - component: {fileID: 1954689665}
   - component: {fileID: 1954689664}
@@ -7991,23 +7972,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1954689667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954689660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddc6f1f688ef69449eee6b0d353ab44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitudeY: 4
-  frequencyY: 2
-  amplitudeX: 2
-  frequencyX: 1.5
-  phaseOffsetX: 3
 --- !u!1 &1965159256
 GameObject:
   m_ObjectHideFlags: 0

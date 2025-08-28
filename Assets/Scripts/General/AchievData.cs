@@ -29,6 +29,7 @@ namespace F
             PlatformManager.instance.UnlockAchievement("RelentlessDeath", SaveSystem.achievData.deathCardUsed / 7f);
             PlatformManager.instance.UnlockAchievement("Reaper", SaveSystem.achievData.deathCardUsed / 10f);
             PlatformManager.instance.UnlockAchievement("LordOfEndings", SaveSystem.achievData.deathCardUsed / 13f);
+
             /*
                 BASE Whispers of Death - 3
 
@@ -37,6 +38,8 @@ namespace F
                 DLC3 Reaper - 10
                 DLC4 Lord of Endings - 13
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("deathCardUsed", SaveSystem.achievData.deathCardUsed);
         }
 
         public static void CoinCollected(int coinAmnt, int coinsCollected)
@@ -50,6 +53,7 @@ namespace F
                 BASE Five of Pentacles - 5
             */
             if (coinsCollected == 2) PlatformManager.instance.UnlockAchievement("TwoOfPentacles", 1f);
+
         }
 
         public static void KarmaChanged(int karmaValue)
@@ -83,7 +87,7 @@ namespace F
         {
             Debug.Log($"Achievement RoundNext: {roundInd} {meterValue}");
 
-            PlatformManager.instance.UnlockAchievement("FirstArcane", roundInd / 2f);
+            PlatformManager.instance.UnlockAchievement("FirstArcana", roundInd / 2f);
             PlatformManager.instance.UnlockAchievement("TheWheelTurns", roundInd / 3f);
             PlatformManager.instance.UnlockAchievement("FourthKey", roundInd / 4f);
             PlatformManager.instance.UnlockAchievement("FifthArcana", roundInd / 5f);
@@ -114,6 +118,8 @@ namespace F
             /*
                 BASE Heart of Emerald - 1
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("emeraldBought", SaveSystem.achievData.emeraldBought);
         }
 
         public static void SaphireBought()
@@ -125,6 +131,8 @@ namespace F
             /*
                 BASE Sapphire Tears - 1
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("saphireBought", SaveSystem.achievData.saphireBought);
         }
 
         public static void RubyBought()
@@ -132,10 +140,15 @@ namespace F
             SaveSystem.achievData.rubyBought++;
             Debug.Log($"Achievement RubyBought: {SaveSystem.achievData.rubyBought}");
 
-            if (SaveSystem.achievData.rubyBought >= 1) PlatformManager.instance.UnlockAchievement("RubyBlood", 1f);
+            if (SaveSystem.achievData.rubyBought >= 1)
+            {
+                PlatformManager.instance.UnlockAchievement("RubyBlood", 1f);
+            }
             /*
                 BASE Ruby Blood - 1
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("rubyBought", SaveSystem.achievData.rubyBought);
         }
 
         public static void CloseStore(bool[] coinsBought)
@@ -155,11 +168,11 @@ namespace F
             SaveSystem.achievData.emeraldUsed++;
             Debug.Log($"Achievement EmeraldUsed: {SaveSystem.achievData.emeraldUsed}");
 
-            PlatformManager.instance.UnlockAchievement("FirstEnchantmentEmerald", (float) SaveSystem.achievData.emeraldUsed / 1f);
-            PlatformManager.instance.UnlockAchievement("TrinityOfEmeralds", (float) SaveSystem.achievData.emeraldUsed / 3f);
-            PlatformManager.instance.UnlockAchievement("GreenPentacle", (float) SaveSystem.achievData.emeraldUsed / 5f);
-            PlatformManager.instance.UnlockAchievement("EightFacetsEmerald", (float) SaveSystem.achievData.emeraldUsed / 8f);
-            PlatformManager.instance.UnlockAchievement("SupremeJewelEmerald", (float) SaveSystem.achievData.emeraldUsed / 10f);
+            PlatformManager.instance.UnlockAchievement("FirstEnchantmentEmerald", (float)SaveSystem.achievData.emeraldUsed / 1f);
+            PlatformManager.instance.UnlockAchievement("TrinityOfEmeralds", (float)SaveSystem.achievData.emeraldUsed / 3f);
+            PlatformManager.instance.UnlockAchievement("GreenPentacle", (float)SaveSystem.achievData.emeraldUsed / 5f);
+            PlatformManager.instance.UnlockAchievement("EightFacetsEmerald", (float)SaveSystem.achievData.emeraldUsed / 8f);
+            PlatformManager.instance.UnlockAchievement("SupremeJewelEmerald", (float)SaveSystem.achievData.emeraldUsed / 10f);
             /*
                 BASE First Enchantment – Emerald - 1
                 DLC1 Trinity of Emeralds - 3
@@ -167,6 +180,8 @@ namespace F
                 DLC3 Eight Facets – Emerald - 8
                 DLC4 Supreme Jewel – Emerald - 10
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("emeraldUsed", SaveSystem.achievData.emeraldUsed);
         }
 
         public static void SaphireUsed()
@@ -186,6 +201,8 @@ namespace F
                 DLC3 Eight Facets – Sapphire - 8
                 DLC4 Supreme Jewel – Sapphire - 10
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("saphireUsed", SaveSystem.achievData.saphireUsed);
         }
 
         public static void RubyUsed()
@@ -205,6 +222,8 @@ namespace F
                 DLC3 Eight Facets – Ruby - 8
                 DLC4 Supreme Jewel – Ruby - 10
             */
+
+            SaveCompatibility.LocalPlayerPrefs.SetInt("rubyUsed", SaveSystem.achievData.rubyUsed);
         }
     }
 }

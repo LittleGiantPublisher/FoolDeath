@@ -634,7 +634,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     Stadia: DOTWEEN
-    Standalone: DOTWEEN;MICROSOFT_GDK_SUPPORT
+    Standalone: DOTWEEN;MICROSOFT_GDK_SUPPORT;MICROSOFT_GAME_CORE
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN

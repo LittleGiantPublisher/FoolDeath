@@ -32,8 +32,7 @@ namespace F
 
         private void Awake()
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            
             // enforce singleton pattern
             if (Instance != null)
             {
@@ -42,6 +41,13 @@ namespace F
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            if (ControllerManager.current.currentPCInput == ControllerManager.INPUT_TYPE.GAMEPAD)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            
 
             // initialize InputSystem actions
             controls = ControllerManager.current.thisController.inputPlayerActions;

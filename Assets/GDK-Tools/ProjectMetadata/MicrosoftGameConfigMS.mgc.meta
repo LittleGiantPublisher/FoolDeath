@@ -8,12 +8,12 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 3e8e5a87a551bfc45aa0ac07bcf83cf4, type: 3}
-  titleId: 75844e0a
+  titleId: 75844E0A
   sCID: 00000000-0000-0000-0000-000075844e0a
   mSAAppId: 00000000456FA900
   identityName: BadMinionsGameStudio.2500960584656
   identityPublisher: CN=263847BB-1FA2-4476-8BEB-DC622E84304A
-  identityVersion: 1.0.0.0
+  identityVersion: 1.0.1.0
   storeId: 9P72WL5KZ368
   languagePairResources:
     keys:

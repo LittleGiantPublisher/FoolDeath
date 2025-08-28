@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Game
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Game xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   configVersion="1">
   <Identity
     Name="BadMinionsGameStudio.47921B96E95A9"
     Publisher="CN=263847BB-1FA2-4476-8BEB-DC622E84304A"
-    Version="1.0.0.0" />
+    Version="1.0.0.1" />
   <ShellVisuals
     DefaultDisplayName="XIII A Final Game of Tarot With Death (Xbox One)"
     PublisherDisplayName="Bad Minions Game Studio"

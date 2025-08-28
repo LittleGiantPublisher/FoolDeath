@@ -1172,10 +1172,6 @@ PrefabInstance:
       value: AfilPortingSystems
       objectReference: {fileID: 0}
     - target: {fileID: 8317502848043115447, guid: 4e4dcab46ba7f02438823e4e578dcfa5, type: 3}
-      propertyPath: scid
-      value: 00000000-0000-0000-0000-00006ac1c82c
-      objectReference: {fileID: 0}
-    - target: {fileID: 8317502848043115447, guid: 4e4dcab46ba7f02438823e4e578dcfa5, type: 3}
       propertyPath: objectsByPlatform.Array.size
       value: 1
       objectReference: {fileID: 0}

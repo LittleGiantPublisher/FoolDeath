@@ -715,7 +715,7 @@ public class MS_Platform : IPlatform
 
     //FlowManager FM_ = FlowManager.Instance;
 
-    public void UnlockAchievement(int achievementID, int progress, Action<bool> callback)
+    public void UnlockAchievement(int achievementID, float progress, Action<bool> callback)
     {
         //FM_..UpdateCurrentInfoState(FlowManager.currentStep.Achievement, FlowManager.currentState.Start, 1, "MS_Platform UnlockAchievement: " + achievementID);
 
@@ -729,8 +729,8 @@ public class MS_Platform : IPlatform
         }
         userXUID = xuid;
        //FM_..UpdateCurrentInfoState(FlowManager.currentStep.Achievement, FlowManager.currentState.InBetween, 1, "MS_Platform UnlockAchievement: " + achievementID + " - Got XUserGetID");
-
-        SDK.XBL.XblAchievementsUpdateAchievementAsync(m_CurrentUserData.m_context, this.userXUID, achievementID.ToString(), progress * 100, (result) => 
+        Debug.LogError($"@Debug - MS_Platform - UnlockAchievement - XUserGetId - {this.userXUID}  - Achiev {achievementID} - Progress {(uint)(progress * 100)} ");
+        SDK.XBL.XblAchievementsUpdateAchievementAsync(m_CurrentUserData.m_context, this.userXUID, achievementID.ToString(), (uint)(progress * 100), (result) => 
         {
 
             if(result == 0)

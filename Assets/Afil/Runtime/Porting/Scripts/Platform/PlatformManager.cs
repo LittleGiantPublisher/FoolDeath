@@ -115,10 +115,14 @@ namespace Porting
             currentPlatform = new PS5_Platform();
 #elif UNITY_GAMECORE && !UNITY_EDITOR
             currentPlatform = new XB_Platform();
-#elif MICROSOFT_GAME_CORE 
+#elif MICROSOFT_GAME_CORE  && !UNITY_EDITOR
             currentPlatform = new MS_Platform();
 #else
             currentPlatform = new Windows_Platform();
+#endif
+
+#if MICROSOFT_GDK_SUPPORT
+    Debug.LogError("MICROSOFT_GDK_SUPPORT");
 #endif
             ////Debug.LogError("\n[Current Platform] = " + currentPlatform);
 
@@ -243,8 +247,9 @@ namespace Porting
             {
                 currentPlatform.UnlockAchievement(trophyID, progress, null);
                 // Debug.LogError($"Unlocked {trophyID} : {name}");
-                hasUnlockedAchievement[trophyID] = true;
+                if (progress >= 1f) hasUnlockedAchievement[trophyID] = true;
                 SaveCompatibility.LocalPlayerPrefs.SetBool("UnlockList", hasUnlockedAchievement);
+                SaveCompatibility.LocalPlayerPrefs.Save();
             }
 
         }
@@ -260,8 +265,9 @@ namespace Porting
             {
                 currentPlatform.UnlockAchievement(trophyID, progress, null);
                 ////Debug.LogError($"Unlocked {trophyID} : {name}");
-                hasUnlockedAchievement[trophyID] = true;
+                if (progress >= 1f) hasUnlockedAchievement[trophyID] = true;
                 SaveCompatibility.LocalPlayerPrefs.SetBool("UnlockList", hasUnlockedAchievement);
+                SaveCompatibility.LocalPlayerPrefs.Save();
             }
         }
 

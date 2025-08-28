@@ -36,7 +36,7 @@ MonoBehaviour:
   - id: 10
     name: Temperance
   - id: 11
-    name: The Magician
+    name: TheMagician
   - id: 12
     name: TheWorld
   - id: 13
@@ -48,7 +48,7 @@ MonoBehaviour:
   - id: 16
     name: SapphireTears
   - id: 17
-    name: Ruby Blood
+    name: RubyBlood
   - id: 18
     name: ArcaneTrinity
   - id: 19

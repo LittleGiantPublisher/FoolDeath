@@ -18,24 +18,21 @@ MonoBehaviour:
   settingsList:
   - runtimePlatform: 2
     targetMicrosoftGdk: 1
-    gameConfigAsset: {fileID: -944628639613478452, guid: 321052417a71bab4687a72d2254c521e,
-      type: 3}
+    gameConfigAsset: {fileID: -944628639613478452, guid: 321052417a71bab4687a72d2254c521e, type: 3}
     shellVisualsMode: 1
     createScriptingDefine: 1
     createPackage: 1
     sideloadPackage: 0
   - runtimePlatform: 37
     targetMicrosoftGdk: 1
-    gameConfigAsset: {fileID: -944628639613478452, guid: a98fd0eaf690f954e864c32b7e928b98,
-      type: 3}
+    gameConfigAsset: {fileID: -944628639613478452, guid: a98fd0eaf690f954e864c32b7e928b98, type: 3}
     shellVisualsMode: 1
     createScriptingDefine: 1
     createPackage: 0
     sideloadPackage: 0
   - runtimePlatform: 36
     targetMicrosoftGdk: 1
-    gameConfigAsset: {fileID: -944628639613478452, guid: 427bcd2d0aec523418e81fc8ed4377e7,
-      type: 3}
+    gameConfigAsset: {fileID: -944628639613478452, guid: 427bcd2d0aec523418e81fc8ed4377e7, type: 3}
     shellVisualsMode: 1
     createScriptingDefine: 1
     createPackage: 0

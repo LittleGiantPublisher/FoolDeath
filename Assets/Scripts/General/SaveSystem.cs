@@ -26,7 +26,7 @@ namespace F
             SaveSystem.achievData.saphireUsed = LocalPlayerPrefs.GetInt("saphireUsed", 0);
             SaveSystem.achievData.rubyUsed = LocalPlayerPrefs.GetInt("rubyUsed", 0);
 
-            Debug.Log($"DATA LOADED {SaveSystem.data.coins} {SaveSystem.data.rounds} {SaveSystem.data.points}");
+            Debug.LogError($"DATA LOADED {SaveSystem.achievData}");
         }
 
         public static void Save()
