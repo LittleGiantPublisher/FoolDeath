@@ -451,6 +451,12 @@ namespace F.Cards
                 return;
             }
 
+            if (dir == NavigationMode.Up || dir == NavigationMode.Down)
+            {
+                eventSystem.SetSelectedGameObject(cards[currentIndex].gameObject);
+                return;
+            }
+
             if (dir == NavigationMode.Left && currentIndex > 0)
             {
                 ChangeSelection(currentIndex - 1);
@@ -461,6 +467,7 @@ namespace F.Cards
                 ChangeSelection(currentIndex + 1);
                 return;
             }
+            
             StartCoroutine(FallbackToExplicit(dir));
         }
         
@@ -552,7 +559,23 @@ namespace F.Cards
                 var nextDeckNav = next.GetComponent<DeckNavigationHandler>();
                 if (nextDeckNav != null && nextDeckNav.deckVisual.cards.Count == 0)
                 {
-                    //eventSystem.SetSelectedGameObject(null);
+                    var cards = GetSortedCards();
+                    if (cards.Count == 1)
+                    {
+                        var card = cards[currentIndex].gameObject;
+                        eventSystem.SetSelectedGameObject(card);
+                        yield break;
+                    }
+
+                    if (currentIndex == 0 && mode == NavigationMode.Left)
+                    {
+                        Debug.Log("FallbackToExplicit: Wrap left");
+                        currentIndex = cards.Count - 1;
+                    }
+                    else
+                    {
+                        currentIndex = 0;
+                    }
                     ChangeSelection(currentIndex);
                     yield break;
                 }

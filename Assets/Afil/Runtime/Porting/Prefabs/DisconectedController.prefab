@@ -140,8 +140,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: controller not found
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e0606f10e659b794b9939466a0d1e90c, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_margin: {x: 447.0094, y: 85.37206, z: 448.8454, w: 65.51354}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &961110275401782507
@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8777616826908007977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -517,10 +517,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press <sprite=0> button or ENTER\n to continue"
+  m_text: "Press <sprite name=gamepadFaceAtlas_0> or ENTER\n to continue"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e0606f10e659b794b9939466a0d1e90c, type: 2}
+  m_sharedMaterial: {fileID: -2902408255173487452, guid: e0606f10e659b794b9939466a0d1e90c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -780,6 +780,14 @@ MonoBehaviour:
   PS5: {fileID: 3847520194964880241}
   XB1: {fileID: 509943477444948125}
   PC: {fileID: 7132553764911054059}
+  PS4_Title: {fileID: 6657940226446744198}
+  PS4_Description: {fileID: 3395950450144895914}
+  PS5_Title: {fileID: 1587444081137850848}
+  PS5_Description: {fileID: 1743682067183454201}
+  XB_Title: {fileID: 8280477112146610332}
+  XB_Description: {fileID: 3310808594075737631}
+  PC_Title: {fileID: 4881012386367629164}
+  PC_Description: {fileID: 4656229212311605116}
 --- !u!225 &427714157248398501
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -963,7 +971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4210246933168635428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1053,8 +1061,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: controller not found
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e0606f10e659b794b9939466a0d1e90c, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1117,7 +1125,7 @@ MonoBehaviour:
   m_margin: {x: 447.0094, y: 85.37206, z: 448.8454, w: 65.51354}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5058024170316837766
@@ -1185,7 +1193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press <sprite=5> button\n to continue"
+  m_text: "Press <sprite name=gamepadFaceAtlas_3> button\n to continue"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1358,8 +1366,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Press <sprite=0> button\n to continue"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e0606f10e659b794b9939466a0d1e90c, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1422,7 +1430,7 @@ MonoBehaviour:
   m_margin: {x: 1.3760986, y: 6.4988937, z: 3.2120972, w: 4.3868637}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6314483608655629964
@@ -1662,8 +1670,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Reconect the controller\n to continue"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1796,8 +1804,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: controller not found
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
-  m_sharedMaterial: {fileID: 8962073879228743209, guid: f61ac0c16b3bc1f4286f13707f95ad9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

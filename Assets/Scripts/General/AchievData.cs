@@ -94,7 +94,7 @@ namespace F
             PlatformManager.instance.UnlockAchievement("SixthSeal", roundInd / 6f);
             PlatformManager.instance.UnlockAchievement("SeventhGate", roundInd / 7f);
 
-            if (meterValue == 0) PlatformManager.instance.UnlockAchievement("PerfectBalance", 1);
+            if (meterValue < 10 && meterValue > -10) PlatformManager.instance.UnlockAchievement("AlmostPerfectBalance", 1);
             /*
                 Round ind
                 BASE First Arcane - 2

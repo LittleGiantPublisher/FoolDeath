@@ -391,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 239315f47e573f946893aaec1f897d71, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -749,7 +749,10 @@ MonoBehaviour:
   TitleImages:
   - titleObject: {fileID: 1031791723}
     hasAnimation: 0
-    timeForAnim: 4
+    timeForAnim: 3
+  - titleObject: {fileID: 1217373607}
+    hasAnimation: 0
+    timeForAnim: 3
   apresentationIsFinish: 0
 --- !u!1 &1774664060
 GameObject:

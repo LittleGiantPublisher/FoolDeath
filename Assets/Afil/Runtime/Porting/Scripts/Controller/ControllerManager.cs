@@ -221,10 +221,11 @@ public class ControllerManager : MonoBehaviour
 
 #endif
         bool canEnable = false;
-       Debug.LogError($"[ ControllerConnected ] device.deviceId : {device.deviceId}");
+        Debug.LogError($"[ ControllerConnected ] device.deviceId : {device.deviceId}");
+        hasGamepadConected = true;
 
 
-#if UNITY_EDITOR 
+#if UNITY_EDITOR
         canEnable = false;
 #elif UNITY_PS4
         var temp = device as UnityEngine.InputSystem.PS4.DualShockGamepadPS4;
@@ -655,6 +656,7 @@ public class ControllerManager : MonoBehaviour
     public IEnumerator ConnectController()
     {
         Debug.Log("RECONNECT AFIL PACKAGE");
+        
         tryReconnectController = false;
         yield return new WaitForEndOfFrame();
         GamepadScreen(false);

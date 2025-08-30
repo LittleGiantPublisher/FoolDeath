@@ -195,8 +195,8 @@ MonoBehaviour:
     L_STICK_ID: -1
     R_STICK_ID: -1
     DPAD_ID: -1
-    Sprite: {fileID: 897154463, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
-    Alt_Sprite: {fileID: -452672054, guid: 704976e845b63d346bbafb4a309da4a1, type: 3}
+    Sprite: {fileID: 21300000, guid: 1074ea69ab52f89418b81dcafae0149f, type: 3}
+    Alt_Sprite: {fileID: 21300000, guid: 4fa3887fe08a1d44fa743eac34f1f253, type: 3}
   - BUTTON_ID: 1
     L_STICK_ID: -1
     R_STICK_ID: -1

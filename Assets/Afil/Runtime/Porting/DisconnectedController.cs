@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using F;
 
 public class DisconnectedController : MonoBehaviour
 {
@@ -11,6 +12,17 @@ public class DisconnectedController : MonoBehaviour
     [SerializeField] GameObject XB1;
     [SerializeField] GameObject PC;
 
+    [SerializeField] private TextMeshProUGUI PS4_Title;
+    [SerializeField] private TextMeshProUGUI PS4_Description;
+
+    [SerializeField] private TextMeshProUGUI PS5_Title;
+    [SerializeField] private TextMeshProUGUI PS5_Description;
+
+    [SerializeField] private TextMeshProUGUI XB_Title;
+    [SerializeField] private TextMeshProUGUI XB_Description;
+
+    [SerializeField] private TextMeshProUGUI PC_Title;
+    [SerializeField] private TextMeshProUGUI PC_Description;
 
     bool needUpdate;
     private void Awake() {
@@ -69,19 +81,19 @@ public class DisconnectedController : MonoBehaviour
 
     public void LoadTranslations()
     {
-/*
-        PS4_Title.text = TranslationManager.instance.LoadTranslationData("PS4ControllerDisconnection-Title", TranslationManager.instance.SelectedLanguage);
-        PS4_Description.text = TranslationManager.instance.LoadTranslationData("PS4ControllerDisconnection-Description", TranslationManager.instance.SelectedLanguage);
-        PS5_Title.text = TranslationManager.instance.LoadTranslationData("PS5ControllerDisconnection-Title", TranslationManager.instance.SelectedLanguage);
-        PS5_Description.text = TranslationManager.instance.LoadTranslationData("PS5ControllerDisconnection-Description", TranslationManager.instance.SelectedLanguage);
-        //xbox
-        XB1_Title.text = TranslationManager.instance.LoadTranslationData("XB1ControllerDisconnection-Title", TranslationManager.instance.SelectedLanguage);
-        XB1_Description.text = TranslationManager.instance.LoadTranslationData("XB1ControllerDisconnection-Description", TranslationManager.instance.SelectedLanguage);
-        //pc
-        PC_Title.text = TranslationManager.instance.LoadTranslationData("PCControllerDisconnection-Title", TranslationManager.instance.SelectedLanguage);
-        PC_Description.text = TranslationManager.instance.LoadTranslationData("PCControllerDisconnection-Description", TranslationManager.instance.SelectedLanguage);
-*/
-
+#if UNITY_PS5
+        PS5_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
+        PS5_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PS");
+#elif UNITY_PS4
+        PS4_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
+        PS4_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PS");
+#elif UNITY_GAMECORE
+        XB_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
+        XB_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_XB");
+#elif UNITY_STANDALONE || MICROSOFT_GAME_CORE
+        PC_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
+        PC_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PC");
+#endif        
     }
 
     void ShowDisconnectedApplet()

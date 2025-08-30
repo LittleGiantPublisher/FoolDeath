@@ -6655,8 +6655,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 644714163}
-    m_SelectOnDown: {fileID: 644714163}
+    m_SelectOnUp: {fileID: 367616149}
+    m_SelectOnDown: {fileID: 367616149}
     m_SelectOnLeft: {fileID: 367616149}
     m_SelectOnRight: {fileID: 367616149}
   m_Transition: 1

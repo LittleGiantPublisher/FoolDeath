@@ -41,3 +41,8 @@
 "Msg2","Keep the left gauge near 0<br>This will earn you more money and points","Mantenha a barra da esquerda perto de 0.  <br>  Para ganhar mais dinheiro e pontos",
 "Msg3","If the number is too low or high at round's end, you lose","Número muito baixo ou alto no fim da rodada <br> faz você perder",
 "Msg4","XIII is Death <br> Nulls Everything","XIII é a morte <br> Zera Tudo",
+
+"DC_CONTROLLER_TITLE","Controller not found","Controle não encontrado",
+"DC_CONTROLLER_BODY_PC","Press <sprite name=gamepadFaceAtlasBig_1> or ENTER to continue","Pressione <sprite name=gamepadFaceAtlasBig_1> ou ENTER para continuar",
+"DC_CONTROLLER_BODY_XB","Press <sprite name=gamepadFaceAtlasBig_1> to continue","Pressione <sprite name=gamepadFaceAtlasBig_1> para continuar",
+"DC_CONTROLLER_BODY_PS","Reconnect the controller to continue","Reconecte o controle para continuar",
