@@ -1175,6 +1175,10 @@ PrefabInstance:
       value: AfilPortingSystems
       objectReference: {fileID: 0}
     - target: {fileID: 8317502848043115447, guid: 4e4dcab46ba7f02438823e4e578dcfa5, type: 3}
+      propertyPath: patch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317502848043115447, guid: 4e4dcab46ba7f02438823e4e578dcfa5, type: 3}
       propertyPath: objectsByPlatform.Array.size
       value: 1
       objectReference: {fileID: 0}

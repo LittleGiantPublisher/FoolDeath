@@ -31,6 +31,7 @@ namespace Porting
     {
 
         public static UNLOCK_CHECK CUR_PATCH;
+        public static int BASE_ACHIEVEMENT_MAX = 21;
 
     	public static bool notSpaceAvailable;
 
@@ -243,6 +244,13 @@ namespace Porting
                 return;
 
             int trophyID = GetAchievementID[name];
+            int patchCap = BASE_ACHIEVEMENT_MAX + ((int)CUR_PATCH * 5);
+            if (trophyID > patchCap)
+            {
+                Debug.LogError($"[Platform Manager] Achievement {name} with ID {trophyID} is not available in the current patch cap {patchCap}");
+                return;
+            }
+
             if (!hasUnlockedAchievement[trophyID])
             {
                 currentPlatform.UnlockAchievement(trophyID, progress, null);
@@ -260,6 +268,13 @@ namespace Porting
 
             if (!GetAchievementID.ContainsValue(trophyID))
                 return;
+
+            int patchCap = BASE_ACHIEVEMENT_MAX + ((int)CUR_PATCH * 5);
+            if (trophyID > patchCap)
+            {
+                Debug.LogError($"[Platform Manager] Achievement {name} with ID {trophyID} is not available in the current patch cap {patchCap}");
+                return;
+            }
 
             if (!hasUnlockedAchievementOnPlat[trophyID])
             {

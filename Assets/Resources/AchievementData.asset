@@ -57,3 +57,43 @@ MonoBehaviour:
     name: FirstEnchantmentSapphire
   - id: 21
     name: FirstEnchantmentRuby
+  - id: 22
+    name: EchoOfDeath
+  - id: 23
+    name: TrinityOfEmeralds
+  - id: 24
+    name: TrinityOfSapphires
+  - id: 25
+    name: TrinityOfRubies
+  - id: 26
+    name: FourthKey
+  - id: 27
+    name: RelentlessDeath
+  - id: 28
+    name: GreenPentacle
+  - id: 29
+    name: BluePentacle
+  - id: 30
+    name: RedPentacle
+  - id: 31
+    name: FifthArcana
+  - id: 32
+    name: Reaper
+  - id: 33
+    name: EightFacetsEmerald
+  - id: 34
+    name: EightFacetsSapphire
+  - id: 35
+    name: EightFacetsRuby
+  - id: 36
+    name: TheSixthSeal
+  - id: 37
+    name: LordOfEndings
+  - id: 38
+    name: SupremeJewelEmerald
+  - id: 39
+    name: SupremeJewelSapphire
+  - id: 40
+    name: SupremeJewelRuby
+  - id: 41
+    name: TheSeventhGate
