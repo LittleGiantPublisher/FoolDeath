@@ -25,6 +25,7 @@ public class ControllerManager : MonoBehaviour
     public static bool tryReconnectController = false;
 
     public bool onReconec;
+    public static bool firstConnect = true;
     public static bool startFindInput = true;
     public static bool firstInput = false;
     public bool hasGamepadConected = false;
@@ -334,6 +335,7 @@ public class ControllerManager : MonoBehaviour
         if (reconectRotine)
         {
             OnControllerConnnect?.Invoke();
+            thisController.inputPlayerActions.UI.Enable();
             controllerDisconnected = false;
         }
 #else
@@ -341,6 +343,7 @@ public class ControllerManager : MonoBehaviour
         if (reconectRotine)
         {
             Debug.Log("Invocando OnControllerConnnect");
+            thisController.inputPlayerActions.UI.Enable();
             OnControllerConnnect?.Invoke();
             controllerDisconnected = false;
         }
@@ -361,6 +364,7 @@ public class ControllerManager : MonoBehaviour
         if (reconectRotine)
         {
             OnControllerConnnect?.Invoke();
+            thisController.inputPlayerActions.UI.Enable();
             controllerDisconnected = false;
         }
        // //Debug.LogError("Conectado controle: " + thisController.InputIsActive(InputController.ACTION_MAP.PLAYER));
@@ -406,6 +410,7 @@ public class ControllerManager : MonoBehaviour
             Debug.LogError($"[ ControllerDisconnected ] device.deviceId : {device.deviceId}");
             Porting.PlatformManager.ForcePause?.Invoke();
             thisController.ActiveInput(false);
+            thisController.inputPlayerActions.UI.Disable();
             EventSystem.current.sendNavigationEvents = false;
             tryReconnectController = true;
             controllerDisconnected = true;
@@ -414,7 +419,7 @@ public class ControllerManager : MonoBehaviour
 
     void CheckControllerReconnection()
     {
-#if (UNITY_STANDALONE)
+#if (UNITY_STANDALONE || UNITY_EDITOR || MICROSOFT_GAME_CORE)
         if (tryReconnectController)
             hasGamepadConected = false;
 

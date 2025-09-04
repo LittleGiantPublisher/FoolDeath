@@ -26,9 +26,10 @@ namespace F.State
             if(base.screenCover != null)base.screenCover.Hide();
             base.curtainLeft.Hide();
             base.curtainRight.Hide();
-            if (ControllerManager.startFindInput)
+            if (ControllerManager.firstConnect)
             {
                 this.owner.ChangeState<PressAnyState>();
+                ControllerManager.firstConnect = false;
             }
             else this.owner.ChangeState<TitleMainMenuState>();
         }

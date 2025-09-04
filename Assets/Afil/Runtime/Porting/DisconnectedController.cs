@@ -30,22 +30,22 @@ public class DisconnectedController : MonoBehaviour
     }
     void OnEnable()
     {
-#if UNITY_PS5
+#if UNITY_PS5 && !UNITY_EDITOR
         PS5.SetActive(true);
         PS4.SetActive(false);
         XB1.SetActive(false);
         PC.SetActive(false);
-#elif UNITY_PS4
+#elif UNITY_PS4 && !UNITY_EDITOR
         PS4.SetActive(true);
         PS5.SetActive(false);
         XB1.SetActive(false);
         PC.SetActive(false);
-#elif UNITY_GAMECORE
+#elif UNITY_GAMECORE && !UNITY_EDITOR
         XB1.SetActive(true);
         PS4.SetActive(false);
         PS5.SetActive(false);
         PC.SetActive(false);
-#elif UNITY_STANDALONE || MICROSOFT_GAME_CORE
+#elif UNITY_STANDALONE || MICROSOFT_GAME_CORE || UNITY_EDITOR
         PC.SetActive(true);
         PS4.SetActive(false);
         PS5.SetActive(false);
@@ -81,16 +81,16 @@ public class DisconnectedController : MonoBehaviour
 
     public void LoadTranslations()
     {
-#if UNITY_PS5
+#if UNITY_PS5 && !UNITY_EDITOR
         PS5_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
         PS5_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PS");
-#elif UNITY_PS4
+#elif UNITY_PS4 && !UNITY_EDITOR    
         PS4_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
         PS4_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PS");
-#elif UNITY_GAMECORE
+#elif UNITY_GAMECORE && !UNITY_EDITOR
         XB_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
         XB_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_XB");
-#elif UNITY_STANDALONE || MICROSOFT_GAME_CORE
+#elif UNITY_STANDALONE || MICROSOFT_GAME_CORE || UNITY_EDITOR
         PC_Title.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_TITLE");
         PC_Description.text = LocalizationSystem.GetLocalizedValue("DC_CONTROLLER_BODY_PC");
 #endif        

@@ -53,6 +53,7 @@ namespace F.Cards
                 controls.UI.Confirm.started += OnCancelPressed;
                 controls.UI.Cancel.started += OnConfirmPressed;
             }
+            controls.Player.Start.performed += OnCancelPressed;
 
             uiClickHeld     = false;
             draggedCard     = null;
@@ -74,6 +75,7 @@ namespace F.Cards
                 controls.UI.Confirm.started -= OnCancelPressed;
                 controls.UI.Cancel.started -= OnConfirmPressed;
             }
+            controls.Player.Start.performed -= OnCancelPressed;
         }
 
         private void Update()
@@ -96,7 +98,7 @@ namespace F.Cards
             }
 
             // continuous stick-based drag
-            if (uiClickHeld && draggedCard != null && !draggedCard.cardVisual.isStatic)
+            if (uiClickHeld && draggedCard != null && !draggedCard.cardVisual.isStatic && !ControllerManager.current.onReconec)
             {
                 Vector2 moveDelta = controls.Player.LeftStick.ReadValue<Vector2>();
                 Vector2 lookDelta = Vector2.zero;
