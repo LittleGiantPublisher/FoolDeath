@@ -25,7 +25,7 @@ public class ControllerManager : MonoBehaviour
     public static bool tryReconnectController = false;
 
     public bool onReconec;
-    public static bool startFindInput = false;
+    public static bool startFindInput = true;
     public static bool firstInput = false;
     public bool hasGamepadConected = false;
     public static ControllerManager current;
@@ -72,9 +72,9 @@ public class ControllerManager : MonoBehaviour
         //Debug.Log($"Controller object name: {ControllerDisconnection.name}");
         disconectionScreen = ControllerDisconnection.transform.GetChild(0).gameObject;
 #endif
-        userDevice = new InputDevice();
-        InputSystem.EnableDevice(userDevice);
-        InputSystem.FlushDisconnectedDevices();
+        //userDevice = new InputDevice();
+        //InputSystem.EnableDevice(userDevice);
+        //InputSystem.FlushDisconnectedDevices();
 
         ConectFirstInput();
         //Debug.Log($"[DeviceCap]: {this.playerInput.devices[0].device.description.capabilities}");
@@ -211,7 +211,6 @@ public class ControllerManager : MonoBehaviour
         }
     }
 
-
     void ControllerConnected(InputDevice device)
     {
 
@@ -267,8 +266,11 @@ public class ControllerManager : MonoBehaviour
             }
             
         }
+        
 #elif UNITY_GAMECORE || MICROSOFT_GAME_CORE
     canEnable = false;
+
+    Debug.LogError($"[ ControllerManager ] device.deviceId : {device.deviceId} - device type {device.GetType()} - name {device.name}");
 #endif
 
         Debug.LogError("** Pass 1");
@@ -312,8 +314,6 @@ public class ControllerManager : MonoBehaviour
 
     }
 
-
-
     IEnumerator ActiveMapWithTime(float f,bool canEnable, InputDevice device,bool reconectRotine = false)
     {
 
@@ -340,6 +340,7 @@ public class ControllerManager : MonoBehaviour
 
         if (reconectRotine)
         {
+            Debug.Log("Invocando OnControllerConnnect");
             OnControllerConnnect?.Invoke();
             controllerDisconnected = false;
         }
@@ -364,12 +365,9 @@ public class ControllerManager : MonoBehaviour
         }
        // //Debug.LogError("Conectado controle: " + thisController.InputIsActive(InputController.ACTION_MAP.PLAYER));
     }
+
     void ControllerDisconnected(InputDevice device)
     {
-
-
-        
-
 
         bool canDisable = false;
 
@@ -389,6 +387,8 @@ public class ControllerManager : MonoBehaviour
 
 #elif UNITY_GAMECORE
         canDisable = (userDevice == device);
+        
+        Debug.LogError($"[ ControllerDisconnected ] userDevice.deviceId : {userDevice.deviceId} - device.deviceId : {device.deviceId} - canDisable: {canDisable}");
 #elif UNITY_STANDALONE || MICROSOFT_GAME_CORE
 
         if (!hasGamepadConected)
@@ -400,9 +400,6 @@ public class ControllerManager : MonoBehaviour
 
         if (canDisable)
         {
-
-
-        
             InputSystem.FlushDisconnectedDevices();
 
             OnControllerDisconnnect?.Invoke();
@@ -587,6 +584,7 @@ public class ControllerManager : MonoBehaviour
                     {
                         currentPCInput = INPUT_TYPE.GAMEPAD;
                         OnInputChanged?.Invoke();
+                        Debug.LogError($"[ ControllerManager ] FIRST INPUT FOUND - device.deviceId : {device.deviceId} - device type {device.GetType()} - name {device.name}");
                         userDevice = device;
                         if(!firstInput)
                         {
@@ -768,6 +766,7 @@ public class ControllerManager : MonoBehaviour
         Npad.SetSupportedStyleSet(NpadStyle.FullKey | NpadStyle.Handheld | NpadStyle.JoyDual);
 #endif
         }
+
     void ShowControllerSupport()
     {
 #if UNITY_SWITCH

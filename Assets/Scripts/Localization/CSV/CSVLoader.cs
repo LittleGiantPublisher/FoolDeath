@@ -54,7 +54,6 @@ namespace F
                     {
                         string value = array3[num];
                         dictionary.Add(key, value);
-                        Debug.Log($"Key: {key}, Value: {value}");
                     }
                 }
             }

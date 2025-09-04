@@ -46,3 +46,7 @@
 "DC_CONTROLLER_BODY_PC","Press <sprite name=gamepadFaceAtlasBig_1> or ENTER to continue","Pressione <sprite name=gamepadFaceAtlasBig_1> ou ENTER para continuar",
 "DC_CONTROLLER_BODY_XB","Press <sprite name=gamepadFaceAtlasBig_1> to continue","Pressione <sprite name=gamepadFaceAtlasBig_1> para continuar",
 "DC_CONTROLLER_BODY_PS","Reconnect the controller to continue","Reconecte o controle para continuar",
+"PRESS_ANY_XBOX","Press <sprite name=gamepadFaceAtlasBig_1> to start","Pressione <sprite name=gamepadFaceAtlasBig_1> para começar",
+"PRESS_ANY_PS","Press <sprite name=gamepadFaceAtlasBig_0> to start","Pressione <sprite name=gamepadFaceAtlasBig_0> para começar",
+"PRESS_ANY_SWITCH","Press <sprite name=gamepadFaceAtlasBig_5> to start","Pressione <sprite name=gamepadFaceAtlasBig_5> para começar",
+"PRESS_ANY_MS","Press <sprite name=gamepadFaceAtlasBig_1> or ENTER to start","Pressione <sprite name=gamepadFaceAtlasBig_1> ou ENTER para começar",

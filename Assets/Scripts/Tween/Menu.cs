@@ -40,13 +40,13 @@ namespace F.UI
                 selected = firstGO;
 
                 for (int i = 0; i < entries.Count; i++)
-                    if (entries[i].isActiveAndEnabled) AddEventTrigger(entries[i].button, i);
+                    if (entries[i] != null && entries[i].isActiveAndEnabled) AddEventTrigger(entries[i].button, i);
             }
             else if (entries != null)
             {
                 // still add hover triggers even if virtual cursor is active
                 for (int i = 0; i < entries.Count; i++)
-                    if (entries[i].isActiveAndEnabled) AddEventTrigger(entries[i].button, i);
+                    if (entries[i] != null && entries[i].isActiveAndEnabled) AddEventTrigger(entries[i].button, i);
             }
 
             // only resume highlight if NOT virtual

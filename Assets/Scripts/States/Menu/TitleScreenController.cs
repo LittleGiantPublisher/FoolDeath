@@ -28,6 +28,10 @@ namespace F.State
 
 		public F.UI.Panel characterPanel;
 
+		public F.UI.Menu anyKeyMenu;
+
+		public TMP_Text anyKeyText;
+
 		public F.UI.Menu mainMenu;
 
 		public F.UI.Menu languageMenu;

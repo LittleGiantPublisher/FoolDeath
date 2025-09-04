@@ -26,7 +26,11 @@ namespace F.State
             if(base.screenCover != null)base.screenCover.Hide();
             base.curtainLeft.Hide();
             base.curtainRight.Hide();
-            this.owner.ChangeState<TitleMainMenuState>();
+            if (ControllerManager.startFindInput)
+            {
+                this.owner.ChangeState<PressAnyState>();
+            }
+            else this.owner.ChangeState<TitleMainMenuState>();
         }
     }
 }

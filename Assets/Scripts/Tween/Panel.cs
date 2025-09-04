@@ -121,7 +121,7 @@ namespace F.UI
                 gamepadDefaultSelectable.Select();
                 return gamepadDefaultSelectable.gameObject;
             }
-            if (this is Menu menu && menu.entries.Count > 0) 
+            if (this is Menu menu && menu.entries.Count > 0 && menu.entries[0] is ButtonExtension) 
             {
                 var go = menu.entries[0].button.gameObject;
                 EventSystem.current.SetSelectedGameObject(go);

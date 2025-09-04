@@ -9,6 +9,10 @@ namespace F.State
     public abstract class TitleScreenState : State
     {
         protected InputPlayer input => this.owner.input;
+
+        protected F.UI.Menu anyKeyMenu => this.owner.anyKeyMenu;
+
+        protected TMP_Text anyKeyText => this.owner.anyKeyText;
 //
         protected F.UI.Panel logoPanel => this.owner.logoPanel;
 

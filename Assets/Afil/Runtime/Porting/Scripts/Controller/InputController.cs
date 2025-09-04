@@ -102,7 +102,7 @@ public class InputController
 
     void Init()
     {
-        inputPlayerActions = new InputPlayer();
+        //inputPlayerActions = new InputPlayer();
     
         inputPlayerActions.Player.LeftStick.started += LeftAxis;
         inputPlayerActions.Player.LeftStick.performed += LeftAxis;
@@ -355,7 +355,8 @@ public class InputController
 
         anyButton = (input.y > 0 || input.y < 0 ||
                      input.x < 0 || input.x > 0);
-    } void ButtonSouth(InputAction.CallbackContext context)
+    }
+    void ButtonSouth(InputAction.CallbackContext context)
     {
         bool button = context.ReadValueAsButton();
         anyButton = buttonSouth = button;
